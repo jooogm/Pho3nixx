@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Phoenix</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .navbar-brand-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand-left img {
+            margin-right: 10px; /* Espaço entre o ícone e o logo */
+            height: 30px; /* Ajuste a altura conforme necessário */
+        }
+
+        .nav-logo {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #c0392b; /* cor destacada */
+            margin-left: 0; /* Remove a margem anterior */
+        }
+
+        .navbar-nav.centered {
+            margin: 0 auto; /* Centraliza os itens do menu */
+        }
+
+        .navbar-nav.centered .nav-item {
+            margin: 0 15px; /* Espaço entre os itens do menu */
+        }
+
+        .navbar-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-buttons .btn {
+            margin-left: 10px; /* Espaço entre os botões */
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container"> <a class="navbar-brand navbar-brand-left" href="#">
+                <span class="nav-logo">Phoenix</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+                <ul class="navbar-nav centered">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sobre Nós</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Assinaturas</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            FAQ
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Teste</a></li>
+                            <li><a class="dropdown-item" href="#">Teste</a></li>
+                            <li><a class="dropdown-item" href="#">Teste</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar-buttons">
+                <a href="views/login.html" class="btn btn-outline-danger">Login</a>
+                <a href="views/cadastro.html" class="btn btn-danger"></button>
+                    Cadastrar-se</a>
+            </div>
+        </div>
+    </nav>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
