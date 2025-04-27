@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Perfil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header text-center">
+                <h2>Editar Perfil</h2>
+            </div>
+            <div class="card-body">
+                <form id="editarPerfilForm">
+                    <div class="mb-3">
+                        <label for="nome_completo" class="form-label">Nome Completo</label>
+                        <input type="text" class="form-control" id="nome_completo" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="localizacao" class="form-label">Localização</label>
+                        <input type="text" class="form-control" id="localizacao" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="contato" class="form-label">Contato</label>
+                        <input type="text" class="form-control" id="contato" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="resumo" class="form-label">Resumo Profissional</label>
+                        <textarea class="form-control" id="resumo" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="avatar" class="form-label">Foto de Perfil</label>
+                        <input type="file" class="form-control" id="avatar" accept="image/*">
+                    </div>
+                    <div class="mb-3 text-center">
+                        <img id="avatarPreview" src="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250" alt="Prévia do Avatar" class="rounded-circle" width="120">
+                    </div>
+                    <div class="mb-3">
+                        <label for="redes_sociais" class="form-label">Redes Sociais</label>
+                        <input type="text" class="form-control" id="redes_sociais">
+                    </div>
+                    <div id="extraCampos">
+                        <!-- Campos específicos do usuário (Profissional ou Empresa) serão inseridos aqui via JS -->
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Salvar Alterações</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/editar_perfil.js"></script>
+</body>
+</html>

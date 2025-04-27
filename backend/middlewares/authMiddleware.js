@@ -19,12 +19,12 @@ const authMiddleware = (req, res, next) => {
 
   const jwtToken = tokenParts[1];
 
-
-
-  
   try {
     // Verifica a validade do token
     const decoded = jwt.verify(jwtToken, SECRET);
+
+   // Verificar os dados do token
+    // console.log('Decoded JWT:', decoded);
 
     // Adiciona os dados do usuário decodificados à requisição (ex: id e type_user_id)
     req.user = decoded;

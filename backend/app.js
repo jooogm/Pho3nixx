@@ -30,7 +30,8 @@ app.use(
 );
 
 // Limitar o tamanho do corpo da requisição
-app.use(express.json({ limit: "10mb" }));
+app.use(express.json({ limit: "15mb" }));
+app.use(express.urlencoded({ extended: true, limit: '15mb' }));
 
 // Configuração do Multer para upload de arquivos
 const storage = multer.diskStorage({
@@ -44,7 +45,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 10 * 1024 * 1024 }, // Limitar o tamanho do arquivo para 10MB
+  limits: { fileSize: 15 * 1024 * 1024 }, // Limitar o tamanho do arquivo para 10MB
 });
 
 // Usar o middleware no endpoint de upload

@@ -125,6 +125,8 @@ const getUserProfile = async (req, res) => {
     const userId = req.user.id; // A chave 'userId' é decodificada do token
     const typeUserId = req.user.type_user_id; // A chave 'type_user_id' é decodificada do token
 
+    //console.log('User Profile Data:', req.user);
+
     // Buscar o usuário com o id do token e carregar o perfil
     const user = await User.findOne({
       where: { id: userId },
@@ -149,8 +151,10 @@ const getUserProfile = async (req, res) => {
       return res.status(404).json({ message: 'Usuário não encontrado.' });
     }
 
+    
+
     // Verificar qual perfil o usuário tem (profissional ou de empresa) e montar a resposta
-    //const userProfile = user.type_user_id === 2 ? user.UserProfissionalProfile : user.UserEmpresaProfile;
+  //const userProfile = user.type_user_id === 2 ? user.UserProfissionalProfile : user.UserEmpresaProfile;
 
     let userProfile = null;
 if (typeUserId === 2) { // Profissional
@@ -167,6 +171,7 @@ if (typeUserId === 2) { // Profissional
         id: user.id,
         name: user.name,
         email: user.email,
+        type_user_id: typeUserId,
         profile: userProfile, // Perfil do usuário (Profissional ou Empresa)
       },
     });
@@ -201,7 +206,7 @@ const editUserProfile = async (req, res) => {
           resumo,
           localizacao,
           contato,
-          redes_sociais: redes_sociais ? JSON.stringify(redes_sociais) : null,
+          redes_sociais: typeof redes_sociais === "string" ? redes_sociais : JSON.stringify(redes_sociais),
           avatar,
           data_nascimento: data_nascimento || userProfissionalProfile.data_nascimento, // Verifica se data de nascimento foi enviada
           especializacao: especializacao || userProfissionalProfile.especializacao,  // Verifica se especialização foi enviada
@@ -220,7 +225,7 @@ const editUserProfile = async (req, res) => {
           resumo,
           localizacao,
           contato,
-          redes_sociais: redes_sociais ? JSON.stringify(redes_sociais) : null,
+          redes_sociais: typeof redes_sociais === "string" ? redes_sociais : JSON.stringify(redes_sociais),
           avatar,
         });
         return res.status(200).json({ message: 'Perfil de empresa atualizado com sucesso!' });
