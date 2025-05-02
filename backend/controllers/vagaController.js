@@ -16,24 +16,13 @@ const criarVaga = async (req, res) => {
         console.log('Iniciando processo de criação de vaga...');
         
         // Verificação do token JWT
-        const token = req.headers['authorization']?.split(' ')[1]; 
-        if (!token) {
-            console.log('Token não fornecido.');
-            return res.status(401).json({ message: 'Token não fornecido.' });
-        }
-
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        const userId = decoded.id;
+        const userId = req.user.id;
+        const typeUserId = req.user.type_user_id;
 
 // Verifica se é uma empresa (type_user_id === 3)
-const user = await User.findByPk(id);
-if (!user || user.type_user_id !== 3) {
+if (typeUserId !== 3) {
     return res.status(403).json({ message: 'Apenas empresas podem criar vagas.' });
 }
-
-
-
-        console.log('Token decodificado:', decoded);
 
         // Busca o perfil da empresa do usuário
         const empresaProfile = await UserEmpresaProfile.findOne({ where: { user_id: userId } });
@@ -155,6 +144,30 @@ const restaurarVaga = async (req, res) => {
     }
 };
 
+// Listar vagas de uma empresa específica
+const listarMinhasVagas = async (req, res) => {
+    const userId = req.user.id;
+
+    try {
+        const empresaProfile = await UserEmpresaProfile.findOne({ where: { user_id: userId } });
+
+        if (!empresaProfile) {
+            return res.status(404).json({ message: 'Perfil de empresa não encontrado.' });
+        }
+
+        const vagas = await Vaga.findAll({
+            where: { empresa_id: empresaProfile.id },
+            order: [['created_at', 'DESC']]
+        });
+
+        res.status(200).json(vagas);
+    } catch (error) {
+        console.error("Erro ao buscar vagas da empresa:", error);
+        res.status(500).json({ message: "Erro ao buscar suas vagas." });
+    }
+};
+
+
 // Buscar uma vaga específica pelo ID
 const buscarVagaPorId = async (req, res) => {
     try {
@@ -228,4 +241,5 @@ module.exports = {
     buscarVagaPorId,
     getVagaAnalise,
     listarVagasAbertas,
+    listarMinhasVagas,
 };

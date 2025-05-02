@@ -29,13 +29,14 @@ document.addEventListener("DOMContentLoaded", async function () {
         //console.log("Resposta da API:", data);
         //console.log("Estrutura do usuário:", user);
         //console.log('Tipo de usuário:', user.type_user_id);
+        //console.log("profile:", user.profile);
 
         let perfilHTML = `
             <div class="text-center">
                 <img src="${user.profile?.avatar 
-  ? (user.profile.avatar.startsWith('data:image/') 
+  ? user.profile.avatar.startsWith('data:image/') || user.profile.avatar.startsWith("https")
       ? user.profile.avatar 
-      : `data:image/jpeg;base64,${user.profile.avatar}`)
+      : `data:image/jpeg;base64,${user.profile.avatar}`
   : 'https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250'}" class="rounded-circle" width="150">
                 <h3>${user.name}</h3>
                 <p><strong>Email:</strong> ${user.email}</p>
@@ -62,6 +63,10 @@ document.addEventListener("DOMContentLoaded", async function () {
                 <p><strong>Contato:</strong> ${user.profile?.contato || '-'}</p>
                 <p><strong>Resumo:</strong> ${user.profile?.resumo || '-'}</p>
                 <p><strong>Redes Sociais:</strong> ${user.profile?.redes_sociais || '-'}</p>
+                <div class="mt-4 text-center">
+                     <a href="criar_vaga.html" class="btn btn-success me-2">Criar Vaga</a>
+                     <a href="minhas_vagas.html" class="btn btn-outline-primary">Minhas Vagas</a>
+             </div>
             `;
         } else {
             perfilHTML += `<p>Tipo de usuário inválido.</p>`;
