@@ -1,135 +1,204 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Cadastro - Phoenix</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-    <style>
-        body {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            transition: background 0.3s, color 0.3s;
-        }
+  <meta charset="UTF-8">
+  <title>Cadastro - Phoenix</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #0d0d0d, #ff6600);
+      height: 100vh;
+      padding-top: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
+    }
 
-        .card-cadastro {
-            width: 100%;
-            max-width: 400px;
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-            transition: background-color 0.3s, color 0.3s;
-        }
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
 
-        .card-cadastro.dark-mode {
-            background-color: #343a40;
-            color: #f8f9fa;
-        }
+    .navbar-brand {
+      color: #ff6600;
+      font-weight: bold;
+    }
 
-        .form-control::placeholder {
-            color: #adb5bd;
-        }
+    .navbar-nav .nav-link {
+      color: #fff;
+      margin-right: 1rem;
+    }
 
-        .form-control.dark-mode {
-            background-color: #495057;
-            color: #fff;
-            border-color: #6c757d;
-        }
+    .navbar-nav .nav-link.active,
+    .navbar-nav .nav-link:hover {
+      color: #ff6600;
+    }
 
-        .btn-dark {
-            background-color:  #dc3545;
-            border: none;
-        }
+    .btn-login {
+      border: 1px solid #ff6600;
+      color: #ff6600;
+      background-color: transparent;
+      margin-right: 0.5rem;
+    }
 
-        .btn-dark:hover {
-            background-color: #1a1e21;
-        }
+    .btn-login:hover {
+      background-color: #ff6600;
+      color: #fff;
+    }
 
-        .toggle-dark {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-        }
+    .btn-register {
+      background-color: #ff6600;
+      color: #fff;
+    }
 
-        .input-group-text {
-            background-color: transparent;
-            border-right: none;
-        }
+    .btn-register:hover {
+      background-color: #e65c00;
+    }
 
-        .form-control {
-            border-left: none;
-        }
+    .card-cadastro {
+      width: 100%;
+      max-width: 400px;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+      background-color: #1e1e1e;
+    }
 
-        .form-control:focus {
-            box-shadow: none;
-        }
+    .card-cadastro h2 {
+      color: #ff6600;
+    }
 
-        a {
-            text-decoration: none;
-        }
+    .form-label {
+      color: #f1f1f1;
+    }
 
-        .text-small {
-            font-size: 0.9rem;
-        }
-    </style>
+    .form-control {
+      background-color: #343a40;
+      color: white;
+      border-color: #555;
+    }
+
+    .form-control::placeholder {
+      color: #adb5bd;
+    }
+
+    .form-control:focus {
+      box-shadow: none;
+      border-color: #ff6600;
+    }
+
+    .input-group-text {
+      background-color: #2c2c2c;
+      border-color: #555;
+      color: #ff6600;
+    }
+
+    .btn-dark {
+      background-color: #ff6600;
+      border: none;
+    }
+
+    .btn-dark:hover {
+      background-color: #e65500;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .text-small {
+      font-size: 0.9rem;
+    }
+
+    a.text-secondary {
+      color: #ff6600 !important;
+    }
+
+    a.text-secondary:hover {
+      text-decoration: underline;
+      color: #ffa94d !important;
+    }
+
+    #mensagem {
+      color: #ff6600;
+    }
+  </style>
 </head>
 <body>
-    <div class="card-cadastro" id="cadastroCard">
-        <h2 class="text-center mb-4">Criar Conta</h2>
-        <form id="cadastroForm">
-            <div class="mb-3">
-                <label for="nomeCadastro" class="form-label">Nome</label>
-                <div class="input-group">
-                    <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
-                    <input type="text" class="form-control" id="name" placeholder="Seu nome completo" required>
-                </div>
-            </div>
-            <div class="mb-3">
-              <label for="cpf_cnpj" class="form-label">CPF / CNPJ</label>
-              <div class="input-group">
-                  <span class="input-group-text"><i class="bi bi-credit-card-2-front"></i></span>
-                  <input type="text" class="form-control" id="cpf_cnpj" placeholder="Digite seu CPF ou CNPJ" required>
-              </div>
-          </div>
 
-            <div class="mb-3">
-                <label for="emailCadastro" class="form-label">E-mail</label>
-                <div class="input-group">
-                    <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
-                    <input type="email" class="form-control" id="email" placeholder="Digite o seu email" required>
-                </div>
-            </div>
-            <div class="mb-3">
-                <label for="senhaCadastro" class="form-label">Senha</label>
-                <div class="input-group">
-                    <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-                    <input type="password" class="form-control" id="password" placeholder="••••••••" required>
-                </div>
-                <div class="mb-3">
-                  <label for="type_user_id" class="form-label">Tipo de Usuário</label>
-                  <div class="input-group">
-                      <span class="input-group-text"><i class="bi bi-person-lines-fill"></i></span>
-                      <select class="form-control" id="type_user_id" required>
-                          <option value="">Selecione...</option>
-                          <option value="2">Profissional</option>
-                          <option value="3">Empresa</option>
-                      </select>
-                  </div>
-            </div>
-            <button type="submit" class="btn btn-dark w-100">Cadastrar</button>
-            <div class="mt-3 text-center">
-                <a href="login.html" class="text-secondary text-small">Já tem uma conta? Entrar</a>
-            </div>
-        </form>
-        <p id="mensagem" class="mt-2 text-center"></p>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+    <a class="navbar-brand" href="views/index.html">Phoenix</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+      </ul>
     </div>
+  </nav>
 
-<script src="/js/cadastro.js"></script>
+  <!-- Formulário de Cadastro -->
+  <div class="card-cadastro" id="cadastroCard">
+    <h2 class="text-center mb-4">Criar Conta</h2>
+    <form id="cadastroForm">
+      <div class="mb-3">
+        <label for="nomeCadastro" class="form-label">Nome</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+          <input type="text" class="form-control" id="name" placeholder="Seu nome completo" required>
+        </div>
+      </div>
 
+      <div class="mb-3">
+        <label for="cpf_cnpj" class="form-label">CPF / CNPJ</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-credit-card-2-front"></i></span>
+          <input type="text" class="form-control" id="cpf_cnpj" placeholder="Digite seu CPF ou CNPJ" required>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="emailCadastro" class="form-label">E-mail</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
+          <input type="email" class="form-control" id="email" placeholder="Digite o seu email" required>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="senhaCadastro" class="form-label">Senha</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+          <input type="password" class="form-control" id="password" placeholder="••••••••" required>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="type_user_id" class="form-label">Tipo de Usuário</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-person-lines-fill"></i></span>
+          <select class="form-control" id="type_user_id" required>
+            <option value="">Selecione...</option>
+            <option value="2">Profissional</option>
+            <option value="3">Empresa</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-dark w-100">Cadastrar</button>
+
+      <div class="mt-3 text-center">
+        <a href="views/login.html" class="text-secondary text-small">Já tem uma conta? Entrar</a>
+      </div>
+    </form>
+    <p id="mensagem" class="mt-2 text-center"></p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/cadastro.js"></script>
 </body>
 </html>
