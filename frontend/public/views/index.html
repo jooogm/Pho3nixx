@@ -1,86 +1,144 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pho3nix</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .navbar-brand-left {
-            display: flex;
-            align-items: center;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Phoenix</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background: linear-gradient(135deg, #0d0d0d, #ff6600);
+      color: white;
+    }
 
-        .navbar-brand-left img {
-            margin-right: 10px; /* Espaço entre o ícone e o logo */
-            height: 30px; /* Ajuste a altura conforme necessário */
-        }
+    .navbar {
+      background-color: #1e1e1e !important;
+    }
 
-        .nav-logo {
-            font-weight: bold;
-            font-size: 1.5rem;
-            color: #c0392b; /* cor destacada */
-            margin-left: 0; /* Remove a margem anterior */
-        }
+    .navbar-brand-left {
+      display: flex;
+      align-items: center;
+    }
 
-        .navbar-nav.centered {
-            margin: 0 auto; /* Centraliza os itens do menu */
-        }
+    .nav-logo {
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: #ff6600;
+    }
 
-        .navbar-nav.centered .nav-item {
-            margin: 0 15px; /* Espaço entre os itens do menu */
-        }
+    .navbar-nav.centered {
+      margin: 0 auto;
+    }
 
-        .navbar-buttons {
-            display: flex;
-            align-items: center;
-        }
+    .navbar-nav.centered .nav-item .nav-link {
+      color: white;
+      transition: color 0.3s;
+    }
 
-        .navbar-buttons .btn {
-            margin-left: 10px; /* Espaço entre os botões */
-        }
-    </style>
+    .navbar-nav.centered .nav-item .nav-link:hover,
+    .navbar-nav.centered .nav-item .nav-link.active {
+      color: #ff6600;
+    }
+
+    .navbar-buttons .btn-outline-danger {
+      border-color: #ff6600;
+      color: #ff6600;
+    }
+
+    .navbar-buttons .btn-outline-danger:hover {
+      background-color: #ff6600;
+      color: white;
+    }
+
+    .navbar-buttons .btn-danger {
+      background-color: #ff6600;
+      border-color: #ff6600;
+    }
+
+    .navbar-buttons .btn-danger:hover {
+      background-color: #e65500;
+    }
+
+    .hero-section {
+      min-height: 100vh;
+      background: transparent;
+    }
+
+    .hero-section h2 {
+      font-weight: bold;
+    }
+
+    .hero-section span {
+      color: #ff6600;
+    }
+
+    .hero-section .btn {
+      background-color: #ff6600;
+      color: white;
+    }
+
+    .hero-section .btn:hover {
+      background-color: #e65500;
+    }
+  </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container"> <a class="navbar-brand navbar-brand-left" href="#">
-                <span class="nav-logo">Pho3nix</span>
-            </a>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand navbar-brand-left" href="#">
+        <span class="nav-logo">Phoenix</span>
+      </a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-            <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
-                <ul class="navbar-nav centered">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Sobre Nós</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Assinaturas</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            FAQ
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Teste</a></li>
-                            <li><a class="dropdown-item" href="#">Teste</a></li>
-                            <li><a class="dropdown-item" href="#">Teste</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="navbar-buttons">
-                <a href="views/login.html" class="btn btn-outline-danger">Login</a>
-                <a href="views/cadastro.html" class="btn btn-danger"></button>
-                    Cadastrar-se</a>
-            </div>
-        </div>
-    </nav>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+        <ul class="navbar-nav centered">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Sobre Nós</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Assinaturas</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">FAQ</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Teste</a></li>
+              <li><a class="dropdown-item" href="#">Teste</a></li>
+              <li><a class="dropdown-item" href="#">Teste</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="navbar-buttons">
+        <a href="views/login.html" class="btn btn-outline-danger">Login</a>
+        <a href="views/cadastro.html" class="btn btn-danger">Cadastrar-se</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero-section d-flex align-items-center">
+    <div class="container d-flex flex-column flex-lg-row align-items-center justify-content-between">
+      <div class="col-lg-6">
+        <h2 class="mb-3">
+          Encontre os melhores talentos de <span>TECNOLOGIA</span> do Brasil ou conquiste uma oportunidade nas maiores empresas do país.
+        </h2>
+        <p class="text-light mb-4">
+          Conectamos profissionais qualificados a empresas inovadoras, impulsionando carreiras e acelerando o crescimento do setor de TI.
+        </p>
+        <a href="views/cadastro.html" class="btn btn-lg">Cadastre-se</a>
+      </div>
+      <div class="col-lg-5 mt-4 mt-lg-0">
+        <img src="./LogoPhoenix.PNG" alt="Phoenix" >
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
