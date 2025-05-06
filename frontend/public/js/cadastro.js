@@ -19,7 +19,7 @@ document.getElementById('cadastroForm').addEventListener('submit', async functio
   
       if (response.ok) {
         document.getElementById('mensagem').innerText = 'Cadastro realizado! Faça login.';
-        window.location.href = '/views/login.html';
+        window.location.href = 'login.html';
       } else {
         document.getElementById('mensagem').innerText = data.message;
       }

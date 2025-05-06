@@ -35,7 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
             <p><strong>Tipo de contrato:</strong> ${vaga.tipo_contrato}</p>
             <p><strong>Status:</strong> ${vaga.status}</p>
             <p><strong>Data de criação:</strong> ${new Date(vaga.created_at).toLocaleDateString()}</p>
-          `;
+          <a href="editar_vaga.html?id=${vaga.vaga_id}" class="botao-editar" title="Editar vaga">
+    ✏️ Editar
+  </a>
+            `;
   
           vagasContainer.appendChild(vagaCard);
         });
@@ -45,4 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
         vagasContainer.innerHTML = '<p>Erro ao carregar vagas.</p>';
       });
   });
+
+  // Função global para redirecionar para tela de edição
+function editarVaga(id) {
+  window.location.href = `editar_vaga.html?id=${id}`;
+}
   

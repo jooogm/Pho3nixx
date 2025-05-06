@@ -54,9 +54,9 @@ app.post("/upload", upload.single("avatar"), (req, res) => {
 });
 
 // Servir arquivos estáticos
-app.use(express.static(path.join(__dirname, "..", "frontend", "public")));
+app.use(express.static(path.join(__dirname, "..", "frontend", "public", "views")));
 //app.use(express.static(path.join(__dirname, "..", "frontend", "src", "public", "css")));
-//app.use(express.static(path.join(__dirname, "..", "frontend", "src", "public", "js")));
+app.use(express.static(path.join(__dirname, "..", "frontend", "public", "js")));
 
 
 // Definir rotas para usuários, vagas, inscrições e autenticação

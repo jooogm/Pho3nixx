@@ -5,7 +5,7 @@ document.getElementById('formEsqueciSenha').addEventListener('submit', async fun
     const mensagem = document.getElementById('mensagem');
   
     try {
-      const response = await fetch('http://localhost:3000/api/usuarios/forgot-password', {
+      const response = await fetch('http://localhost:3000/api/auth/forgot-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })

@@ -36,3 +36,9 @@ document.getElementById('loginForm').addEventListener('submit', async function (
       console.error("Erro:", error);
     }
   });
+
+  // Evento de clique no botão "Voltar para Home"
+document.getElementById('voltarHome').addEventListener('click', function (e) {
+  e.preventDefault();
+  window.location.href = 'index.html'; 
+});
