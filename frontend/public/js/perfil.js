@@ -63,10 +63,6 @@ document.addEventListener("DOMContentLoaded", async function () {
                 <p><strong>Contato:</strong> ${user.profile?.contato || '-'}</p>
                 <p><strong>Resumo:</strong> ${user.profile?.resumo || '-'}</p>
                 <p><strong>Redes Sociais:</strong> ${user.profile?.redes_sociais || '-'}</p>
-                <div class="mt-4 text-center">
-                     <a href="criar_vaga.html" class="btn btn-success me-2">Criar Vaga</a>
-                     <a href="minhas_vagas.html" class="btn btn-outline-primary">Minhas Vagas</a>
-             </div>
             `;
         } else {
             perfilHTML += `<p>Tipo de usuário inválido.</p>`;

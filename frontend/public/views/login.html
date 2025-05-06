@@ -24,19 +24,44 @@
       z-index: 1000;
     }
 
-    .navbar-brand {
-      color: #ff6600;
+    .navbar {
+      background-color: #1e1e1e !important;
+    }
+
+    .nav-logo {
       font-weight: bold;
-    }
-
-    .navbar-nav .nav-link {
-      color: #fff;
-      margin-right: 1rem;
-    }
-
-    .navbar-nav .nav-link.active,
-    .navbar-nav .nav-link:hover {
+      font-size: 1.5rem;
       color: #ff6600;
+    }
+
+
+    .navbar-nav.centered .nav-item .nav-link {
+      color: white;
+      transition: color 0.3s;
+    }
+
+    .navbar-nav.centered .nav-item .nav-link:hover,
+    .navbar-nav.centered .nav-item .nav-link.active {
+      color: #ff6600;
+    }
+
+    .navbar-buttons .btn-outline-danger {
+      border-color: #ff6600;
+      color: #ff6600;
+    }
+
+    .navbar-buttons .btn-outline-danger:hover {
+      background-color: #ff6600;
+      color: white;
+    }
+
+    .navbar-buttons .btn-danger {
+      background-color: #ff6600;
+      border-color: #ff6600;
+    }
+
+    .navbar-buttons .btn-danger:hover {
+      background-color: #e65500;
     }
 
     .btn-login {
@@ -145,11 +170,17 @@
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
-    <a class="navbar-brand" href="index.html">Pho3nix</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand navbar-brand-left" href="index.html">
+        <span class="nav-logo">Pho3nix</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+    </div>
   </nav>
 
   <!-- Login Card -->
