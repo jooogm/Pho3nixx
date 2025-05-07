@@ -58,6 +58,32 @@
         .navbar-buttons .btn-danger:hover {
           background-color: #e65500;
         }
+
+        .btn-minhasvagas {
+      border-color: #ff6600;
+      color: #ff6600;
+    }
+
+        .btn-meuperfil {
+      border-color: #ff6600;
+      color: #ff6600;
+    }
+
+        .btn-sair {
+      border-color: #ff6600;
+      color: #000000;
+      color: #ff6600;
+      background-color: #000 !important; /* preto */
+      color: #fff !important;            /* texto branco */
+    }
+
+        .btn-sair:hover,
+        .btn-minhasvagas:hover,
+        .btn-meuperfil:hover {
+      background-color: #ff6600 !important;
+      color: #fff !important;
+      border-color: #ff6600 !important;
+    }
     
         .hero-section {
           min-height: 100vh;
@@ -80,6 +106,34 @@
         .hero-section .btn:hover {
           background-color: #e65500;
         }
+
+        .card {
+          background-color: rgba(30, 30, 30, 0.7); /* fundo escuro semi-transparente */
+          border: 1px solid #ff6600;               /* borda laranja */
+          border-radius: 1rem;
+          box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* leve sombra */
+          color: white;
+        }
+
+        .card-header {
+          background-color: rgba(0, 0, 0, 0.4); /* header um pouco mais escuro */
+          border-bottom: 1px solid #ff6600;
+        }
+
+        .custom-save-button {
+          background-color: #ff6600;
+          border: none;
+          color: white;
+          padding: 0.75rem;
+          font-weight: bold;
+          border-radius: 0.5rem;
+          transition: background-color 0.3s;
+        }
+
+        .custom-save-button:hover {
+          background-color: #e65500;
+        }
+
       </style>
 
 </head>
@@ -104,15 +158,7 @@
                 <a class="nav-link" href="#">Sobre Nós</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Assinaturas</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">FAQ</a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Teste</a></li>
-                  <li><a class="dropdown-item" href="#">Teste</a></li>
-                  <li><a class="dropdown-item" href="#">Teste</a></li>
-                </ul>
+                <a class="nav-link" href="#">Cursos</a>
               </li>
             </ul>
           </div>
@@ -161,7 +207,7 @@
                     <div id="extraCampos">
                         <!-- Campos específicos do usuário (Profissional ou Empresa) serão inseridos aqui via JS -->
                     </div>
-                    <button type="submit" class="btn btn-success w-100">Salvar Alterações</button>
+                    <button type="submit" class="btn custom-save-button w-100">Salvar Alterações</button>
                 </form>
             </div>
         </div>

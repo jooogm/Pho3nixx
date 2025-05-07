@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Perfil do Usuário</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Perfil do Usuário</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
-<style>
+  <style>
     body {
       background: linear-gradient(135deg, #0d0d0d, #ff6600);
       color: white;
@@ -59,67 +59,138 @@
     .navbar-buttons .btn-danger:hover {
       background-color: #e65500;
     }
-</style>
+    
+    .btn-sair {
+      border-color: #ff6600;
+      color: #000000;
+      color: #ff6600;
+      background-color: #000 !important; /* preto */
+      color: #fff !important;            /* texto branco */
+    }
+
+    .btn-minhasvagas {
+      border-color: #ff6600;
+      color: #ff6600;
+    }
+
+    .btn-meuperfil {
+      border-color: #ff6600;
+      color: #ff6600;
+    }
+
+    .btn-sair:hover,
+    .btn-minhasvagas:hover,
+    .btn-meuperfil:hover {
+       background-color: #ff6600 !important;
+       color: #fff !important;
+      border-color: #ff6600 !important;
+    }
+
+    .perfil-card {
+      background-color: rgb(255, 255, 255);
+      border-radius: 10px;
+      padding: 30px;
+      color: black;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .perfil-card h3 {
+      font-weight: bold;
+    }
+
+    .perfil-card h4 {
+      margin-top: 25px;
+      color: #e65c00;
+    }
+
+    .perfil-card p {
+      margin-bottom: 10px;
+    }
+
+    .perfil-card img {
+      border: 3px solid #e65c00;
+      margin-bottom: 20px;
+    }
+
+    .perfil-card a {
+      color: #ffffff;
+    }
+
+    .perfil-card a:hover {
+      text-decoration: underline;
+    }
+
+    .btn-editar-perfil {
+  background-color: #000;
+  color: white;
+  border: 2px solid #ff6600;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+    .btn-editar-perfil:hover {
+  background-color: #ff6600;
+  color: #000;
+}
+
+    .card {
+  background-color: rgba(30, 30, 30, 0.7); /* fundo escuro semi-transparente */
+  border: 1px solid #ff6600;               /* borda laranja */
+  border-radius: 1rem;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* leve sombra */
+  color: white;
+}
+
+    .card-header {
+  background-color: rgba(0, 0, 0, 0.4); /* header um pouco mais escuro */
+  border-bottom: 1px solid #ff6600;
+}
+
+  </style>
 </head>
 <body>
-     <!-- Navbar -->
-     <nav class="navbar navbar-expand-lg">
-        <div class="container">
-          <a class="navbar-brand navbar-brand-left" href="index.html">
-            <span class="nav-logo" >Pho3nix</span>
-          </a>
-    
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-    
-          <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
-            <ul class="navbar-nav centered">
-              <li class="nav-item">
-                <a class="nav-link active" href="index.html">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Sobre Nós</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Assinaturas</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">FAQ</a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Teste</a></li>
-                  <li><a class="dropdown-item" href="#">Teste</a></li>
-                  <li><a class="dropdown-item" href="#">Teste</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-    
-          <div class="navbar-buttons" id="auth-buttons">
-            <a href="login.html" class="btn btn-outline-danger">Login</a>
-            <a href="cadastro.html" class="btn btn-danger">Cadastrar-se</a>
-          </div>
-        </div>
-      </nav>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand navbar-brand-left" href="index.html">
+        <span class="nav-logo">Pho3nix</span>
+      </a>
 
-    <div class="container mt-5">
-        <div class="card">
-            <div class="card-header text-center">
-                <h2>Perfil do Usuário</h2>
-            </div>
-            <div class="card-body">
-                <div id="perfilContainer">
-                    <!-- O perfil será carregado dinamicamente via JavaScript -->
-                </div>
-                <!-- Botão para Edição de Perfil -->
-                <div class="text-center mt-4">
-                    <a href="editar_perfil.html" class="btn btn-primary">Editar Perfil</a>
-                </div>
-            </div>
-        </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+        <ul class="navbar-nav centered">
+        </ul>
+      </div>
+      <div class="navbar-buttons" id="auth-buttons">
+        <a href="login.html" class="btn btn-outline-danger">Login</a>
+        <a href="cadastro.html" class="btn btn-danger">Cadastrar-se</a>
+      </div>
     </div>
+  </nav>
 
-    <script src="/perfil.js"></script>
-    <script src="/nav.js"></script>
+  <!-- Conteúdo do Perfil -->
+  <div class="container mt-5">
+    <div class="card perfil-card">
+      <div class="text-center mb-4">
+        <h2>Perfil do Usuário</h2>
+      </div>
+      <div id="perfilContainer">
+        <!-- Perfil será carregado aqui via JavaScript -->
+      </div>
+      <div class="text-center mt-4">
+        <a href="editar_perfil.html" class="btn btn-editar-perfil">Editar Perfil</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="/perfil.js"></script>
+  <script src="/nav.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

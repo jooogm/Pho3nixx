@@ -14,16 +14,16 @@ document.addEventListener("DOMContentLoaded", () => {
   
         if (typeUserId === 2) {
             // Profissional
-            extraButtons += `<a href="candidaturas.html" class="btn btn-outline-secondary me-2">Minhas Candidaturas</a>`;
+            extraButtons += `<a href="candidaturas.html" class="btn btn-outline-secondary me-2 btn-candidaturas">Minhas Candidaturas</a>`;
           } else if (typeUserId === 3) {
             // Empresa
-            extraButtons += `<a href="minhas_vagas.html" class="btn btn-outline-secondary me-2">Minhas Vagas</a>`;
+            extraButtons += `<a href="minhas_vagas.html" class="btn btn-outline-secondary me-2 btn-minhasvagas">Minhas Vagas</a>`;
           }
   
         authButtons.innerHTML = `
           ${extraButtons}
-          <a href="perfil.html" class="btn btn-outline-primary me-2">Meu Perfil</a>
-          <a href="#" class="btn btn-secondary" id="logout">Sair</a>
+          <a href="perfil.html" class="btn btn-outline-primary me-2 btn-meuperfil">Meu Perfil</a>
+          <a href="#" class="btn btn-secondary btn-sair" id="logout">Sair</a>
         `;
   
         document.getElementById("logout").addEventListener("click", (e) => {
