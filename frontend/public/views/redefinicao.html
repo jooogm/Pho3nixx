@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <title>Redefinir Senha - Phoenix</title>
@@ -10,10 +11,13 @@
       background: linear-gradient(135deg, #0d0d0d, #ff6600);
       height: 100vh;
       display: flex;
-      align-items: center;
       justify-content: center;
+      /* Alinha horizontalmente */
+      align-items: center;
+      /* Alinha verticalmente */
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: white;
+      margin: 0;
     }
 
     .reset-card {
@@ -79,9 +83,67 @@
       text-decoration: underline;
       color: #ffa94d !important;
     }
+
+    /* Alinhar a navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #1e1e1e;
+      padding: 10px 20px;
+      z-index: 10;
+    }
+
+    .navbar-brand {
+      color: #ff6600;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .navbar-brand:hover {
+      color: #ffa94d;
+    }
+
+    .navbar-nav {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-toggler {
+      border: none;
+    }
+
+    #input-pesquisa {
+      margin-right: 10px;
+    }
+
+    .navbar-collapse {
+      justify-content: center;
+    }
   </style>
 </head>
+
 <body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Pho3nix</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <form class="d-flex me-3" role="search" id="form-pesquisa">
+          <input id="input-pesquisa" class="form-control me-1" type="search" placeholder="Buscar" aria-label="Search">
+          <button class="btn btn-outline-light" type="submit">
+            <i class="bi bi-search"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
   <div class="reset-card">
     <h2 class="text-center mb-4">Redefinir Senha</h2>
     <form id="formEsqueciSenha">
@@ -101,6 +163,6 @@
   </div>
 
   <script src="/redefinicao.js"></script>
-
 </body>
+
 </html>

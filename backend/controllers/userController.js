@@ -221,7 +221,6 @@ const editUserProfile = async (req, res) => {
       if (userEmpresaProfile) {
         // Atualizar perfil de empresa
         await userEmpresaProfile.update({
-          nome_completo,
           resumo,
           localizacao,
           contato,
@@ -260,10 +259,51 @@ const deleteUser = async (req, res) => {
   }
 };
 
+const getEmpresaPublica = async (req, res) => {
+  const empresaProfileId = req.params.id;
+
+  try {
+    const empresa = await UserEmpresaProfile.findOne({
+      where: { id: empresaProfileId },
+      include: {
+        model: User,
+        as: 'user',
+        attributes: ['id', 'name', 'email']
+      }
+    });
+
+    if (!empresa) {
+      return res.status(404).json({ message: 'Empresa não encontrada.' });
+    }
+
+    return res.status(200).json({
+      user: {
+        id: empresa.user.id,
+        name: empresa.user.name,
+        email: empresa.user.email,
+        profile: {
+          id: empresa.id,
+          nome_completo: empresa.nome_completo,
+          localizacao: empresa.localizacao,
+          contato: empresa.contato,
+          resumo: empresa.resumo,
+          avatar: empresa.avatar,
+          redes_sociais: empresa.redes_sociais
+        }
+      }
+    });
+  } catch (error) {
+    console.error('Erro ao buscar empresa pelo ID de perfil:', error);
+    return res.status(500).json({ message: 'Erro ao buscar empresa.' });
+  }
+};
+
+
 module.exports = {
   createUser,
   loginUser,
   getUserProfile,
   editUserProfile,
+  getEmpresaPublica,
   deleteUser
 };

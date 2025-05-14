@@ -29,7 +29,7 @@ const candidatarVaga = async (req, res) => {
     const existingInscricao = await Inscricao.findOne({
       where: {
         user_id: userId,
-        vaga_id: vagaId,
+        vaga_id: vaga_id,
       },
       paranoid: false // Inclui registros soft deleted na busca
     });
@@ -78,7 +78,7 @@ const acompanharCandidatura = async (req, res) => {
       return res.status(403).json({ message: 'Apenas profissionais podem ver suas candidaturas.' });
     }
     console.log(`Buscando inscrições para o usuário ID: ${userId}`);
-    console.log("📍 ENTROU NA ROTA /acompanhamento");
+    //console.log("📍 ENTROU NA ROTA /acompanhamento");
 
 
     const candidaturas = await Inscricao.findAll({
@@ -192,7 +192,12 @@ const obterCandidatos = async (req, res) => {
         {
           model: User,
           as: 'user',
-          attributes: ['name', 'email', 'id']
+          attributes: ['name', 'email', 'id'],
+          include: {
+      model: UserProfissionalProfile,
+      as: 'profile', // isso só funciona se o alias estiver correto no model
+      attributes: ['nome_completo', 'contato', 'especializacao', 'link_curriculo', 'avatar']
+         }
         }
       ]
     });
@@ -200,6 +205,8 @@ const obterCandidatos = async (req, res) => {
     if (candidatos.length === 0) {
       return res.status(200).json({ message: 'Não há candidatos para esta vaga.' });
     }
+
+    // console.log("Candidatos encontrados:", JSON.stringify(candidatos, null, 2));
 
     return res.status(200).json(candidatos);
   } catch (error) {

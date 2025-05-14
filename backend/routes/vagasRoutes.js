@@ -26,7 +26,7 @@ router.put('/restaurar/:id', authMiddleware, VagaController.restaurarVaga);
 router.get('/analise/:vagaId', authMiddleware, VagaController.getVagaAnalise);
 
 // Rota para listar vagas abertas
-router.get('/abertas', authMiddleware, VagaController.listarVagasAbertas);
+router.get('/abertas', VagaController.listarVagasAbertas);
 
 // Rota para buscar uma vaga por ID
 router.get('/:id', authMiddleware, VagaController.buscarVagaPorId);

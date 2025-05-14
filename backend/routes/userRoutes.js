@@ -18,6 +18,7 @@ router.put('/perfil', authMiddleware, userController.editUserProfile);
 // Rota para excluir o usuário (exclusão lógica)
 router.delete('/excluir/:id', authMiddleware, userController.deleteUser);
 
-
+// Rota para obter o perfil de uma empresa pública
+router.get('/empresa/:id', userController.getEmpresaPublica);
 
 module.exports = router;

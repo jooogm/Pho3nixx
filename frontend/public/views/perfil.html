@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <title>Perfil do Usuário</title>
@@ -9,16 +10,46 @@
   <style>
     body {
       background: linear-gradient(135deg, #0d0d0d, #ff6600);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
       color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Onda animada */
+    .wave-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      z-index: 0;
+    }
+
+    @keyframes waveMove {
+      0% {
+        d: path("M0,160L48,144C96,128,192,96,288,117.3C384,139,480,213,576,240C672,267,768,245,864,240C960,235,1056,245,1152,234.7C1248,224,1344,192,1392,176L1440,160L1440,0L0,0Z");
+      }
+
+      100% {
+        d: path("M0,120L60,150C120,180,240,180,360,160C480,140,600,100,720,130C840,160,960,220,1080,210C1200,200,1320,120,1440,140L1440,0L0,0Z");
+      }
+    }
+
+    .navbar,
+    .container,
+    .perfil-card {
+      position: relative;
+      z-index: 1;
     }
 
     .navbar {
-      background-color: #1e1e1e !important;
-    }
-
-    .navbar-brand-left {
-      display: flex;
-      align-items: center;
+      background-color: #1e1e1e;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     }
 
     .nav-logo {
@@ -27,163 +58,226 @@
       color: #ff6600;
     }
 
-    .navbar-nav.centered {
+    .navbar-nav.centered .nav-link {
+      color: white;
+      margin: 0 10px;
+      transition: color 0.3s ease;
+    }
+
+    .navbar-nav.centered .nav-link:hover,
+    .navbar-nav.centered .nav-link.active {
+      color: #ff6600;
+    }
+
+    .navbar-buttons .btn {
+      margin-left: 10px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .btn-outline-danger {
+      border-color: #ff6600;
+      color: #ff6600;
+    }
+
+    .btn-outline-danger:hover {
+      background-color: #ff6600;
+      color: white;
+    }
+
+    .btn-danger {
+      background-color: #ff6600;
+      border-color: #ff6600;
+    }
+
+    .btn-danger:hover {
+      background-color: #e65c00;
+    }
+
+    /* Fade-in e slide-up para o card */
+    .perfil-card {
+      background-color: #fff;
+      border-radius: 15px;
+      padding: 40px;
+      max-width: 700px;
       margin: 0 auto;
+      color: #333;
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
+      animation: fadeSlideUp 1.2s ease forwards;
+      opacity: 0;
     }
 
-    .navbar-nav.centered .nav-item .nav-link {
-      color: white;
-      transition: color 0.3s;
+    @keyframes fadeSlideUp {
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    .navbar-nav.centered .nav-item .nav-link:hover,
-    .navbar-nav.centered .nav-item .nav-link.active {
+    /* Animação para o título */
+    .perfil-card h2 {
+      font-weight: 700;
       color: #ff6600;
+      margin-bottom: 30px;
+      animation: slideInText 1s ease forwards;
+      opacity: 0;
     }
 
-    .navbar-buttons .btn-outline-danger {
-      border-color: #ff6600;
-      color: #ff6600;
-    }
+    @keyframes slideInText {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
 
-    .navbar-buttons .btn-outline-danger:hover {
-      background-color: #ff6600;
-      color: white;
-    }
-
-    .navbar-buttons .btn-danger {
-      background-color: #ff6600;
-      border-color: #ff6600;
-    }
-
-    .navbar-buttons .btn-danger:hover {
-      background-color: #e65500;
-    }
-    
-    .btn-sair {
-      border-color: #ff6600;
-      color: #000000;
-      color: #ff6600;
-      background-color: #000 !important; /* preto */
-      color: #fff !important;            /* texto branco */
-    }
-
-    .btn-minhasvagas {
-      border-color: #ff6600;
-      color: #ff6600;
-    }
-
-    .btn-meuperfil {
-      border-color: #ff6600;
-      color: #ff6600;
-    }
-
-    .btn-sair:hover,
-    .btn-minhasvagas:hover,
-    .btn-meuperfil:hover {
-       background-color: #ff6600 !important;
-       color: #fff !important;
-      border-color: #ff6600 !important;
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .perfil-card {
-      background-color: rgb(255, 255, 255);
-      border-radius: 10px;
-      padding: 30px;
-      color: black;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      background: rgba(30, 30, 30, 0.85);
+      border: 2px solid rgba(255, 102, 0, 0.3);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 700px;
+      margin: 0 auto;
+      color: #f0f0f0;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px rgba(255, 102, 0, 0.3);
+      animation: floatIn 2s ease-out, floatIdle 3s ease-in-out 2s 1;
+      opacity: 0;
+      animation-fill-mode: forwards;
+      transition: all 0.3s ease-in-out;
     }
 
-    .perfil-card h3 {
-      font-weight: bold;
+    @keyframes floatIn {
+      0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
 
-    .perfil-card h4 {
-      margin-top: 25px;
-      color: #e65c00;
+    @keyframes floatIdle {
+      0% {
+        transform: translateY(0);
+      }
+
+      25% {
+        transform: translateY(-4px);
+      }
+
+      50% {
+        transform: translateY(0);
+      }
+
+      75% {
+        transform: translateY(4px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
     }
 
-    .perfil-card p {
-      margin-bottom: 10px;
-    }
-
-    .perfil-card img {
-      border: 3px solid #e65c00;
-      margin-bottom: 20px;
-    }
-
-    .perfil-card a {
-      color: #ffffff;
-    }
-
-    .perfil-card a:hover {
-      text-decoration: underline;
-    }
-
+    /* Botão animado */
     .btn-editar-perfil {
-  background-color: #000;
-  color: white;
-  border: 2px solid #ff6600;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  text-decoration: none;
-  display: inline-block;
-  transition: background-color 0.3s, color 0.3s;
-}
+      background-color: #000;
+      color: white;
+      border: 2px solid #ff6600;
+      padding: 0.6rem 1.2rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.4s ease;
+    }
 
     .btn-editar-perfil:hover {
-  background-color: #ff6600;
-  color: #000;
-}
+      background-color: #ff6600;
+      color: #000;
+      transform: scale(1.05);
+    }
 
-    .card {
-  background-color: rgba(30, 30, 30, 0.7); /* fundo escuro semi-transparente */
-  border: 1px solid #ff6600;               /* borda laranja */
-  border-radius: 1rem;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* leve sombra */
-  color: white;
-}
+    @media (max-width: 768px) {
+      .perfil-card {
+        padding: 20px;
+      }
 
-    .card-header {
-  background-color: rgba(0, 0, 0, 0.4); /* header um pouco mais escuro */
-  border-bottom: 1px solid #ff6600;
-}
+      .nav-logo {
+        font-weight: bold;
+        font-size: 1.5rem;
+        color: #ff6600;
+      }
 
+      .navbar-buttons .btn {
+        margin: 5px 0;
+      }
+    }
   </style>
 </head>
+
 <body>
+
+  <!-- Onda decorativa -->
+  <div class="wave-container">
+    <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#1e1e1e; stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#111; stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      <path fill="url(#waveGradient)">
+        <animate attributeName="d" dur="8s" repeatCount="indefinite" values="
+            M0,160 C360,280 1080,40 1440,160 L1440,0 L0,0 Z;
+            M0,160 C300,100 1140,280 1440,160 L1440,0 L0,0 Z;
+            M0,160 C360,280 1080,40 1440,160 L1440,0 L0,0 Z
+          " />
+      </path>
+    </svg>
+  </div>
+
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg">
     <div class="container">
       <a class="navbar-brand navbar-brand-left" href="index.html">
         <span class="nav-logo">Pho3nix</span>
       </a>
-
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
         <ul class="navbar-nav centered">
+          <!-- Adicione links aqui se necessário -->
         </ul>
-      </div>
-      <div class="navbar-buttons" id="auth-buttons">
-        <a href="login.html" class="btn btn-outline-danger">Login</a>
-        <a href="cadastro.html" class="btn btn-danger">Cadastrar-se</a>
+        <form class="d-flex me-3" role="search" id="form-pesquisa">
+          <input id="input-pesquisa" class="form-control me-1" type="search" placeholder="Buscar" aria-label="Search">
+          <button class="btn btn-outline-light" type="submit">
+            <i class="bi bi-search"></i>
+          </button>
+        </form>
       </div>
     </div>
   </nav>
 
   <!-- Conteúdo do Perfil -->
   <div class="container mt-5">
-    <div class="card perfil-card">
-      <div class="text-center mb-4">
-        <h2>Perfil do Usuário</h2>
-      </div>
+    <div class="perfil-card text-center">
+      <h2>Perfil do Usuário</h2>
       <div id="perfilContainer">
-        <!-- Perfil será carregado aqui via JavaScript -->
+        <!-- Conteúdo do perfil via JS -->
       </div>
-      <div class="text-center mt-4">
+      <div class="mt-4">
         <a href="editar_perfil.html" class="btn btn-editar-perfil">Editar Perfil</a>
       </div>
     </div>
@@ -193,4 +287,5 @@
   <script src="/nav.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

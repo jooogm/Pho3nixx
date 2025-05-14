@@ -28,7 +28,7 @@ router.post('/forgot-password', async (req, res) => {
 
         const token = jwt.sign({ id: user.id }, SECRET_RESET, { expiresIn: '15m' });
 
-        const resetLink = `http://localhost:3000/reset-password?token=${token}`;
+        const resetLink = `http://localhost:3000/redefinirsenha.html?token=${token}`;
 
         await transporter.sendMail({
             from: '"Suporte" <seuemail@gmail.com>',

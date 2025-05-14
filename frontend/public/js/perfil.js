@@ -22,24 +22,40 @@ document.addEventListener("DOMContentLoaded", async function () {
       const user = data.user;
       const perfilContainer = document.getElementById("perfilContainer");
   
-      let perfilHTML = `
-        <div class="text-center">
-          <img src="${user.profile?.avatar 
-            ? user.profile.avatar.startsWith('data:image/') || user.profile.avatar.startsWith("https")
-              ? user.profile.avatar 
-              : `data:image/jpeg;base64,${user.profile.avatar}`
-            : 'https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250'}"
-            class="rounded-circle" width="150">
-          <h3>${user.name}</h3>
-          <p><strong>Email:</strong> ${user.email}</p>
-          <hr>
-        </div>
-      `;
+
+// Exibe nome da empresa ou nome completo do profissional
+const nomeExibido = user.type_user_id === 2
+      ? `${user.name} ${user.profile?.nome_completo || ""}`
+      : user.name;
+
+      let avatar = user.profile?.avatar;
+let avatarSrc = "";
+
+// Se avatar está vazio ou nulo
+if (!avatar) {
+  avatarSrc = "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250";
+
+// Se avatar começa com "data:image/" ou "http" → usa direto
+} else if (typeof avatar === "string" && (avatar.startsWith("data:image/") || avatar.startsWith("http"))) {
+  avatarSrc = avatar;
+
+// Caso contrário, assume que é base64 puro e adiciona o prefixo
+} else {
+  avatarSrc = `data:image/jpeg;base64,${avatar}`;
+}
+
+let perfilHTML = `
+  <div class="text-center">
+    <img src="${avatarSrc}" class="rounded-circle" width="150">
+    <h3>${nomeExibido}</h3>
+    <p><strong>Email:</strong> ${user.email}</p>
+    <hr>
+  </div>
+`;
   
       if (user.type_user_id === 2) {
         perfilHTML += `
           <h4>Perfil Profissional</h4>
-          <p><strong>Nome Completo:</strong> ${user.profile?.nome_completo || '-'}</p>
           <p><strong>Data de Nascimento:</strong> ${user.profile?.data_nascimento || '-'}</p>
           <p><strong>Localização:</strong> ${user.profile?.localizacao || '-'}</p>
           <p><strong>Contato:</strong> ${user.profile?.contato || '-'}</p>
@@ -51,7 +67,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       } else if (user.type_user_id === 3) {
         perfilHTML += `
           <h4>Perfil Empresarial</h4>
-          <p><strong>Nome da Empresa:</strong> ${user.profile?.nome_completo || '-'}</p>
           <p><strong>Localização:</strong> ${user.profile?.localizacao || '-'}</p>
           <p><strong>Contato:</strong> ${user.profile?.contato || '-'}</p>
           <p><strong>Resumo:</strong> ${user.profile?.resumo || '-'}</p>

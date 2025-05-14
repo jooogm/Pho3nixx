@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -31,8 +32,10 @@
       border-color: #ff6600;
       color: #000000;
       color: #ff6600;
-      background-color: #000 !important; /* preto */
-      color: #fff !important;            /* texto branco */
+      background-color: #000 !important;
+      /* preto */
+      color: #fff !important;
+      /* texto branco */
     }
 
     .navbar-nav.centered {
@@ -68,23 +71,55 @@
       background-color: #e65500;
     }
 
-    .btn-minhasvagas {
-      border-color: #ff6600;
-      color: #ff6600;
-    }
 
     .btn-meuperfil {
-      border-color: #ff6600;
-      color: #ff6600;
+      color: white;
+      border: 2px solid #ff6600;
     }
 
-     .hero-section {
+    .hero-section {
       min-height: 100vh;
       background: transparent;
     }
 
     .hero-section h2 {
       font-weight: bold;
+    }
+
+    .btn-candidaturas {
+      color: white;
+      border: 2px solid #ff6600;
+    }
+
+    .btn-candidaturas:hover {
+      background-color: #ffaa00;
+      border-color: #ffaa00;
+    }
+
+    /* Estilo para o botão cinza */
+    .btn-candidaturas {
+      color: white;
+      border: 2px solid #ff6600;
+    }
+
+    .btn-candidaturas:hover {
+      background-color: #ffaa00;
+      border-color: #ffaa00;
+    }
+
+    /* Estilo para o botão "Minhas Vagas" */
+    .btn-minhasvagas {
+      /* Cor laranja */
+      color: white;
+      border: 2px solid #ff6600;
+      /* Borda laranja */
+    }
+
+    .btn-minhasvagas:hover {
+      background-color: #ffaa00;
+      /* Cor do fundo no hover */
+      border-color: #ffaa00;
+      /* Cor da borda no hover */
     }
 
     .hero-section span {
@@ -101,16 +136,14 @@
     }
 
     .btn-sair:hover,
-    .btn-minhasvagas:hover,
     .btn-meuperfil:hover {
-       background-color: #ff6600 !important;
-       color: #fff !important;
+      background-color: #ff6600 !important;
+      color: #fff !important;
       border-color: #ff6600 !important;
     }
-
-
   </style>
 </head>
+
 <body>
   <nav class="navbar navbar-expand-lg">
     <div class="container">
@@ -139,9 +172,9 @@
         </ul>
       </div>
 
-       <!-- Barra de pesquisa -->
-       <form class="d-flex me-3" role="search">
-        <input class="form-control me-1" type="search" placeholder="Buscar" aria-label="Search">
+      <!-- Barra de pesquisa -->
+      <form class="d-flex me-3" role="search" id="form-pesquisa">
+        <input id="input-pesquisa" class="form-control me-1" type="search" placeholder="Buscar" aria-label="Search">
         <button class="btn btn-outline-light" type="submit">
           <i class="bi bi-search"></i>
         </button>
@@ -158,53 +191,56 @@
     <div class="container d-flex flex-column flex-lg-row align-items-center justify-content-between">
       <div class="col-lg-6">
         <h2 class="mb-3">
-          Encontre os melhores talentos de <span>TECNOLOGIA</span> do Brasil ou conquiste uma oportunidade nas maiores empresas do país.
+          Encontre os melhores talentos de <span>TECNOLOGIA</span> do Brasil ou conquiste uma oportunidade nas maiores
+          empresas do país.
         </h2>
         <p class="text-light mb-4">
-          Conectamos profissionais qualificados a empresas inovadoras, impulsionando carreiras e acelerando o crescimento do setor de TI.
+          Conectamos profissionais qualificados a empresas inovadoras, impulsionando carreiras e acelerando o
+          crescimento do setor de TI.
         </p>
         <a href="cadastro.html" class="btn btn-lg">Cadastre-se</a>
       </div>
       <div class="col-lg-5 mt-4 mt-lg-0">
-        <img src="./LogoPhoenix.PNG" alt="Phoenix" >
+        <img src="./LogoPhoenix.PNG" alt="Phoenix">
       </div>
     </div>
   </section>
 
-    <!-- Rodapé -->
-    <footer class="text-white pt-5 pb-3" style="background-color: #1e1e1e;">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-3 mb-4">
-            <h5 class="text-uppercase fw-bold text-warning">Pho3nix</h5>
-            <p>Conectando profissionais de tecnologia às maiores empresas do Brasil.</p>
-          </div>
-          <div class="col-md-3 mb-4">
-            <h6 class="text-uppercase fw-bold">Institucional</h6>
-            <ul class="list-unstyled">
-              <li><a href="#" class="text-white text-decoration-none">Sobre nós</a></li>
-              <li><a href="#" class="text-white text-decoration-none">Carreiras</a></li>    
-            </ul>
-          </div>
-          <div class="col-md-3 mb-4">
-            <h6 class="text-uppercase fw-bold">Serviços</h6>
-            <ul class="list-unstyled">
-              <li><a href="#" class="text-white text-decoration-none">Empresas</a></li>
-              <li><a href="#" class="text-white text-decoration-none">Profissionais</a></li>
-            </ul>
-          </div>
-         
+  <!-- Rodapé -->
+  <footer class="text-white pt-5 pb-3" style="background-color: #1e1e1e;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 mb-4">
+          <h5 class="text-uppercase fw-bold text-warning">Pho3nix</h5>
+          <p>Conectando profissionais de tecnologia às maiores empresas do Brasil.</p>
+        </div>
+        <div class="col-md-3 mb-4">
+          <h6 class="text-uppercase fw-bold">Institucional</h6>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-white text-decoration-none">Sobre nós</a></li>
+            <li><a href="#" class="text-white text-decoration-none">Carreiras</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3 mb-4">
+          <h6 class="text-uppercase fw-bold">Serviços</h6>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-white text-decoration-none">Empresas</a></li>
+            <li><a href="#" class="text-white text-decoration-none">Profissionais</a></li>
+          </ul>
+        </div>
+
         <hr class="border-secondary" />
-  
+
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
           <a href="#" class="text-white text-decoration-none mb-2 mb-md-0">Política de Privacidade</a>
           <p class="mb-0">© 2025 Phoenix. Todos os direitos reservados.</p>
         </div>
       </div>
-    </footer>
+  </footer>
 
   <!-- Botão voltar ao topo -->
-  <button id="btnTopo" class="btn btn-warning position-fixed" style="bottom: 20px; right: 20px; display: none; border-radius: 50%; width: 48px; height: 48px; z-index: 999;">
+  <button id="btnTopo" class="btn btn-warning position-fixed"
+    style="bottom: 20px; right: 20px; display: none; border-radius: 50%; width: 48px; height: 48px; z-index: 999;">
     <i class="bi bi-chevron-up"></i>
   </button>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
@@ -221,4 +257,5 @@
     });
   </script>
 </body>
+
 </html>

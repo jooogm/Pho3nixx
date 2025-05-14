@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Busca de Vagas</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(180deg, #121212 0%, #ff6600 100%);
+      color: white;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Onda animada */
+    .wave-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      z-index: -1;
+      /* Garante que a onda esteja atrás do conteúdo */
+    }
+
+    .navbar {
+      background-color: #1e1e1e !important;
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      color: #ff6600;
+      font-size: 1.5rem;
+    }
+
+    .navbar-brand:hover {
+      color: #ffa14a;
+    }
+
+    .navbar-buttons .btn-custom-outline {
+      border: 1px solid #ff6600;
+      color: #ff6600;
+      background-color: transparent;
+      border-radius: 12px;
+      padding: 4px 14px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .navbar-buttons .btn-custom-outline:hover {
+      background-color: #ff6600;
+      color: white;
+    }
+
+    .navbar-buttons .btn-custom-fill {
+      background-color: #ff6600;
+      color: white;
+      border-radius: 12px;
+      padding: 4px 14px;
+      font-weight: 500;
+      border: none;
+      transition: 0.3s;
+    }
+
+    .navbar-buttons .btn-custom-fill:hover {
+      background-color: #e65500;
+    }
+
+    .container h2 {
+      font-weight: bold;
+      color: #ff6600;
+    }
+
+    .result-card {
+      background: rgba(255, 102, 0, 0.6);
+      /* Laranja semitransparente */
+      color: white;
+      margin: 20px auto;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      border: 2px solid #ff6600;
+      /* Borda laranja */
+    }
+
+    .result-card h3 {
+      color: #ff6600;
+      font-weight: bold;
+    }
+
+    .btn-search {
+      background-color: #ff6600;
+      color: rgba(30, 30, 30, 0.85);
+      border-radius: 8px;
+      font-weight: 500;
+      padding: 10px 20px;
+      border: none;
+      transition: 0.3s;
+    }
+
+    .btn-search:hover {
+      background-color: #ffaa00;
+    }
+
+    .card.mb-3 {
+      background: rgba(0, 0, 0, 0.6);
+      /* Preto semitransparente */
+      color: white;
+      margin: 20px auto;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      border: 2px solid #ff6600ad;
+      /* Borda laranja */
+    }
+
+    footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background-color: #1e1e1e;
+      color: white;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    footer .container {
+      max-width: 1200px;
+    }
+
+    footer .row {
+      margin: 0;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+
+  <body>
+    <!--Navbar -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand navbar-brand-left" href="index.html">
+          <span class="nav-logo">Pho3nix</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+      <form class="d-flex me-3" role="search" id="form-pesquisa">
+        <input id="input-pesquisa" class="form-control me-1" type="search" placeholder="Buscar" aria-label="Search">
+        <button class="btn btn-outline-light" type="submit">
+          <i class="bi bi-search"></i>
+        </button>
+      </form>
+    </nav>
+
+    <!-- Onda animada -->
+    <div class="wave-container">
+      <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#1e1e1e; stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#111; stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <path fill="url(#waveGradient)">
+          <animate attributeName="d" dur="8s" repeatCount="indefinite" values="
+              M0,160 C360,280 1080,40 1440,160 L1440,0 L0,0 Z;
+              M0,160 C300,100 1140,280 1440,160 L1440,0 L0,0 Z;
+              M0,160 C360,280 1080,40 1440,160 L1440,0 L0,0 Z
+            " />
+        </path>
+      </svg>
+    </div>
+
+    <div class="container mt-4">
+      <h2>Resultados da Busca</h2>
+      <div id="resultados-vagas" class="mt-3">
+        <!-- Aqui você pode inserir os resultados da busca -->
+      </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer class="text-white pt-5 pb-3" style="background-color: #1e1e1e; position: absolute; bottom: 0; width: 100%;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 mb-4">
+            <h5 class="text-uppercase fw-bold text-warning">Pho3nix</h5>
+            <p>Conectando profissionais de tecnologia às maiores empresas do Brasil.</p>
+          </div>
+          <div class="col-md-3 mb-4">
+            <h6 class="text-uppercase fw-bold">Institucional</h6>
+            <ul class="list-unstyled">
+              <li><a href="#" class="text-white text-decoration-none">Sobre nós</a></li>
+              <li><a href="#" class="text-white text-decoration-none">Carreiras</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 mb-4">
+            <h6 class="text-uppercase fw-bold">Serviços</h6>
+            <ul class="list-unstyled">
+              <li><a href="#" class="text-white text-decoration-none">Empresas</a></li>
+              <li><a href="#" class="text-white text-decoration-none">Profissionais</a></li>
+            </ul>
+          </div>
+
+          <hr class="border-secondary" />
+
+          <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+            <a href="#" class="text-white text-decoration-none mb-2 mb-md-0">Política de Privacidade</a>
+            <p class="mb-0">© 2025 Phoenix. Todos os direitos reservados.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Botão voltar ao topo -->
+    <button id="btnTopo" class="btn btn-warning position-fixed"
+      style="bottom: 20px; right: 20px; display: none; border-radius: 50%; width: 48px; height: 48px; z-index: 999;">
+      <i class="bi bi-chevron-up"></i>
+    </button>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/buscar.js"></script>
+    <script>
+      const btnTopo = document.getElementById("btnTopo");
+
+      window.addEventListener("scroll", () => {
+        btnTopo.style.display = window.scrollY > 200 ? "block" : "none";
+      });
+
+      btnTopo.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    </script>
+    <script src="/nav.js"></script>
+    <script src="/busca.js"></script>
+
+  </body>
+
+</html>

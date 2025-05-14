@@ -173,7 +173,7 @@ const buscarVagaPorId = async (req, res) => {
     try {
         const vagaId = req.params.id;
         
-        const vaga = await Vaga.findOne({ where: { vaga_id: vagaId }, paranoid: false });
+        const vaga = await Vaga.findOne({ where: { vaga_id: vagaId } });
         if (!vaga) {
             return res.status(404).json({ message: "Vaga não encontradaa." });
         }
@@ -210,26 +210,25 @@ const getVagaAnalise = async (req, res) => {
 };
 
 const listarVagasAbertas = async (req, res) => {
-    const { titulo } = req.query; // Parâmetro de busca por título (opcional)
-  
-    try {
-      // Filtrando as vagas abertas
-      const where = { status: 'aberta' }; // Filtrando apenas as vagas abertas
-  
-      if (titulo) {
-        where.titulo = { [Op.like]: `%${titulo}%` }; // Pesquisa por título
-      }
-  
-      const vagas = await Vaga.findAll({
-        where,
-      });
-  
-      res.status(200).json(vagas);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Erro ao buscar vagas.' });
-    }
-  };
+  const { titulo, empresa_id } = req.query;
+  const where = { status: 'Aberta' };
+
+// console.log("📍 Entrou na rota listarVagasAbertas", req.query);
+
+  if (empresa_id) {
+    where.empresa_id = empresa_id;
+  } else if (titulo) {
+    where.titulo = { [Op.like]: `%${titulo}%` };
+  }
+
+  try {
+    const vagas = await Vaga.findAll({ where });
+    res.status(200).json(vagas);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erro ao buscar vagas.' });
+  }
+};
 
 // Exportação das funções para uso em outros módulos
 module.exports = {

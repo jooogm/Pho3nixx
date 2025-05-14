@@ -22,12 +22,18 @@ document.addEventListener('DOMContentLoaded', () => {
           container.innerHTML = '<p>Você ainda não se inscreveu em nenhuma vaga.</p>';
         } else {
           data.forEach(inscricao => {
+//console.log("Inscrição:", inscricao);
+
             const card = document.createElement('div');
             card.classList.add('col-md-6', 'mb-3');
             card.innerHTML = `
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">${inscricao.vaga?.titulo || 'Título não disponível'}</h5>
+                  <h5 class="card-title">
+                    <a href="vaga.html?id=${inscricao.vaga_id}" class="text-decoration-none text-dark">
+                       ${inscricao.vaga?.titulo || 'Título não disponível'}
+                         </a>
+                       </h5>
                   <p class="card-text">${inscricao.vaga?.descricao || 'Sem descrição'}</p>
                   <p><strong>Status:</strong> ${inscricao.status_inscricao}</p>
                   <button class="btn btn-outline-danger btn-sm" onclick="cancelarInscricao(${inscricao.inscricao_id})">Cancelar</button>

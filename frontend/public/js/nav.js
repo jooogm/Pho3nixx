@@ -14,10 +14,10 @@ document.addEventListener("DOMContentLoaded", () => {
   
         if (typeUserId === 2) {
             // Profissional
-            extraButtons += `<a href="candidaturas.html" class="btn btn-outline-secondary me-2 btn-candidaturas">Minhas Candidaturas</a>`;
+            extraButtons += `<a href="candidaturas.html" class="btn btn-candidaturas me-2">Minhas Candidaturas</a>`;
           } else if (typeUserId === 3) {
             // Empresa
-            extraButtons += `<a href="minhas_vagas.html" class="btn btn-outline-secondary me-2 btn-minhasvagas">Minhas Vagas</a>`;
+            extraButtons += `<a href="minhas_vagas.html" class="btn btn- me-2 btn-minhasvagas">Minhas Vagas</a>`;
           }
   
         authButtons.innerHTML = `
@@ -37,3 +37,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
   
+    // Funcionalidade da barra de pesquisa
+    const formPesquisa = document.getElementById("form-pesquisa");
+    const inputPesquisa = document.getElementById("input-pesquisa");
+  
+    if (formPesquisa) {
+      formPesquisa.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const termo = inputPesquisa.value.trim();
+        if (termo) {
+          // Redireciona para a página de resultados de busca com o termo como query string
+          window.location.href = `busca.html?termo=${encodeURIComponent(termo)}`;
+        }
+      });
+    }

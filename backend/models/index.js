@@ -22,8 +22,8 @@ User.belongsTo(TypeUser, { foreignKey: 'type_user_id', as: 'typeUser' });  // Re
 User.hasOne(UserProfissionalProfile, { foreignKey: 'user_id', as: 'profile' });  // Relacionando User com UserProfissionalProfile
 User.hasOne(UserEmpresaProfile, { foreignKey: 'user_id', as: 'empresaProfile' });  // Relacionando User com UserEmpresaProfile
 
-UserProfissionalProfile.belongsTo(User, { foreignKey: 'user_id' });  // Relacionando UserProfissionalProfile com User
-UserEmpresaProfile.belongsTo(User, { foreignKey: 'user_id' });  // Relacionando UserEmpresaProfile com User
+UserProfissionalProfile.belongsTo(User, { foreignKey: 'user_id', as: 'user' });  // Relacionando UserProfissionalProfile com User
+UserEmpresaProfile.belongsTo(User, { foreignKey: 'user_id', as: 'user' });  // Relacionando UserEmpresaProfile com User
 
 
 

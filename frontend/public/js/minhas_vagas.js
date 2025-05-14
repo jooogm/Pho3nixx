@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      vagas.forEach(vaga => {
+      vagas.forEach((vaga) => {
         const vagaCard = document.createElement('div');
         vagaCard.className = 'vaga-card';
 
@@ -34,9 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
           <p><strong>Salário:</strong> R$ ${vaga.salario}</p>
           <p><strong>Tipo de contrato:</strong> ${vaga.tipo_contrato}</p>
           <p><strong>Status:</strong> ${vaga.status}</p>
-          <p><strong>Data de criação:</strong> ${new Date(vaga.created_at).toLocaleDateString()}</p>
-          <a href="editar_vaga.html?id=${vaga.vaga_id}" class="btn-edit">✏️ Editar</a>
-          <button class="btn-delete" onclick="deletarVaga('${vaga.vaga_id}')">🗑️ Excluir</button>
+          <div class="mt-3">
+          <a href="editar_vaga.html?id=${vaga.vaga_id}" class="btn btn-edit">Editar</a>
+          <button class="btn btn-delete" onclick="deletarVaga(${vaga.vaga_id})">Excluir</button>
+          <a href="candidatos.html?vaga_id=${vaga.vaga_id}" class="btn btn-orange ms-2">Ver Candidatos</a>
+        </div>
         `;
 
         vagasContainer.appendChild(vagaCard);

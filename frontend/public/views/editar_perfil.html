@@ -1,219 +1,368 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Editar Perfil</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <title>Editar Perfil</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
 
-    <style>
-        body {
-          background: linear-gradient(135deg, #0d0d0d, #ff6600);
-          color: white;
-        }
-    
-        .navbar {
-          background-color: #1e1e1e !important;
-        }
-    
-        .navbar-brand-left {
-          display: flex;
-          align-items: center;
-        }
-    
-        .nav-logo {
-          font-weight: bold;
-          font-size: 1.5rem;
-          color: #ff6600;
-        }
-    
-        .navbar-nav.centered {
-          margin: 0 auto;
-        }
-    
-        .navbar-nav.centered .nav-item .nav-link {
-          color: white;
-          transition: color 0.3s;
-        }
-    
-        .navbar-nav.centered .nav-item .nav-link:hover,
-        .navbar-nav.centered .nav-item .nav-link.active {
-          color: #ff6600;
-        }
-    
-        .navbar-buttons .btn-outline-danger {
-          border-color: #ff6600;
-          color: #ff6600;
-        }
-    
-        .navbar-buttons .btn-outline-danger:hover {
-          background-color: #ff6600;
-          color: white;
-        }
-    
-        .navbar-buttons .btn-danger {
-          background-color: #ff6600;
-          border-color: #ff6600;
-        }
-    
-        .navbar-buttons .btn-danger:hover {
-          background-color: #e65500;
-        }
+  <style>
+    body {
+      background: linear-gradient(135deg, #0d0d0d, #ff6600);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+      color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      position: relative;
+      overflow-x: hidden;
+    }
 
-        .btn-minhasvagas {
+    /* Onda animada */
+    .wave-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      z-index: 0;
+    }
+
+    .input-icon-wrapper {
+      display: flex;
+      align-items: center;
+      background-color: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 0.375rem;
+      padding: 0.5rem 0.75rem;
+      color: white;
+    }
+
+    .input-icon-wrapper i {
+      color: #ff6600;
+      margin-right: 0.75rem;
+      font-size: 1.2rem;
+    }
+
+    .input-icon-wrapper input {
+      border: none;
+      background: transparent;
+      color: white;
+      flex: 1;
+      padding: 0;
+      outline: none;
+    }
+
+    .input-icon-wrapper input::placeholder {
+      color: #aaa;
+    }
+
+    .input-icon-wrapper:focus-within {
       border-color: #ff6600;
+      box-shadow: 0 0 0 0.2rem rgba(255, 102, 0, 0.25);
+    }
+
+    .form-icon-group {
+      position: relative;
+    }
+
+    .form-icon-group i {
+      position: absolute;
+      top: 50%;
+      left: 12px;
+      transform: translateY(-50%);
+      color: #ff6600;
+      font-size: 1.2rem;
+      z-index: 2;
+    }
+
+    .form-icon-group .form-control {
+      padding-left: 2.5rem;
+      /* espaço para o ícone */
+      background-color: #1a1a1a;
+      color: #fff;
+      border: 1px solid #333;
+    }
+
+    .form-icon-group .form-control:focus {
+      border-color: #ff6600;
+      box-shadow: 0 0 0 0.2rem rgba(255, 102, 0, 0.25);
+    }
+
+    .form-icon-group .invalid-feedback {
+      margin-left: 2.5rem;
+    }
+
+    .navbar {
+      background-color: #1e1e1e !important;
+      padding-top: 0.4rem;
+      padding-bottom: 0.4rem;
+    }
+
+    .nav-logo {
+      font-weight: bold;
+      font-size: 1.5rem;
       color: #ff6600;
     }
 
-        .btn-meuperfil {
-      border-color: #ff6600;
+    .navbar-nav .nav-link {
+      color: white;
+      transition: 0.3s;
+      padding: 0.5rem 1rem;
+    }
+
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active {
       color: #ff6600;
     }
 
-        .btn-sair {
+    .card {
+      background-color: rgba(30, 30, 30, 0.9);
+      border: 1px solid #ff6600;
+      border-radius: 1rem;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      color: white;
+    }
+
+    .card-header {
+      background-color: rgba(0, 0, 0, 0.4);
+      border-bottom: 1px solid #ff6600;
+    }
+
+    .form-container {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+      width: 100%;
+      max-width: 800px;
+      margin: 80px auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .form-control:focus {
       border-color: #ff6600;
-      color: #000000;
-      color: #ff6600;
-      background-color: #000 !important; /* preto */
-      color: #fff !important;            /* texto branco */
+      box-shadow: 0 0 0 0.2rem rgba(255, 102, 0, 0.25);
     }
 
-        .btn-sair:hover,
-        .btn-minhasvagas:hover,
-        .btn-meuperfil:hover {
-      background-color: #ff6600 !important;
-      color: #fff !important;
-      border-color: #ff6600 !important;
+    .custom-save-button {
+      background-color: #ff6600;
+      border: none;
+      color: white;
+      padding: 0.75rem;
+      font-weight: bold;
+      border-radius: 0.5rem;
+      transition: background-color 0.3s;
     }
-    
-        .hero-section {
-          min-height: 100vh;
-          background: transparent;
-        }
-    
-        .hero-section h2 {
-          font-weight: bold;
-        }
-    
-        .hero-section span {
-          color: #ff6600;
-        }
-    
-        .hero-section .btn {
-          background-color: #ff6600;
-          color: white;
-        }
-    
-        .hero-section .btn:hover {
-          background-color: #e65500;
-        }
 
-        .card {
-          background-color: rgba(30, 30, 30, 0.7); /* fundo escuro semi-transparente */
-          border: 1px solid #ff6600;               /* borda laranja */
-          border-radius: 1rem;
-          box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* leve sombra */
-          color: white;
-        }
+    .custom-save-button.loading {
+      pointer-events: none;
+      opacity: 0.7;
+    }
 
-        .card-header {
-          background-color: rgba(0, 0, 0, 0.4); /* header um pouco mais escuro */
-          border-bottom: 1px solid #ff6600;
-        }
+    .custom-save-button:hover {
+      background-color: #e65500;
+    }
 
-        .custom-save-button {
-          background-color: #ff6600;
-          border: none;
-          color: white;
-          padding: 0.75rem;
-          font-weight: bold;
-          border-radius: 0.5rem;
-          transition: background-color 0.3s;
-        }
+    /* Colunas do formulário */
+    .row-cols-2 {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
 
-        .custom-save-button:hover {
-          background-color: #e65500;
-        }
+    .form-group {
+      flex: 1;
+      min-width: 45%;
+    }
 
-      </style>
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+    }
 
+    .invalid-feedback {
+      display: block;
+    }
+  </style>
 </head>
+
 <body>
-     <!-- Navbar -->
-     <nav class="navbar navbar-expand-lg">
-        <div class="container">
-          <a class="navbar-brand navbar-brand-left" href="index.html">
-            <span class="nav-logo">Pho3nix</span>
-          </a>
-    
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-    
-          <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
-            <ul class="navbar-nav centered">
-              <li class="nav-item">
-                <a class="nav-link active" href="index.html">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Sobre Nós</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Cursos</a>
-              </li>
-            </ul>
-          </div>
-    
-          <div class="navbar-buttons" id="auth-buttons">
-            <a href="login.html" class="btn btn-outline-danger">Login</a>
-            <a href="cadastro.html" class="btn btn-danger">Cadastrar-se</a>
-          </div>
-        </div>
-      </nav>
+  <!-- Onda decorativa -->
+  <div class="wave-container">
+    <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#1e1e1e; stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#111; stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      <path fill="url(#waveGradient)">
+        <animate attributeName="d" dur="8s" repeatCount="indefinite" values="
+            M0,160 C360,280 1080,40 1440,160 L1440,0 L0,0 Z;
+            M0,160 C300,100 1140,280 1440,160 L1440,0 L0,0 Z;
+            M0,160 C360,280 1080,40 1440,160 L1440,0 L0,0 Z
+          " />
+      </path>
+    </svg>
+  </div>
 
-    <div class="container mt-5">
-        <div class="card">
-            <div class="card-header text-center">
-                <h2>Editar Perfil</h2>
-            </div>
-            <div class="card-body">
-                <form id="editarPerfilForm">
-                    <div class="mb-3">
-                        <label for="nome_completo" class="form-label">Nome Completo</label>
-                        <input type="text" class="form-control" id="nome_completo" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="localizacao" class="form-label">Localização</label>
-                        <input type="text" class="form-control" id="localizacao" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="contato" class="form-label">Contato</label>
-                        <input type="text" class="form-control" id="contato" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="resumo" class="form-label">Resumo Profissional</label>
-                        <textarea class="form-control" id="resumo" rows="3"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="avatar" class="form-label">Foto de Perfil</label>
-                        <input type="file" class="form-control" id="avatar" accept="image/*">
-                    </div>
-                    <div class="mb-3 text-center">
-                        <img id="avatarPreview" src="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250" alt="Prévia do Avatar" class="rounded-circle" width="120">
-                    </div>
-                    <div class="mb-3">
-                        <label for="redes_sociais" class="form-label">Redes Sociais</label>
-                        <input type="text" class="form-control" id="redes_sociais">
-                    </div>
-                    <div id="extraCampos">
-                        <!-- Campos específicos do usuário (Profissional ou Empresa) serão inseridos aqui via JS -->
-                    </div>
-                    <button type="submit" class="btn custom-save-button w-100">Salvar Alterações</button>
-                </form>
-            </div>
-        </div>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand navbar-brand-left" href="index.html">
+        <span class="nav-logo">Pho3nix</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+        <ul class="navbar-nav centered">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Sobre Nós</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Cursos</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="#" data-bs-toggle="dropdown">FAQ</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Barra de pesquisa -->
+      <form class="d-flex me-3" role="search" id="form-pesquisa">
+        <input id="input-pesquisa" class="form-control me-1" type="search" placeholder="Buscar" aria-label="Search">
+        <button class="btn btn-outline-light" type="submit">
+          <i class="bi bi-search"></i>
+        </button>
+      </form>
+
+      <div class="navbar-buttons" id="auth-buttons">
+        <a href="login.html" class="btn btn-outline-danger">Login</a>
+        <a href="cadastro.html" class="btn btn-danger">Cadastrar-se</a>
+      </div>
     </div>
+  </nav>
 
-    <script src="/editar_perfil.js"></script>
-    <script src="/nav.js"></script>
+  <div class="container mt-5">
+    <h2 class="text-center">Editar Perfil</h2>
+    <form id="editarPerfilForm" class="form-container">
+      <div class="row row-cols-2">
+        <div class="form-group mb-3">
+          <label for="nome_completo" class="form-label">Nome completo</label>
+          <input type="text" class="form-control" id="nome_completo" required />
+        </div>
+        <div class="form-group mb-3">
+          <label for="localizacao" class="form-label">Localização</label>
+          <input type="text" class="form-control" id="localizacao" />
+        </div>
+        <div class="form-group mb-3">
+          <label for="contato" class="form-label">Contato</label>
+          <input type="text" class="form-control" id="contato" />
+        </div>
+        <div class="form-group mb-3">
+          <label for="redes_sociais" class="form-label">Redes Sociais</label>
+          <input type="text" class="form-control" id="redes_sociais" />
+        </div>
+        <div class="form-group mb-3">
+          <label for="resumo" class="form-label">Resumo</label>
+          <textarea class="form-control" id="resumo" rows="3"></textarea>
+        </div>
+        <div class="form-group mb-3">
+          <label for="avatar" class="form-label">Foto de Perfil</label>
+          <input type="file" class="form-control" id="avatar" accept="image/*" />
+        </div>
+        <div class="text-center mb-3">
+          <img id="avatarPreview" src="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
+            alt="Prévia do Avatar" class="rounded-circle" width="120" />
+        </div>
+      </div>
+
+      <!-- Blocos condicionais -->
+      <div id="camposProfissional" class="row row-cols-2 d-none">
+        <div class="form-group mb-3">
+          <label for="especializacao" class="form-label">Especialização</label>
+          <input type="text" class="form-control" id="especializacao" />
+        </div>
+        <div class="form-group mb-3">
+          <label for="data_nascimento" class="form-label">Data de Nascimento</label>
+          <input type="date" class="form-control" id="data_nascimento" />
+        </div>
+        <div class="form-group mb-3">
+          <label for="link_curriculo" class="form-label">Link do Currículo</label>
+          <input type="url" class="form-control" id="link_curriculo" />
+        </div>
+      </div>
+
+      <div id="camposEmpresa" class="row row-cols-2 d-none">
+        <div class="form-group mb-3">
+          <label for="nome_empresa" class="form-label">Nome da Empresa</label>
+          <input type="text" class="form-control" id="nome_empresa" />
+        </div>
+      </div>
+
+      <div class="d-grid mt-4">
+        <button id="btnSalvar" type="submit" class="btn btn-primary">
+          <span class="spinner-border spinner-border-sm d-none" id="spinner" role="status" aria-hidden="true"></span>
+          <span id="btnText">Salvar Alterações</span>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const form = document.getElementById("editarPerfilForm");
+    const avatarInput = document.getElementById("avatar");
+    const avatarPreview = document.getElementById("avatarPreview");
+    const btnSalvar = document.getElementById("btnSalvar");
+    const btnText = document.getElementById("btnText");
+    const spinner = document.getElementById("spinner");
+
+    avatarInput.addEventListener("change", () => {
+      const file = avatarInput.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = e => {
+          avatarPreview.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        form.classList.add("was-validated");
+        return;
+      }
+
+      // Animação de carregamento
+      btnSalvar.classList.add("loading");
+      spinner.classList.remove("d-none");
+      btnText.textContent = "Salvando...";
+
+      // Simula salvamento
+      setTimeout(() => {
+        spinner.classList.add("d-none");
+        btnSalvar.classList.remove("loading");
+        btnText.textContent = "Salvar Alterações";
+        alert("Perfil salvo com sucesso!");
+        form.classList.remove("was-validated");
+      }, 2000);
+    });
+  </script>
+  <script src="/editar_perfil.js"></script>
+  <script src="/nav.js"></script>
 </body>
+
 </html>
