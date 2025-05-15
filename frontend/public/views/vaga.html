@@ -2,21 +2,178 @@
 <html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Detalhes da Vaga</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
+    body {
+      background: linear-gradient(180deg, #121212 0%, #ff6600 100%);
+      color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .navbar-brand {
+      color: #ff6600 !important;
+      text-decoration: none !important;
+    }
+
+    .navbar {
+      background-color: #1e1e1e;
+      padding: 0.6rem 1rem;
+      position: relative;
+      z-index: 10;
+      border-bottom: none;
+    }
+
+    .nav-logo {
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: #ff6600;
+    }
+
+    .wave-container {
+      margin-top: -4px;
+      line-height: 0;
+    }
+
+    .wave-container svg {
+      display: block;
+      width: 100%;
+      height: 100px;
+    }
+
+    h1 {
+      color: #ff6600;
+      font-weight: bold;
+      margin-bottom: 30px;
+      text-align: center;
+      text-shadow: 1px 1px 2px #000;
+      margin-top: 40px;
+    }
+
+    #detalhes-vaga {
+      background-color: rgba(30, 30, 30, 0.85);
+      border: 2px solid rgba(255, 102, 0, 0.5);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 0 15px rgba(255, 102, 0, 0.3);
+      max-width: 800px;
+      margin: 0 auto 40px;
+      backdrop-filter: blur(10px);
+    }
+
+    #detalhes-vaga h3 {
+      color: #ff6600;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    #detalhes-vaga p {
+      color: #ddd;
+      margin-bottom: 10px;
+    }
+
+    #btn-inscrever {
+      display: block;
+      margin: 0 auto 60px auto;
+      background-color: #000;
+      border: 2px solid #ff6600;
+      color: white;
+      font-weight: bold;
+      border-radius: 10px;
+      padding: 12px 24px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    #btn-inscrever:hover {
+      background-color: #ff6600;
+      color: black;
+    }
+
+    .search-form {
+      max-width: 300px;
+    }
+
+    .search-input {
+      background-color: #fff;
+      color: #000;
+      border-radius: 4px 0 0 4px;
+      border: 1px solid #ccc;
+    }
+
+    .search-btn {
+      border: 1px solid #ccc;
+      border-radius: 0 4px 4px 0;
+      background-color: #000;
+      color: #fff;
+    }
+
+    .search-btn:hover {
+      background-color: #ff6600;
+      border-color: #ff6600;
+    }
+  </style>
 </head>
 
 <body>
-  <h1>Detalhes da Vaga</h1>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container d-flex justify-content-between align-items-center">
 
-  <div id="detalhes-vaga">
-    <!-- Detalhes da vaga serão inseridos via JS -->
+      <!-- Logo à esquerda -->
+      <a class="navbar-brand nav-logo" href="index.html">Pho3nix</a>
+
+      <!-- Barra de pesquisa à direita -->
+      <form class="d-flex search-form" role="search">
+        <input class="form-control search-input me-2" type="search" placeholder="Buscar vaga..." aria-label="Buscar">
+        <button class="btn btn-outline-light search-btn" type="submit"><i class="bi bi-search"></i></button>
+      </form>
+
+    </div>
+  </nav>
+
+
+  <!-- Onda encostada na navbar -->
+  <div class="wave-container">
+    <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#1e1e1e; stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#1e1e1e; stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      <path fill="url(#waveGradient)">
+        <animate attributeName="d" dur="8s" repeatCount="indefinite" values="
+          M0,160 C360,280 1080,40 1440,160 L1440,0 L0,0 Z;
+          M0,160 C300,100 1140,280 1440,160 L1440,0 L0,0 Z;
+          M0,160 C360,280 1080,40 1440,160 L1440,0 L0,0 Z
+        " />
+      </path>
+    </svg>
   </div>
 
-  <button id="btn-inscrever">Me Inscrever</button>
+  <!-- Conteúdo da Vaga -->
+  <div class="container">
+    <h1>Detalhes da Vaga</h1>
+    <div id="detalhes-vaga">
+      <!-- Inserido via JS -->
+    </div>
+    <button id="btn-inscrever">Me Inscrever</button>
+  </div>
 
   <script src="vaga.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

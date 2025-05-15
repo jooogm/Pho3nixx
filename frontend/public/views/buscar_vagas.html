@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,29 +9,41 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
   <style>
     body {
-      background: linear-gradient(to right, #eb811d, #663410);
-      color: #ffffff;
+      background: linear-gradient(135deg, #0d0d0d, #ff6600);
+      height: 100vh;
+      padding-top: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
     }
 
     .navbar {
       background-color: #1e1e1e !important;
     }
 
-    .navbar-nav .nav-link {
+    .nav-logo {
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: #ff6600;
+    }
+
+    .navbar-nav.centered .nav-item .nav-link {
       color: white;
       transition: color 0.3s;
     }
 
-    .navbar-nav .nav-link:hover,
-    .navbar-nav .nav-link.active {
-      color: #ff6600 !important;
-    }
-
-    .navbar-brand {
-      font-weight: bold;
-      font-size: 1.5rem;
-      color: #ff6600 !important;
+    .navbar-nav.centered .nav-item .nav-link:hover,
+    .navbar-nav.centered .nav-item .nav-link.active {
+      color: #ff6600;
     }
 
     .navbar-buttons .btn-outline-danger {
@@ -49,7 +62,7 @@
     }
 
     .navbar-buttons .btn-danger:hover {
-      background-color: #e65c00;
+      background-color: #e65500;
     }
 
     .container-main {
@@ -66,7 +79,8 @@
       color: #ffa500;
     }
 
-    .filtros label, .filtros legend {
+    .filtros label,
+    .filtros legend {
       color: #ddd;
     }
 
@@ -106,209 +120,259 @@
     .btn-candidatar:hover {
       background-color: #e65c00;
     }
+
+    .navbar {
+      background-color: #1e1e1e;
+      padding: 10px 20px;
+    }
+
+    .navbar-brand {
+      color: #ff6600 !important;
+      font-weight: bold;
+      font-size: 1.5rem;
+      text-decoration: none;
+    }
+
+    .search-form {
+      display: flex;
+      align-items: center;
+      margin: 0;
+    }
+
+    .search-input {
+      min-width: 180px;
+      background-color: #fff;
+      color: #000;
+      border: 1px solid #444;
+      border-radius: 4px 0 0 4px;
+    }
+
+    .search-input::placeholder {
+      color: #666;
+    }
+
+    .search-btn {
+      border: 1px solid #fff;
+      border-radius: 0 4px 4px 0;
+      background-color: #000;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   </style>
 </head>
+
 <body>
 
-<!-- Navbar atualizada -->
-<nav class="navbar navbar-expand-lg navbar-dark px-4">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Pho3nix</a>
+  <nav class="navbar">
+    <div class="container-fluid">
+      <div class="row w-100 align-items-center">
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarContent">
-      <!-- Menu centralizado -->
-      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-      </ul>
-
-      <!-- Busca e botões -->
-      <form class="d-flex me-2" role="search">
-        <input class="form-control" type="search" placeholder="Buscar" aria-label="Buscar">
-        <button class="btn btn-outline-light ms-1" type="submit"><i class="bi bi-search"></i></button>
-      </form>
-
-    </div>
-  </div>
-</nav>
-
-<!-- Conteúdo principal -->
-<div class="container-fluid container-main">
-  <div class="row">
-
-<!-- Filtros -->
-<div class="col-md-3 filtros">
-    <h4>Filtros</h4>
-  
-    <div class="mb-3">
-      <legend>Nível de experiência</legend>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="estagio">
-        <label class="form-check-label" for="estagio">Estágio</label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="junior">
-        <label class="form-check-label" for="junior">Júnior</label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="pleno">
-        <label class="form-check-label" for="pleno">Pleno</label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="senior">
-        <label class="form-check-label" for="senior">Sênior</label>
-      </div>
-    </div>
-  
-    <div class="mb-3">
-      <legend>Faixa salarial</legend>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="ate3000">
-        <label class="form-check-label" for="ate3000">Até R$ 3.000</label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="faixa1">
-        <label class="form-check-label" for="faixa1">R$ 3.000 - R$ 6.000</label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="faixa2">
-        <label class="form-check-label" for="faixa2">R$ 6.000 - R$ 10.000</label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="acima10000">
-        <label class="form-check-label" for="acima10000">Acima de R$ 10.000</label>
-      </div>
-    </div>
-  
-    <div class="mb-3">
-      <legend>Tecnologias</legend>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="javascript">
-        <label class="form-check-label" for="javascript">JavaScript</label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="python">
-        <label class="form-check-label" for="python">Python</label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="java">
-        <label class="form-check-label" for="java">Java</label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="nodejs">
-        <label class="form-check-label" for="nodejs">Node.js</label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="react">
-        <label class="form-check-label" for="react">React</label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="docker">
-        <label class="form-check-label" for="docker">Docker</label>
-      </div>
-    </div>
-  
-    <button class="btn btn-aplicar w-100">Aplicar filtros</button>
-  </div>
-
-    <!-- Vagas -->
-    <div class="col-md-9">
-      <!-- Vaga 1 -->
-      <div class="vaga-card">
-        <h5>Estagiário em Desenvolvimento Web</h5>
-        <p><i class="bi bi-geo-alt"></i> São Paulo, SP &nbsp; | &nbsp; <i class="bi bi-clock"></i> Há 3 dias &nbsp; | &nbsp; <i class="bi bi-briefcase"></i> Estágio</p>
-        <p>Estamos em busca de um estagiário para auxiliar no desenvolvimento e manutenção de aplicações web usando HTML, CSS e JavaScript.</p>
-        <div class="mb-2">
-          <span class="badge">HTML</span>
-          <span class="badge">CSS</span>
-          <span class="badge">JavaScript</span>
+        <!-- Logo -->
+        <div class="col-3 d-flex justify-content-start ps-5">
+          <a class="navbar-brand" href="#">Pho3nix</a>
         </div>
-        <p><strong>R$ 1.500 - R$ 2.000</strong></p>
-        <button class="btn btn-candidatar">Candidatar-se</button>
-      </div>
 
-      <!-- Vaga 2 -->
-      <div class="vaga-card">
-        <h5>Desenvolvedor Júnior Backend</h5>
-        <p><i class="bi bi-geo-alt"></i> Remoto &nbsp; | &nbsp; <i class="bi bi-clock"></i> Há 5 dias &nbsp; | &nbsp; <i class="bi bi-briefcase"></i> Júnior</p>
-        <p>Procuramos desenvolvedor backend com conhecimento em Node.js, APIs REST e banco de dados MongoDB para integrar equipe de inovação.</p>
-        <div class="mb-2">
-          <span class="badge">Node.js</span>
-          <span class="badge">Express</span>
-          <span class="badge">MongoDB</span>
+        <!-- Barra de pesquisa -->
+        <div class="col-6 d-flex justify-content-center">
+          <form class="search-form d-flex" role="search">
+            <input class="form-control search-input" type="search" placeholder="Buscar" aria-label="Buscar">
+            <button class="btn search-btn" type="submit"><i class="bi bi-search"></i></button>
+          </form>
         </div>
-        <p><strong>R$ 3.500 - R$ 5.000</strong></p>
-        <button class="btn btn-candidatar">Candidatar-se</button>
-      </div>
 
-      <!-- Vaga 3 -->
-      <div class="vaga-card">
-        <h5>Desenvolvedor Pleno Fullstack</h5>
-        <p><i class="bi bi-geo-alt"></i> Belo Horizonte, MG &nbsp; | &nbsp; <i class="bi bi-clock"></i> Há 1 semana &nbsp; | &nbsp; <i class="bi bi-briefcase"></i> Pleno</p>
-        <p>Estamos contratando desenvolvedor Fullstack com experiência em React no frontend e Java no backend para projetos corporativos.</p>
-        <div class="mb-2">
-          <span class="badge">React</span>
-          <span class="badge">Java</span>
-          <span class="badge">Spring Boot</span>
-        </div>
-        <p><strong>R$ 6.000 - R$ 9.000</strong></p>
-        <button class="btn btn-candidatar">Candidatar-se</button>
-      </div>
+        <!-- Espaço vazio (futuro: botões ou avatar) -->
+        <div class="col-3"></div>
 
-      <!-- Vaga 4 -->
-      <div class="vaga-card">
-        <h5>Arquiteto de Software Sênior</h5>
-        <p><i class="bi bi-geo-alt"></i> Brasília, DF &nbsp; | &nbsp; <i class="bi bi-clock"></i> Há 2 semanas &nbsp; | &nbsp; <i class="bi bi-briefcase"></i> Sênior</p>
-        <p>Responsável por projetar soluções escaláveis em nuvem, arquitetura de microsserviços e liderar time técnico.</p>
-        <div class="mb-2">
-          <span class="badge">AWS</span>
-          <span class="badge">Docker</span>
-          <span class="badge">Microservices</span>
-        </div>
-        <p><strong>R$ 12.000 - R$ 18.000</strong></p>
-        <button class="btn btn-candidatar">Candidatar-se</button>
       </div>
     </div>
-  </div>
-</div>
+  </nav>
 
-<!-- Rodapé -->
-<footer class="text-white pt-5 pb-3" style="background-color: #1e1e1e;">
-  <div class="container">
+  <!-- Conteúdo principal -->
+  <div class="container-fluid container-main">
     <div class="row">
-      <div class="col-md-3 mb-4">
-        <h5 class="text-uppercase fw-bold text-warning">Pho3nix</h5>
-        <p>Conectando profissionais de tecnologia às maiores empresas do Brasil.</p>
-      </div>
-      <div class="col-md-3 mb-4">
-        <h6 class="text-uppercase fw-bold">Institucional</h6>
-        <ul class="list-unstyled">
-          <li><a href="#" class="text-white text-decoration-none">Sobre nós</a></li>
-          <li><a href="#" class="text-white text-decoration-none">Carreiras</a></li>
-        </ul>
-      </div>
-      <div class="col-md-3 mb-4">
-        <h6 class="text-uppercase fw-bold">Serviços</h6>
-        <ul class="list-unstyled">
-          <li><a href="#" class="text-white text-decoration-none">Empresas</a></li>
-          <li><a href="#" class="text-white text-decoration-none">Profissionais</a></li>
-          <li><a href="#" class="text-white text-decoration-none">Fale Conosco</a></li>
-        </ul>
-      </div>
-    </div>
 
-    <hr class="border-secondary" />
+      <!-- Filtros -->
+      <div class="col-md-3 filtros">
+        <h4>Filtros</h4>
 
-    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-      <a href="#" class="text-white text-decoration-none mb-2 mb-md-0">Política de Privacidade</a>
-      <p class="mb-0">© 2025 Phoenix. Todos os direitos reservados.</p>
+        <div class="mb-3">
+          <legend>Nível de experiência</legend>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="estagio">
+            <label class="form-check-label" for="estagio">Estágio</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="junior">
+            <label class="form-check-label" for="junior">Júnior</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="pleno">
+            <label class="form-check-label" for="pleno">Pleno</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="senior">
+            <label class="form-check-label" for="senior">Sênior</label>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <legend>Faixa salarial</legend>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="ate3000">
+            <label class="form-check-label" for="ate3000">Até R$ 3.000</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="faixa1">
+            <label class="form-check-label" for="faixa1">R$ 3.000 - R$ 6.000</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="faixa2">
+            <label class="form-check-label" for="faixa2">R$ 6.000 - R$ 10.000</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="acima10000">
+            <label class="form-check-label" for="acima10000">Acima de R$ 10.000</label>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <legend>Tecnologias</legend>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="javascript">
+            <label class="form-check-label" for="javascript">JavaScript</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="python">
+            <label class="form-check-label" for="python">Python</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="java">
+            <label class="form-check-label" for="java">Java</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="nodejs">
+            <label class="form-check-label" for="nodejs">Node.js</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="react">
+            <label class="form-check-label" for="react">React</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="docker">
+            <label class="form-check-label" for="docker">Docker</label>
+          </div>
+        </div>
+
+        <button class="btn btn-aplicar w-100">Aplicar filtros</button>
+      </div>
+
+      <!-- Vagas -->
+      <div class="col-md-9">
+        <!-- Vaga 1 -->
+        <div class="vaga-card">
+          <h5>Estagiário em Desenvolvimento Web</h5>
+          <p><i class="bi bi-geo-alt"></i> São Paulo, SP &nbsp; | &nbsp; <i class="bi bi-clock"></i> Há 3 dias &nbsp; |
+            &nbsp; <i class="bi bi-briefcase"></i> Estágio</p>
+          <p>Estamos em busca de um estagiário para auxiliar no desenvolvimento e manutenção de aplicações web usando
+            HTML, CSS e JavaScript.</p>
+          <div class="mb-2">
+            <span class="badge">HTML</span>
+            <span class="badge">CSS</span>
+            <span class="badge">JavaScript</span>
+          </div>
+          <p><strong>R$ 1.500 - R$ 2.000</strong></p>
+          <button class="btn btn-candidatar">Candidatar-se</button>
+        </div>
+
+        <!-- Vaga 2 -->
+        <div class="vaga-card">
+          <h5>Desenvolvedor Júnior Backend</h5>
+          <p><i class="bi bi-geo-alt"></i> Remoto &nbsp; | &nbsp; <i class="bi bi-clock"></i> Há 5 dias &nbsp; | &nbsp;
+            <i class="bi bi-briefcase"></i> Júnior
+          </p>
+          <p>Procuramos desenvolvedor backend com conhecimento em Node.js, APIs REST e banco de dados MongoDB para
+            integrar equipe de inovação.</p>
+          <div class="mb-2">
+            <span class="badge">Node.js</span>
+            <span class="badge">Express</span>
+            <span class="badge">MongoDB</span>
+          </div>
+          <p><strong>R$ 3.500 - R$ 5.000</strong></p>
+          <button class="btn btn-candidatar">Candidatar-se</button>
+        </div>
+
+        <!-- Vaga 3 -->
+        <div class="vaga-card">
+          <h5>Desenvolvedor Pleno Fullstack</h5>
+          <p><i class="bi bi-geo-alt"></i> Belo Horizonte, MG &nbsp; | &nbsp; <i class="bi bi-clock"></i> Há 1 semana
+            &nbsp; | &nbsp; <i class="bi bi-briefcase"></i> Pleno</p>
+          <p>Estamos contratando desenvolvedor Fullstack com experiência em React no frontend e Java no backend para
+            projetos corporativos.</p>
+          <div class="mb-2">
+            <span class="badge">React</span>
+            <span class="badge">Java</span>
+            <span class="badge">Spring Boot</span>
+          </div>
+          <p><strong>R$ 6.000 - R$ 9.000</strong></p>
+          <button class="btn btn-candidatar">Candidatar-se</button>
+        </div>
+
+        <!-- Vaga 4 -->
+        <div class="vaga-card">
+          <h5>Arquiteto de Software Sênior</h5>
+          <p><i class="bi bi-geo-alt"></i> Brasília, DF &nbsp; | &nbsp; <i class="bi bi-clock"></i> Há 2 semanas &nbsp;
+            | &nbsp; <i class="bi bi-briefcase"></i> Sênior</p>
+          <p>Responsável por projetar soluções escaláveis em nuvem, arquitetura de microsserviços e liderar time
+            técnico.</p>
+          <div class="mb-2">
+            <span class="badge">AWS</span>
+            <span class="badge">Docker</span>
+            <span class="badge">Microservices</span>
+          </div>
+          <p><strong>R$ 12.000 - R$ 18.000</strong></p>
+          <button class="btn btn-candidatar">Candidatar-se</button>
+        </div>
+      </div>
     </div>
   </div>
-</footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Rodapé -->
+  <footer class="text-white pt-5 pb-3" style="background-color: #1e1e1e;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 mb-4">
+          <h5 class="text-uppercase fw-bold text-warning">Pho3nix</h5>
+          <p>Conectando profissionais de tecnologia às maiores empresas do Brasil.</p>
+        </div>
+        <div class="col-md-3 mb-4">
+          <h6 class="text-uppercase fw-bold">Institucional</h6>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-white text-decoration-none">Sobre nós</a></li>
+            <li><a href="#" class="text-white text-decoration-none">Carreiras</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3 mb-4">
+          <h6 class="text-uppercase fw-bold">Serviços</h6>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-white text-decoration-none">Empresas</a></li>
+            <li><a href="#" class="text-white text-decoration-none">Profissionais</a></li>
+            <li><a href="#" class="text-white text-decoration-none">Fale Conosco</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="border-secondary" />
+
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+        <a href="#" class="text-white text-decoration-none mb-2 mb-md-0">Política de Privacidade</a>
+        <p class="mb-0">© 2025 Phoenix. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

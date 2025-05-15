@@ -35,17 +35,35 @@
       color: #ffa94d;
     }
 
-    .wave-container {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-      line-height: 0;
+    .navbar-nav {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
     }
 
-    .wave-container svg {
-      display: block;
+    .navbar-toggler {
+      border: none;
+    }
+
+    .navbar-collapse {
+      justify-content: center;
+    }
+
+    #input-pesquisa {
+      margin-right: 10px;
       width: 100%;
-      height: 100px;
+    }
+
+    header {
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    header h1 {
+      font-weight: bold;
+      margin-bottom: 1rem;
     }
 
     .form-container {
@@ -169,6 +187,33 @@
     .btn-orange:hover {
       animation: pulse 0.6s ease-out;
     }
+
+    /* Barra de pesquisa com fundo branco */
+    #form-pesquisa #input-pesquisa {
+      background-color: #fff !important;
+      color: #000 !important;
+      border: 1px solid #ccc !important;
+      border-radius: 9px !important;
+      padding: 0.4rem 0.75rem !important;
+      font-weight: 400;
+    }
+
+    #form-pesquisa #input-pesquisa::placeholder {
+      color: #666;
+    }
+
+    .wave-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+    }
+
+    .wave-container svg {
+      display: block;
+      width: 100%;
+      height: 100px;
+    }
   </style>
 </head>
 
@@ -180,7 +225,23 @@
       <a class="navbar-brand" href="index.html">
         <span class="nav-logo">Pho3nix</span>
       </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+        <ul class="navbar-nav centered"></ul>
+        <form class="d-flex me-3" role="search" id="form-pesquisa">
+          <input id="input-pesquisa" class="form-control me-1" type="search" placeholder="Buscar" aria-label="Search">
+          <button class="btn btn-outline-light" type="submit">
+            <i class="bi bi-search"></i>
+          </button>
+        </form>
+      </div>
     </div>
+  </nav>
+
+  </div>
+  </div>
   </nav>
 
   <!-- Onda logo após a navbar -->
@@ -190,7 +251,7 @@
         <linearGradient id="waveGradientTop" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" style="stop-color:#1e1e1e; stop-opacity:1" />
           <stop offset="50%" style="stop-color:#1e1e1e; stop-opacity:1" />
-          <stop offset="100%" style="stop-color:#ff6600; stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#1e1e1e; stop-opacity:1" />
         </linearGradient>
       </defs>
       <path fill="url(#waveGradientTop)">

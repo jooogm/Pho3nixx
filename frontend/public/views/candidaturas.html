@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pho3nix - Perfil</title>
+  <title>Pho3nix - Candidaturas</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
   <style>
@@ -12,162 +12,176 @@
       background: linear-gradient(180deg, #121212 0%, #ff6600 100%);
       color: white;
       min-height: 100vh;
-      position: relative;
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
-    /* Onda animada */
     .wave-container {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       overflow: hidden;
-      line-height: 0;
       z-index: -1;
-      /* Garante que a onda esteja atrás do conteúdo */
     }
 
     .navbar {
       background-color: #1e1e1e !important;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
     }
 
-    .navbar-brand {
+    .nav-logo {
       font-weight: bold;
-      color: #ff6600;
       font-size: 1.5rem;
-    }
-
-    .navbar-brand:hover {
-      color: #ffa14a;
-    }
-
-    .navbar-buttons .btn-custom-outline {
-      border: 1px solid #ff6600;
       color: #ff6600;
-      background-color: transparent;
-      border-radius: 12px;
-      padding: 4px 14px;
-      font-weight: 500;
-      transition: 0.3s;
     }
 
-    .navbar-buttons .btn-custom-outline:hover {
-      background-color: #ff6600;
-      color: white;
+    #form-pesquisa #input-pesquisa {
+      background-color: #fff;
+      color: #000;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 0.4rem 0.75rem;
     }
 
-    .navbar-buttons .btn-custom-fill {
-      background-color: #ff6600;
-      color: white;
-      border-radius: 12px;
-      padding: 4px 14px;
-      font-weight: 500;
-      border: none;
-      transition: 0.3s;
+    #form-pesquisa #input-pesquisa::placeholder {
+      color: #666;
     }
 
-    .navbar-buttons .btn-custom-fill:hover {
-      background-color: #e65500;
-    }
-
-    .profile-card {
-      background: white;
-      color: #333;
-      max-width: 400px;
-      margin: -100px auto 0;
-      padding: 20px;
-      border-radius: 16px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-      text-align: center;
-    }
-
-    .profile-card h2 {
+    h2 {
+      margin-top: 100px;
       color: #ff6600;
       font-weight: bold;
+      text-shadow: 1px 1px 2px #000;
     }
 
-    .profile-card .btn-edit {
-      background-color: #121212;
+    .vaga-card {
+      background-color: rgba(30, 30, 30, 0.55);
+      border: 2px solid rgba(255, 102, 0, 0.5);
+      border-radius: 16px;
+      padding: 20px;
+      color: #eee;
+      box-shadow: 0 0 20px rgba(255, 102, 0, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .vaga-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 25px rgba(255, 102, 0, 0.5);
+    }
+
+    .vaga-card .card-title a {
+      color: #ff6600;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .vaga-card .card-title a:hover {
+      text-decoration: underline;
+    }
+
+    .vaga-card p {
+      color: #ccc;
+    }
+
+    .vaga-card .btn-cancelar {
+      border: 1px solid #ff4d4d;
+      color: #ff4d4d;
+      background: transparent;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .vaga-card .btn-cancelar:hover {
+      background-color: #ff4d4d;
       color: white;
-      border: none;
-      padding: 10px 16px;
+    }
+
+    .btn-voltar {
+      margin-top: 40px;
+      background-color: #000;
+      border: 2px solid #ff6600;
+      color: white;
+      font-weight: bold;
       border-radius: 8px;
-      font-weight: 500;
-      transition: 0.3s;
+      padding: 10px 20px;
+      transition: all 0.3s ease;
     }
 
-    .profile-card .btn-edit:hover {
-      background-color: #ff6600;
-      color: white;
+    .btn-voltar:hover {
+      box-shadow: 0 0 10px #ff6600;
+    }
+
+    @media (max-width: 768px) {
+      h2 {
+        margin-top: 80px;
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
 
 <body>
-  <!--Navbar -->
+  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg">
     <div class="container">
       <a class="navbar-brand navbar-brand-left" href="index.html">
         <span class="nav-logo">Pho3nix</span>
       </a>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <form class="d-flex ms-auto" role="search" id="form-pesquisa">
+        <input id="input-pesquisa" class="form-control me-1" type="search" placeholder="Buscar" aria-label="Search">
+        <button class="btn btn-outline-light" type="submit">
+          <i class="bi bi-search"></i>
+        </button>
+      </form>
     </div>
-    <form class="d-flex me-3" role="search" id="form-pesquisa">
-      <input id="input-pesquisa" class="form-control me-1" type="search" placeholder="Buscar" aria-label="Search">
-      <button class="btn btn-outline-light" type="submit">
-        <i class="bi bi-search"></i>
-      </button>
-    </form>
   </nav>
+
   <!-- Onda animada -->
   <div class="wave-container">
     <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
       <defs>
         <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" style="stop-color:#1e1e1e; stop-opacity:1" />
-          <stop offset="100%" style="stop-color:#111; stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#1e1e1e; stop-opacity:1" />
         </linearGradient>
       </defs>
       <path fill="url(#waveGradient)">
         <animate attributeName="d" dur="8s" repeatCount="indefinite" values="
-            M0,160 C360,280 1080,40 1440,160 L1440,0 L0,0 Z;
-            M0,160 C300,100 1140,280 1440,160 L1440,0 L0,0 Z;
-            M0,160 C360,280 1080,40 1440,160 L1440,0 L0,0 Z
-          " />
+          M0,160 C360,280 1080,40 1440,160 L1440,0 L0,0 Z;
+          M0,160 C300,100 1140,280 1440,160 L1440,0 L0,0 Z;
+          M0,160 C360,280 1080,40 1440,160 L1440,0 L0,0 Z
+        " />
       </path>
     </svg>
   </div>
 
-  <div class="container mt-5">
+  <!-- Conteúdo -->
+  <div class="container pt-5">
     <h2 class="mb-4">Minhas Candidaturas</h2>
-    <div id="candidaturas-container" class="row"></div>
+    <div id="candidaturas-container" class="row g-4"></div>
+
+    <div class="text-center">
+      <a href="perfil.html" class="btn btn-voltar mt-4">Voltar para o Perfil</a>
+    </div>
   </div>
 
-  <!-- Botão voltar ao topo -->
-  <button id="btnTopo" class="btn btn-warning position-fixed"
-    style="bottom: 20px; right: 20px; display: none; border-radius: 50%; width: 48px; height: 48px; z-index: 999;">
-    <i class="bi bi-chevron-up"></i>
-  </button>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     const btnTopo = document.getElementById("btnTopo");
-
     window.addEventListener("scroll", () => {
       btnTopo.style.display = window.scrollY > 200 ? "block" : "none";
     });
-
-    btnTopo.addEventListener("click", () => {
+    btnTopo?.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   </script>
 
   <script src="/candidaturas.js"></script>
   <script src="/nav.js"></script>
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

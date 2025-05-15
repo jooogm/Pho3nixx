@@ -33,9 +33,7 @@
       color: #000000;
       color: #ff6600;
       background-color: #000 !important;
-      /* preto */
       color: #fff !important;
-      /* texto branco */
     }
 
     .navbar-nav.centered {
@@ -68,9 +66,8 @@
     }
 
     .navbar-buttons .btn-danger:hover {
-      background-color: #e65500;
+      background-color: #ff6600;
     }
-
 
     .btn-meuperfil {
       color: white;
@@ -92,34 +89,18 @@
     }
 
     .btn-candidaturas:hover {
-      background-color: #ffaa00;
-      border-color: #ffaa00;
+      background-color: #ff6600;
+      border-color: #ff6600;
     }
 
-    /* Estilo para o botão cinza */
-    .btn-candidaturas {
-      color: white;
-      border: 2px solid #ff6600;
-    }
-
-    .btn-candidaturas:hover {
-      background-color: #ffaa00;
-      border-color: #ffaa00;
-    }
-
-    /* Estilo para o botão "Minhas Vagas" */
     .btn-minhasvagas {
-      /* Cor laranja */
       color: white;
       border: 2px solid #ff6600;
-      /* Borda laranja */
     }
 
     .btn-minhasvagas:hover {
-      background-color: #ffaa00;
-      /* Cor do fundo no hover */
-      border-color: #ffaa00;
-      /* Cor da borda no hover */
+      background-color: #ff6600;
+      border-color: #ff6600;
     }
 
     .hero-section span {
@@ -140,6 +121,40 @@
       background-color: #ff6600 !important;
       color: #fff !important;
       border-color: #ff6600 !important;
+    }
+
+    /* 🔥 NOVO: Botões após login */
+    .navbar-buttons .btn-nav {
+      background-color: transparent;
+      color: white;
+      border: 2px solid #ff6600;
+      border-radius: 8px;
+      padding: 0.4rem 1rem;
+      margin-left: 8px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-buttons .btn-nav:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 5px #ff6600;
+    }
+
+    .btn-nav-fill {
+      background-color: #ff6600;
+      color: white;
+      font-weight: 500;
+      padding: 0.4rem 1rem;
+      border-radius: 8px;
+      border: 2px solid #ff6600;
+      margin-left: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-nav-fill:hover {
+      background-color: #e65c00;
+      color: white;
+      box-shadow: 0 0 5px #ff6600;
     }
   </style>
 </head>
@@ -164,7 +179,7 @@
             <a class="nav-link" href="#">Sobre Nós</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Cursos</a>
+            <a class="nav-link" href="cursos.html">Cursos</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link" href="#" data-bs-toggle="dropdown">FAQ</a>
@@ -181,8 +196,8 @@
       </form>
 
       <div class="navbar-buttons" id="auth-buttons">
-        <a href="login.html" class="btn btn-outline-danger">Login</a>
-        <a href="cadastro.html" class="btn btn-danger">Cadastrar-se</a>
+        <a href="login.html" class="btn btn-nav-fill">Login</a>
+        <a href="cadastro.html" class="btn btn-nav">Cadastre-se</a>
       </div>
     </div>
   </nav>

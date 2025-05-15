@@ -119,6 +119,22 @@
       color: #ff6600;
     }
 
+    .navbar-buttons .btn-nav {
+      background-color: transparent;
+      color: white;
+      border: 2px solid #ff6600;
+      border-radius: 8px;
+      padding: 0.4rem 1rem;
+      margin-left: 8px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-buttons .btn-nav:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 5px #ff6600;
+    }
+
     .card {
       background-color: rgba(30, 30, 30, 0.9);
       border: 1px solid #ff6600;
@@ -130,6 +146,21 @@
     .card-header {
       background-color: rgba(0, 0, 0, 0.4);
       border-bottom: 1px solid #ff6600;
+    }
+
+    /* Estilo específico para a barra de pesquisa da navbar */
+    #form-pesquisa #input-pesquisa {
+      background-color: #fff !important;
+      color: #000 !important;
+      border: 1px solid #ccc !important;
+      border-radius: 8px !important;
+      padding: 0.4rem 0.75rem !important;
+      box-shadow: none !important;
+      font-weight: 500;
+    }
+
+    #form-pesquisa #input-pesquisa::placeholder {
+      color: #666;
     }
 
     .form-container {
@@ -188,6 +219,48 @@
     .invalid-feedback {
       display: block;
     }
+
+    .form-control {
+      background-color: #1a1a1a;
+      border: 1px solid #333;
+      color: white;
+      border-radius: 0.375rem;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .form-control::placeholder {
+      color: #aaa;
+    }
+
+    .form-control:focus {
+      border-color: #ff6600;
+      box-shadow: 0 0 0 0.2rem rgba(255, 102, 0, 0.25);
+      background-color: #1a1a1a;
+      color: white;
+    }
+
+
+    #btnSalvar {
+      background-color: #ff6600;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 30px;
+      padding: 0.75rem 1.5rem;
+      transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+      box-shadow: 0 4px 12px rgba(255, 102, 0, 0.3);
+    }
+
+    #btnSalvar:hover {
+      background-color: #e65500;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(255, 102, 0, 0.4);
+    }
+
+    #btnSalvar.loading {
+      opacity: 0.7;
+      pointer-events: none;
+    }
   </style>
 </head>
 
@@ -226,30 +299,24 @@
           <li class="nav-item">
             <a class="nav-link active" href="index.html">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Sobre Nós</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Cursos</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link" href="#" data-bs-toggle="dropdown">FAQ</a>
-          </li>
         </ul>
       </div>
 
       <!-- Barra de pesquisa -->
       <form class="d-flex me-3" role="search" id="form-pesquisa">
-        <input id="input-pesquisa" class="form-control me-1" type="search" placeholder="Buscar" aria-label="Search">
+        <input id="input-pesquisa" type="search" placeholder="Buscar" aria-label="Search">
         <button class="btn btn-outline-light" type="submit">
           <i class="bi bi-search"></i>
         </button>
       </form>
 
-      <div class="navbar-buttons" id="auth-buttons">
-        <a href="login.html" class="btn btn-outline-danger">Login</a>
-        <a href="cadastro.html" class="btn btn-danger">Cadastrar-se</a>
+      <div class="navbar-buttons d-flex">
+        <a href="candidaturas.html" class="btn btn-nav">Minhas Candidaturas</a>
+        <a href="perfil.html" class="btn btn-nav">Meu Perfil</a>
+        <a href="index.html" class="btn btn-nav">Sair</a>
       </div>
+
+    </div>
     </div>
   </nav>
 

@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="mt-3">
           <a href="editar_vaga.html?id=${vaga.vaga_id}" class="btn btn-edit">Editar</a>
           <button class="btn btn-delete" onclick="deletarVaga(${vaga.vaga_id})">Excluir</button>
-          <a href="candidatos.html?vaga_id=${vaga.vaga_id}" class="btn btn-orange ms-2">Ver Candidatos</a>
+          <a href="candidatos.html?vaga_id=${vaga.vaga_id}" class="btn btn-orange-rect">Ver Candidatos</a>
         </div>
         `;
 

@@ -24,7 +24,7 @@ const candidatos = Array.isArray(dados) ? dados : dados.candidatos || [];
       return;
     }
 
-console.log("🔎 Dados recebidos:", candidatos);
+//console.log("🔎 Dados recebidos:", candidatos);
 
     candidatos.forEach(c => {
       const card = document.createElement("div");
