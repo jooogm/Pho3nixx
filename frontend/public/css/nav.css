@@ -1,0 +1,83 @@
+/* Estilos da Navbar */
+.navbar {
+  background-color: #1e1e1e !important;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+  position: relative;
+  z-index: 10;
+}
+
+.nav-logo {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #ff6600;
+}
+
+.navbar-nav .nav-link {
+  color: white;
+  transition: 0.3s;
+  padding: 0.5rem 1rem;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: #ff6600;
+}
+
+/* Botões da Navbar */
+.navbar-buttons .btn-nav {
+  background-color: transparent;
+  color: white;
+  border: 2px solid #ff6600;
+  border-radius: 8px;
+  padding: 0.4rem 1rem;
+  margin-left: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.navbar-buttons .btn-nav:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 5px #ff6600;
+}
+
+.navbar-buttons .btn-nav-fill {
+  background-color: #ff6600;
+  color: white;
+  font-weight: 500;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  border: 2px solid #ff6600;
+  margin-left: 8px;
+  transition: all 0.3s ease;
+}
+
+.navbar-buttons .btn-nav-fill:hover {
+  background-color: #e65c00;
+  color: white;
+  box-shadow: 0 0 5px #ff6600;
+}
+
+/* Barra de Pesquisa */
+#form-pesquisa #input-pesquisa {
+  background-color: #fff !important;
+  color: #000 !important;
+  border: 1px solid #ccc !important;
+  border-radius: 8px !important;
+  padding: 0.4rem 0.75rem !important;
+  box-shadow: none !important;
+  font-weight: 500;
+}
+
+#form-pesquisa #input-pesquisa::placeholder {
+  color: #666;
+}
+
+/* Responsividade */
+.navbar-toggler {
+  border: none;
+}
+
+.navbar-collapse {
+  justify-content: center;
+}

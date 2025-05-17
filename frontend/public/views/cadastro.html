@@ -9,24 +9,16 @@
   <style>
     body {
       background: linear-gradient(135deg, #0d0d0d, #ff6600);
-      height: 100vh;
-      padding-top: 70px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      min-height: 100vh;
+      padding-top: 80px;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: white;
     }
 
     .navbar {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-    }
-
-    .navbar {
       background-color: #1e1e1e !important;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
     }
 
     .nav-logo {
@@ -35,13 +27,13 @@
       color: #ff6600;
     }
 
-    .navbar-nav.centered .nav-item .nav-link {
+    .navbar-nav .nav-link {
       color: white;
-      transition: color 0.3s;
+      transition: 0.3s;
     }
 
-    .navbar-nav.centered .nav-item .nav-link:hover,
-    .navbar-nav.centered .nav-item .nav-link.active {
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active {
       color: #ff6600;
     }
 
@@ -64,30 +56,10 @@
       background-color: #e65500;
     }
 
-    .btn-login {
-      border: 1px solid #ff6600;
-      color: #ff6600;
-      background-color: transparent;
-      margin-right: 0.5rem;
-    }
-
-    .btn-login:hover {
-      background-color: #ff6600;
-      color: #fff;
-    }
-
-    .btn-register {
-      background-color: #ff6600;
-      color: #fff;
-    }
-
-    .btn-register:hover {
-      background-color: #e65c00;
-    }
-
     .card-cadastro {
       width: 100%;
       max-width: 400px;
+      margin: 0 auto;
       padding: 2rem;
       border-radius: 1rem;
       box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
@@ -152,96 +124,91 @@
     #mensagem {
       color: #ff6600;
     }
-
-    /* Estilo exclusivo para a barra de pesquisa da navbar */
-    #form-pesquisa .form-control {
-      background-color: white;
-      color: black;
-      border-color: #ccc;
-    }
-
-    #form-pesquisa .form-control::placeholder {
-      color: #666;
-    }
   </style>
 </head>
 
 <body>
-
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg">
+  <!-- Navbar (única, funcional) -->
+  <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
-      <a class="navbar-brand navbar-brand-left" href="index.html">
-        <span class="nav-logo">Pho3nix</span>
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+      <a class="navbar-brand" href="index.html"><span class="nav-logo">Pho3nix</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <form class="d-flex me-3" role="search" id="form-pesquisa">
-        <input id="input-pesquisa" class="form-control me-1" type="search" placeholder="Buscar" aria-label="Search">
-        <button class="btn btn-outline-light" type="submit">
-          <i class="bi bi-search"></i>
-        </button>
-      </form>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Sobre Nós</a></li>
+          <li class="nav-item"><a class="nav-link" href="cursos.html">Cursos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">FAQ</a></li>
+        </ul>
+      </div>
 
+      <div class="navbar-buttons d-flex">
+        <a href="login.html" class="btn btn-outline-danger">Login</a>
+        <a href="cadastro.html" class="btn btn-danger ms-2">Cadastre-se</a>
+      </div>
+    </div>
   </nav>
 
   <!-- Formulário de Cadastro -->
-  <div class="card-cadastro" id="cadastroCard">
-    <h2 class="text-center mb-4">Criar Conta</h2>
-    <form id="cadastroForm">
-      <div class="mb-3">
-        <label for="nomeCadastro" class="form-label">Nome</label>
-        <div class="input-group">
-          <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
-          <input type="text" class="form-control" id="name" placeholder="Seu nome completo" required>
+  <div class="container mt-5">
+    <div class="card-cadastro">
+      <h2 class="text-center mb-4">Criar Conta</h2>
+      <form id="cadastroForm">
+        <div class="mb-3">
+          <label for="nomeCadastro" class="form-label">Nome</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+            <input type="text" class="form-control" id="name" placeholder="Seu nome completo" required>
+          </div>
         </div>
-      </div>
 
-      <div class="mb-3">
-        <label for="cpf_cnpj" class="form-label">CPF / CNPJ</label>
-        <div class="input-group">
-          <span class="input-group-text"><i class="bi bi-credit-card-2-front"></i></span>
-          <input type="text" class="form-control" id="cpf_cnpj" placeholder="Digite seu CPF ou CNPJ" required>
+        <div class="mb-3">
+          <label for="cpf_cnpj" class="form-label">CPF / CNPJ</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-credit-card-2-front"></i></span>
+            <input type="text" class="form-control" id="cpf_cnpj" placeholder="Digite seu CPF ou CNPJ" required>
+          </div>
         </div>
-      </div>
 
-      <div class="mb-3">
-        <label for="emailCadastro" class="form-label">E-mail</label>
-        <div class="input-group">
-          <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
-          <input type="email" class="form-control" id="email" placeholder="Digite o seu email" required>
+        <div class="mb-3">
+          <label for="emailCadastro" class="form-label">E-mail</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
+            <input type="email" class="form-control" id="email" placeholder="Digite o seu email" required>
+          </div>
         </div>
-      </div>
 
-      <div class="mb-3">
-        <label for="senhaCadastro" class="form-label">Senha</label>
-        <div class="input-group">
-          <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-          <input type="password" class="form-control" id="password" placeholder="••••••••" required>
+        <div class="mb-3">
+          <label for="senhaCadastro" class="form-label">Senha</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+            <input type="password" class="form-control" id="password" placeholder="••••••••" required>
+          </div>
         </div>
-      </div>
 
-      <div class="mb-3">
-        <label for="type_user_id" class="form-label">Tipo de Usuário</label>
-        <div class="input-group">
-          <span class="input-group-text"><i class="bi bi-person-lines-fill"></i></span>
-          <select class="form-control" id="type_user_id" required>
-            <option value="">Selecione...</option>
-            <option value="2">Profissional</option>
-            <option value="3">Empresa</option>
-          </select>
+        <div class="mb-3">
+          <label for="type_user_id" class="form-label">Tipo de Usuário</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-person-lines-fill"></i></span>
+            <select class="form-control" id="type_user_id" required>
+              <option value="">Selecione...</option>
+              <option value="2">Profissional</option>
+              <option value="3">Empresa</option>
+            </select>
+          </div>
         </div>
-      </div>
 
-      <button type="submit" class="btn btn-dark w-100">Cadastrar</button>
+        <button type="submit" class="btn btn-dark w-100">Cadastrar</button>
 
-      <div class="mt-3 text-center">
-        <a href="/login.html" class="text-secondary text-small">Já tem uma conta? Entrar</a>
-      </div>
-    </form>
-    <p id="mensagem" class="mt-2 text-center"></p>
+        <div class="mt-3 text-center">
+          <a href="/login.html" class="text-secondary text-small">Já tem uma conta? Entrar</a>
+        </div>
+      </form>
+      <p id="mensagem" class="mt-2 text-center"></p>
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>

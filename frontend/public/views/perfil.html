@@ -249,17 +249,21 @@
 
 <body>
 
+  <!-- Navbar -->
+  <div id="navbar-container"></div>
+
   <!-- Onda decorativa -->
-  <div class="wave-container">
+  <div class="wave-container wave-top">
     <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
       <defs>
-        <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <linearGradient id="waveGradientTop" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" style="stop-color:#1e1e1e; stop-opacity:1" />
-          <stop offset="100%" style="stop-color:#111; stop-opacity:1" />
+          <stop offset="50%" style="stop-color:#1e1e1e; stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#1e1e1e; stop-opacity:1" />
         </linearGradient>
       </defs>
-      <path fill="url(#waveGradient)">
-        <animate attributeName="d" dur="8s" repeatCount="indefinite" values="
+      <path fill="url(#waveGradientTop)">
+        <animate attributeName="d" dur="10s" repeatCount="indefinite" values="
             M0,160 C360,280 1080,40 1440,160 L1440,0 L0,0 Z;
             M0,160 C300,100 1140,280 1440,160 L1440,0 L0,0 Z;
             M0,160 C360,280 1080,40 1440,160 L1440,0 L0,0 Z
@@ -267,30 +271,6 @@
       </path>
     </svg>
   </div>
-
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg">
-    <div class="container">
-      <a class="navbar-brand navbar-brand-left" href="index.html">
-        <span class="nav-logo">Pho3nix</span>
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
-        <ul class="navbar-nav centered">
-          <!-- Adicione links aqui se necessário -->
-        </ul>
-        <form class="d-flex me-3" role="search" id="form-pesquisa">
-          <input id="input-pesquisa" class="form-control me-1" type="search" placeholder="Buscar" aria-label="Search">
-          <button class="btn btn-outline-light" type="submit">
-            <i class="bi bi-search"></i>
-          </button>
-        </form>
-      </div>
-    </div>
-  </nav>
 
   <!-- Conteúdo do Perfil -->
   <div class="container mt-5">
