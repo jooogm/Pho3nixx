@@ -22,6 +22,6 @@ router.delete("/excluir/:id", authMiddleware, userController.deleteUser);
 router.get("/empresa/:id", userController.getEmpresaPublica);
 
 // Rota para obter o perfil de um profissional público
-router.get("/profissional/:id", getProfissionalPublico);
+router.get("/profissional/:id", userController.getProfissionalPublico);
 
 module.exports = router;

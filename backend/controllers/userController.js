@@ -351,46 +351,6 @@ const getEmpresaPublica = async (req, res) => {
     if (!empresa) {
       return res.status(404).json({ message: "Empresa não encontrada." });
     }
-
-    // Pegar o perfil público do profissional
-    const getProfissionalPublico = async (req, res) => {
-      const userId = req.params.id;
-
-      try {
-        const user = await User.findOne({
-          where: { id: userId },
-          attributes: ["id", "name", "email"],
-          include: {
-            model: UserProfissionalProfile,
-            as: "profile",
-            attributes: [
-              "nome_completo",
-              "localizacao",
-              "contato",
-              "especializacao",
-              "resumo",
-              "avatar",
-              "redes_sociais",
-              "link_curriculo",
-            ],
-          },
-        });
-
-        if (!user || !user.profile) {
-          return res
-            .status(404)
-            .json({ message: "Usuário profissional não encontrado." });
-        }
-
-        return res.status(200).json({ user });
-      } catch (error) {
-        console.error("Erro ao buscar perfil público do profissional:", error);
-        res
-          .status(500)
-          .json({ message: "Erro ao buscar perfil do profissional." });
-      }
-    };
-
     return res.status(200).json({
       user: {
         id: empresa.user.id,
@@ -410,6 +370,43 @@ const getEmpresaPublica = async (req, res) => {
   } catch (error) {
     console.error("Erro ao buscar empresa pelo ID de perfil:", error);
     return res.status(500).json({ message: "Erro ao buscar empresa." });
+  }
+};
+
+// Pegar o perfil público do profissional
+const getProfissionalPublico = async (req, res) => {
+  try {
+    const userId = req.params.id;
+
+    const user = await User.findOne({
+      where: { id: userId },
+      attributes: ["id", "name", "email"],
+      include: {
+        model: UserProfissionalProfile,
+        as: "profile",
+        attributes: [
+          "nome_completo",
+          "localizacao",
+          "contato",
+          "especializacao",
+          "resumo",
+          "avatar",
+          "redes_sociais",
+          "link_curriculo",
+        ],
+      },
+    });
+
+    if (!user || !user.profile) {
+      return res
+        .status(404)
+        .json({ message: "Usuário profissional não encontrado." });
+    }
+
+    return res.status(200).json({ user });
+  } catch (error) {
+    console.error("Erro ao buscar perfil público do profissional:", error);
+    res.status(500).json({ message: "Erro ao buscar perfil do profissional." });
   }
 };
 

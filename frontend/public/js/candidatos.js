@@ -41,9 +41,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       const card = document.createElement("div");
       card.className = "candidato-card";
       card.style.cursor = "pointer";
-      card.addEventListener("click", () => {
-        window.location.href = `perfil_candidato.html?id=${userId}`;
-      });
 
       card.innerHTML = `
         <h5>${c.user.name} ${c.user.profile?.nome_completo || ""}</h5>
@@ -54,13 +51,62 @@ document.addEventListener("DOMContentLoaded", async () => {
         <p><strong>Especialização:</strong> ${
           c.user.profile?.especializacao || "Não informado"
         }</p>
-        <p><strong>Status da inscrição:</strong> ${
-          c.user.status_inscricao || "em andamento"
-        }</p>
+        <label for="status-${
+          c.inscricao_id
+        }"><strong>Status da inscrição:</strong></label>
+<select id="status-${c.inscricao_id}" data-id="${c.inscricao_id}">
+  ${["em andamento", "processo seletivo", "aprovado", "encerrado"]
+    .map(
+      (status) =>
+        `<option value="${status}" ${
+          c.status_inscricao === status ? "selected" : ""
+        }>${status}</option>`
+    )
+    .join("")}
+</select>
         <p><strong>Currículo:</strong> <a href="${
           c.user.profile?.link_curriculo || "#"
         }" target="_blank">Ver Currículo</a></p>
       `;
+
+      // ⛔ Impede que clique no select ative o clique do card
+      card
+        .querySelector("select")
+        .addEventListener("click", (e) => e.stopPropagation());
+
+      // Adicionar evento de mudança para os selects
+      card.querySelector("select").addEventListener("change", async (e) => {
+        const novoStatus = e.target.value;
+        const inscricaoId = e.target.dataset.id;
+
+        try {
+          const res = await fetch(
+            `http://localhost:3000/api/inscricoes/status/${inscricaoId}`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify({ novoStatus }),
+            }
+          );
+
+          const data = await res.json();
+          if (res.ok) {
+            alert("Status atualizado com sucesso!");
+          } else {
+            alert(`Erro: ${data.message}`);
+          }
+        } catch (err) {
+          console.error("Erro ao atualizar status:", err);
+          alert("Erro ao atualizar status da inscrição.");
+        }
+      });
+
+      card.addEventListener("click", () => {
+        window.location.href = `perfil_candidato.html?id=${userId}&inscricao=${c.inscricao_id}`;
+      });
 
       container.appendChild(card);
     });
