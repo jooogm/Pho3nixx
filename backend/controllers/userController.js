@@ -23,10 +23,10 @@ const createUser = async (req, res) => {
     }
     console.log("Campos obrigatórios verificados com sucesso.");
 
-    // const existingUser = await User.findOne({ where: { email } });
-    // if (existingUser) {
-    //   return res.status(400).json({ message: 'E-mail já cadastrado.' });
-    // }
+    const existingUser = await User.findOne({ where: { email } });
+    if (existingUser) {
+      return res.status(400).json({ message: "E-mail já cadastrado." });
+    }
 
     // Criptografar a senha
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -167,7 +167,8 @@ const getUserProfile = async (req, res) => {
             "resumo",
             "avatar",
             "redes_sociais",
-            "link_curriculo",
+            "github_perfil",
+            "projetos",
           ],
         },
         {
@@ -233,7 +234,8 @@ const editUserProfile = async (req, res) => {
     avatar,
     data_nascimento,
     especializacao,
-    link_curriculo,
+    github_perfil,
+    projetos,
   } = req.body;
 
   try {
@@ -268,8 +270,9 @@ const editUserProfile = async (req, res) => {
             data_nascimento || userProfissionalProfile.data_nascimento, // Verifica se data de nascimento foi enviada
           especializacao:
             especializacao || userProfissionalProfile.especializacao, // Verifica se especialização foi enviada
-          link_curriculo:
-            link_curriculo || userProfissionalProfile.link_curriculo, // Verifica se link do currículo foi enviado
+          github_perfil: github_perfil || userProfissionalProfile.github_perfil, // Verifica se github_perfil foi enviada
+          projetos:
+            typeof projetos === "string" ? projetos : JSON.stringify(projetos),
         });
         return res
           .status(200)
@@ -392,7 +395,7 @@ const getProfissionalPublico = async (req, res) => {
           "resumo",
           "avatar",
           "redes_sociais",
-          "link_curriculo",
+          "github_perfil",
         ],
       },
     });

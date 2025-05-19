@@ -333,8 +333,16 @@
           <input type="date" class="form-control" id="data_nascimento" />
         </div>
         <div class="form-group mb-3">
-          <label for="link_curriculo" class="form-label">Link do Currículo</label>
-          <input type="url" class="form-control" id="link_curriculo" />
+          <label for="github_perfil" class="form-label">Link do GitHub</label>
+          <input type="url" class="form-control" id="github_perfil" placeholder="https://github.com/seunome">
+        </div>
+        <div class="form-group mb-3">
+          <label class="form-label">Projetos</label>
+          <div id="projetos-lista"></div>
+
+          <button type="button" class="btn btn-sm btn-outline-light mt-2" id="btnAddProjeto">
+            Adicionar Projeto
+          </button>
         </div>
       </div>
 
