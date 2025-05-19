@@ -1,3 +1,48 @@
+async function carregarEstadosECidades(estadoAtual = "", cidadeAtual = "") {
+  const estadosResp = await fetch("./Estados.json");
+  const cidadesResp = await fetch("./Cidades.json");
+  const estados = await estadosResp.json();
+  const cidades = await cidadesResp.json();
+
+  const estadoSelect = document.getElementById("estado");
+  const cidadeSelect = document.getElementById("cidade");
+
+  estados.forEach((estado) => {
+    const opt = document.createElement("option");
+    opt.value = estado.ID;
+    opt.textContent = `${estado.Nome} (${estado.Sigla})`;
+    if (estado.ID.toString() === estadoAtual.toString()) opt.selected = true;
+    estadoSelect.appendChild(opt);
+  });
+
+  function popularCidadesPorEstadoId(estadoId) {
+    cidadeSelect.innerHTML = '<option value="">Selecione a cidade</option>';
+    const cidadesFiltradas = cidades.filter((c) => c.Estado === estadoId);
+    cidadesFiltradas.forEach((cidade) => {
+      const opt = document.createElement("option");
+      opt.value = cidade.Nome;
+      opt.textContent = cidade.Nome;
+      if (cidade.Nome === cidadeAtual) opt.selected = true;
+      cidadeSelect.appendChild(opt);
+    });
+    cidadeSelect.disabled = false;
+  }
+
+  if (estadoAtual) {
+    popularCidadesPorEstadoId(estadoAtual);
+  }
+
+  estadoSelect.addEventListener("change", () => {
+    cidadeSelect.innerHTML = '<option value="">Selecione a cidade</option>';
+    const estadoSelecionado = estadoSelect.value;
+    if (estadoSelecionado) {
+      popularCidadesPorEstadoId(estadoSelecionado);
+    } else {
+      cidadeSelect.disabled = true;
+    }
+  });
+}
+
 document.addEventListener("DOMContentLoaded", async function () {
   const token = localStorage.getItem("token");
   const avatarInput = document.getElementById("avatar");
@@ -28,7 +73,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     const data = await res.json();
     const user = data.user;
 
-    // Campo para editar o name (para todos os usuários)
     const nomeField = document.createElement("div");
     nomeField.className = "form-group mb-3";
     nomeField.innerHTML = `
@@ -40,9 +84,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     const form = document.getElementById("editarPerfilForm");
     form.insertBefore(nomeField, form.firstChild);
 
-    // Campos comuns
-    document.getElementById("localizacao").value =
-      user.profile?.localizacao || "";
     document.getElementById("contato").value = user.profile?.contato || "";
     document.getElementById("resumo").value = user.profile?.resumo || "";
     document.getElementById("redes_sociais").value =
@@ -53,10 +94,15 @@ document.addEventListener("DOMContentLoaded", async function () {
         : `data:image/jpeg;base64,${user.profile.avatar}`
       : "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250";
 
+    await carregarEstadosECidades(
+      user.profile?.estado || "",
+      user.profile?.cidade || ""
+    );
+
     if (user.type_user_id === 2) {
       document.getElementById("camposProfissional").classList.remove("d-none");
       document.getElementById("nome_completo").value =
-        user.profile?.nome_completo || ""; // sobrenome
+        user.profile?.nome_completo || "";
       document.getElementById("especializacao").value =
         user.profile?.especializacao || "";
       document.getElementById("data_nascimento").value =
@@ -64,21 +110,18 @@ document.addEventListener("DOMContentLoaded", async function () {
       document.getElementById("github_perfil").value =
         user.profile?.github_perfil || "";
 
-      // === PROJETOS DINÂMICOS ===
       const projetosLista = document.getElementById("projetos-lista");
       const btnAddProjeto = document.getElementById("btnAddProjeto");
 
       function criarProjetoInput(nome = "", link = "") {
         const div = document.createElement("div");
         div.classList.add("mb-2", "projeto-item");
-
         div.innerHTML = `
-    <input type="text" class="form-control mb-1" placeholder="Nome do projeto" value="${nome}">
-    <input type="url" class="form-control mb-1" placeholder="Link do projeto" value="${link}">
-    <button type="button" class="btn btn-sm btn-danger">Remover</button>
-    <hr>
-  `;
-
+          <input type="text" class="form-control mb-1" placeholder="Nome do projeto" value="${nome}">
+          <input type="url" class="form-control mb-1" placeholder="Link do projeto" value="${link}">
+          <button type="button" class="btn btn-sm btn-danger">Remover</button>
+          <hr>
+        `;
         div
           .querySelector("button")
           .addEventListener("click", () => div.remove());
@@ -88,18 +131,13 @@ document.addEventListener("DOMContentLoaded", async function () {
       try {
         const projetosSalvos = JSON.parse(user.profile?.projetos || "[]");
         projetosSalvos.forEach((p) => criarProjetoInput(p.nome, p.link));
-      } catch {
-        // ignora erro
-      }
+      } catch {}
 
       btnAddProjeto.addEventListener("click", () => criarProjetoInput());
     } else {
-      // Empresa: não usa nome_completo
       const nomeCompletoInput = document.getElementById("nome_completo");
-
       if (nomeCompletoInput) {
         nomeCompletoInput.removeAttribute("required");
-
         const wrapper = nomeCompletoInput.closest(".form-group");
         if (wrapper) {
           wrapper.classList.add("d-none");
@@ -118,7 +156,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         avatarBase64 = await toBase64(file);
       }
 
-      // Captura os projetos inseridos
       const projetos = Array.from(
         document.querySelectorAll(".projeto-item")
       ).map((div) => {
@@ -132,7 +169,6 @@ document.addEventListener("DOMContentLoaded", async function () {
           user.type_user_id === 2
             ? document.getElementById("nome_completo").value
             : null,
-        localizacao: document.getElementById("localizacao").value,
         contato: document.getElementById("contato").value,
         resumo: document.getElementById("resumo").value,
         avatar: avatarBase64,
@@ -143,6 +179,8 @@ document.addEventListener("DOMContentLoaded", async function () {
           document.getElementById("data_nascimento")?.value || null,
         github_perfil: document.getElementById("github_perfil").value || null,
         projetos,
+        estado: document.getElementById("estado").value,
+        cidade: document.getElementById("cidade").value,
       };
 
       const update = await fetch("http://localhost:3000/api/usuarios/perfil", {

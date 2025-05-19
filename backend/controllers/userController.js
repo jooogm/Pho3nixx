@@ -97,7 +97,7 @@ const loginUser = async (req, res) => {
     const token = jwt.sign(
       { id: user.id, type_user_id: user.type_user_id },
       process.env.JWT_SECRET,
-      { expiresIn: "1h" }
+      { expiresIn: "3h" }
     );
 
     console.log("Token JWT gerado com sucesso.");
@@ -161,7 +161,8 @@ const getUserProfile = async (req, res) => {
             "id",
             "nome_completo",
             "data_nascimento",
-            "localizacao",
+            "estado",
+            "cidade",
             "contato",
             "especializacao",
             "resumo",
@@ -178,7 +179,8 @@ const getUserProfile = async (req, res) => {
           attributes: [
             "id",
             "nome_completo",
-            "localizacao",
+            "estado",
+            "cidade",
             "contato",
             "resumo",
             "avatar",
@@ -228,7 +230,8 @@ const editUserProfile = async (req, res) => {
   const {
     nome_completo,
     resumo,
-    localizacao,
+    estado,
+    cidade,
     contato,
     redes_sociais,
     avatar,
@@ -259,7 +262,8 @@ const editUserProfile = async (req, res) => {
         await userProfissionalProfile.update({
           nome_completo,
           resumo,
-          localizacao,
+          estado,
+          cidade,
           contato,
           redes_sociais:
             typeof redes_sociais === "string"
@@ -291,7 +295,8 @@ const editUserProfile = async (req, res) => {
         // Atualizar perfil de empresa
         await userEmpresaProfile.update({
           resumo,
-          localizacao,
+          estado,
+          cidade,
           contato,
           redes_sociais:
             typeof redes_sociais === "string"
@@ -362,7 +367,8 @@ const getEmpresaPublica = async (req, res) => {
         profile: {
           id: empresa.id,
           nome_completo: empresa.nome_completo,
-          localizacao: empresa.localizacao,
+          estado: empresa.estado,
+          cidade: empresa.cidade,
           contato: empresa.contato,
           resumo: empresa.resumo,
           avatar: empresa.avatar,
@@ -389,7 +395,8 @@ const getProfissionalPublico = async (req, res) => {
         as: "profile",
         attributes: [
           "nome_completo",
-          "localizacao",
+          "estado",
+          "cidade",
           "contato",
           "especializacao",
           "resumo",

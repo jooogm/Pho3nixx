@@ -60,19 +60,18 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (user.type_user_id === 2) {
       perfilHTML += `
           <h4>Perfil Profissional</h4>
-          <p><strong>Data de Nascimento:</strong> ${
-            user.profile?.data_nascimento || "-"
-          }</p>
-          <p><strong>Localização:</strong> ${
-            user.profile?.localizacao || "-"
-          }</p>
+          <p><strong>Idade:</strong> <span id="idadeUsuario">Calculando...</span></p>
+          <p><strong>Estado:</strong> <span id="estadoLabel">Carregando...</span></p>
+          <p><strong>Cidade:</strong> ${user.profile?.cidade || "-"}</p>
           <p><strong>Contato:</strong> ${user.profile?.contato || "-"}</p>
           <p><strong>Especialização:</strong> ${
             user.profile?.especializacao || "-"
           }</p>
           <p><strong>Resumo:</strong> ${user.profile?.resumo || "-"}</p>
-          <p><strong>Redes Sociais:</strong> ${
-            user.profile?.redes_sociais || "-"
+          <p><strong>LinkedIn:</strong> ${
+            user.profile?.redes_sociais
+              ? `<a href="${user.profile.redes_sociais}" target="_blank">${user.profile.redes_sociais}</a>`
+              : "Não informado"
           }</p>
                  <p><strong>GitHub:</strong> ${
                    user.profile?.github_perfil
@@ -96,12 +95,11 @@ ${
     } else if (user.type_user_id === 3) {
       perfilHTML += `
           <h4>Perfil Empresarial</h4>
-          <p><strong>Localização:</strong> ${
-            user.profile?.localizacao || "-"
-          }</p>
+          <p><strong>Estado:</strong> <span id="estadoLabel">Carregando...</span></p>
+          <p><strong>Cidade:</strong> ${user.profile?.cidade || "-"}</p>
           <p><strong>Contato:</strong> ${user.profile?.contato || "-"}</p>
           <p><strong>Resumo:</strong> ${user.profile?.resumo || "-"}</p>
-          <p><strong>Redes Sociais:</strong> ${
+          <p><strong>Linkedin:</strong> ${
             user.profile?.redes_sociais || "-"
           }</p>
         `;
@@ -110,6 +108,41 @@ ${
     }
 
     perfilContainer.innerHTML = perfilHTML;
+
+    async function mostrarNomeEstadoPorId(id) {
+      try {
+        const response = await fetch("Estados.json");
+        const estados = await response.json();
+        const estadoEncontrado = estados.find(
+          (e) => e.ID === id || e.ID.toString() === id.toString()
+        );
+        document.getElementById("estadoLabel").textContent = estadoEncontrado
+          ? `${estadoEncontrado.Nome} (${estadoEncontrado.Sigla})`
+          : "Desconhecido";
+      } catch {
+        document.getElementById("estadoLabel").textContent = "-";
+      }
+    }
+
+    function calcularIdade(dataNascimento) {
+      const hoje = new Date();
+      const nascimento = new Date(dataNascimento);
+      let idade = hoje.getFullYear() - nascimento.getFullYear();
+      const m = hoje.getMonth() - nascimento.getMonth();
+      if (m < 0 || (m === 0 && hoje.getDate() < nascimento.getDate())) {
+        idade--;
+      }
+      return idade;
+    }
+
+    if (user.profile?.estado) {
+      await mostrarNomeEstadoPorId(user.profile.estado);
+    }
+
+    if (user.profile?.data_nascimento) {
+      const idade = calcularIdade(user.profile.data_nascimento);
+      document.getElementById("idadeUsuario").textContent = idade + " anos";
+    }
   } catch (error) {
     console.error("Erro ao carregar perfil:", error);
     alert("Erro ao carregar perfil. Tente novamente mais tarde.");
