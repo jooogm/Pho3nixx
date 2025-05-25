@@ -64,9 +64,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     )
     .join("")}
 </select>
-        <p><strong>Currículo:</strong> <a href="${
-          c.user.profile?.link_curriculo || "#"
-        }" target="_blank">Ver Currículo</a></p>
+       
       `;
 
       // ⛔ Impede que clique no select ative o clique do card

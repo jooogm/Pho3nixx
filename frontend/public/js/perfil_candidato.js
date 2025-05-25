@@ -28,18 +28,19 @@ document.addEventListener("DOMContentLoaded", async () => {
       profile?.nome_completo || ""
     }`;
     document.getElementById("email").textContent = user.email;
-    document.getElementById("localizacao").textContent =
-      profile?.localizacao || "Não informado";
+    if (profile?.estado) {
+      await mostrarNomeEstadoPorId(profile.estado);
+    } else {
+      document.getElementById("estado").textContent = "Não informado";
+    }
+    document.getElementById("cidade").textContent =
+      profile?.cidade || "Não informado";
     document.getElementById("contato").textContent =
       profile?.contato || "Não informado";
     document.getElementById("especializacao").textContent =
       profile?.especializacao || "Não informado";
     document.getElementById("resumo").textContent =
       profile?.resumo || "Não informado";
-    document.getElementById("curriculo").href = profile?.link_curriculo || "#";
-    document.getElementById("curriculo").textContent = profile?.link_curriculo
-      ? "Ver Currículo"
-      : "Nenhum currículo disponível";
     document.getElementById("avatar").src = profile?.avatar?.startsWith(
       "data:image/"
     )
@@ -47,6 +48,76 @@ document.addEventListener("DOMContentLoaded", async () => {
       : profile?.avatar
       ? `data:image/jpeg;base64,${profile.avatar}`
       : "https://www.gravatar.com/avatar/placeholder?s=120";
+
+    // Redes sociais
+    let redes = {};
+    try {
+      redes = JSON.parse(profile?.redes_sociais || "{}");
+    } catch (e) {
+      console.warn("Erro ao ler redes_sociais:", e);
+    }
+
+    // Avatar
+    document.getElementById("avatar").src = profile?.avatar?.startsWith(
+      "data:image/"
+    )
+      ? profile.avatar
+      : profile?.avatar
+      ? `data:image/jpeg;base64,${profile.avatar}`
+      : "https://www.gravatar.com/avatar/placeholder?s=120";
+
+    // GitHub
+    const githubEl = document.getElementById("github");
+    if (githubEl) {
+      githubEl.innerHTML = profile?.github_perfil
+        ? `<a href="${profile.github_perfil}" target="_blank">${profile.github_perfil}</a>`
+        : "Não informado";
+    }
+
+    // Instagram
+    document.getElementById("instagram").innerHTML = redes.instagram
+      ? (() => {
+          const url = new URL(redes.instagram);
+          const usuario = url.pathname.replaceAll("/", "");
+          return `<a href="${redes.instagram}" target="_blank">@${usuario}</a>`;
+        })()
+      : "Não informado";
+
+    // Projetos
+    const projetosContainer = document.getElementById("projetos");
+    if (profile?.projetos) {
+      try {
+        const projetos = JSON.parse(profile.projetos);
+        projetosContainer.innerHTML = projetos
+          .map(
+            (p) =>
+              `<li><strong>${p.nome}</strong>: <a href="${p.link}" target="_blank">${p.link}</a></li>`
+          )
+          .join("");
+      } catch {
+        projetosContainer.innerHTML = "<li>Erro ao carregar projetos.</li>";
+      }
+    } else {
+      projetosContainer.innerHTML = "<li>Nenhum projeto informado.</li>";
+    }
+
+    // Cursos concluídos
+    const cursosContainer = document.getElementById("cursos");
+    if (profile?.cursos_concluidos) {
+      try {
+        const cursos = JSON.parse(profile.cursos_concluidos);
+        cursosContainer.innerHTML = cursos
+          .map(
+            (c) =>
+              `<li><strong>${c.curso}</strong>: <a href="${c.repositorio}" target="_blank">${c.repositorio}</a></li>`
+          )
+          .join("");
+      } catch {
+        cursosContainer.innerHTML = "<li>Erro ao carregar cursos.</li>";
+      }
+    } else {
+      cursosContainer.innerHTML = "<li>Nenhum curso concluído informado.</li>";
+    }
 
     // Preencher status
     const statusSelect = document.getElementById("status");
@@ -81,3 +152,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.body.innerHTML = "<p>Erro ao carregar perfil do candidato.</p>";
   }
 });
+// Função para mostrar nome do estado
+async function mostrarNomeEstadoPorId(id) {
+  try {
+    const response = await fetch("Estados.json");
+    const estados = await response.json();
+    const estadoEncontrado = estados.find(
+      (e) => e.ID === id || e.ID.toString() === id.toString()
+    );
+    document.getElementById("estado").textContent = estadoEncontrado
+      ? `${estadoEncontrado.Nome} (${estadoEncontrado.Sigla})`
+      : "Desconhecido";
+  } catch {
+    document.getElementById("estado").textContent = "-";
+  }
+}

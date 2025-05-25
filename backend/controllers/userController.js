@@ -179,7 +179,6 @@ const getUserProfile = async (req, res) => {
           required: false, // Um usuário pode não ter um perfil de empresa
           attributes: [
             "id",
-            "nome_completo",
             "estado",
             "cidade",
             "contato",
@@ -372,7 +371,6 @@ const getEmpresaPublica = async (req, res) => {
         email: empresa.user.email,
         profile: {
           id: empresa.id,
-          nome_completo: empresa.nome_completo,
           estado: empresa.estado,
           cidade: empresa.cidade,
           contato: empresa.contato,

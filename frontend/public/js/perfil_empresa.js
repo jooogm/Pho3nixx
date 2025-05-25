@@ -10,7 +10,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     // 1. Buscar perfil da empresa (rota pública)
-    const perfilRes = await fetch(`http://localhost:3000/api/usuarios/empresa/${empresaProfileId}`);
+    const perfilRes = await fetch(
+      `http://localhost:3000/api/usuarios/empresa/${empresaProfileId}`
+    );
     if (!perfilRes.ok) throw new Error("Erro ao carregar perfil da empresa.");
 
     const perfilData = await perfilRes.json();
@@ -18,12 +20,31 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // 2. Exibir dados no HTML
     document.getElementById("nome_empresa").textContent = empresa.nome_completo;
-    document.getElementById("localizacao_empresa").textContent = empresa.localizacao || "Não informada";
-    document.getElementById("contato_empresa").textContent = empresa.contato || "Não informado";
-    document.getElementById("resumo_empresa").textContent = empresa.resumo || "Sem descrição.";
+    // Avatar da empresa
+    const avatarImg = document.getElementById("avatar_empresa");
+    if (empresa.avatar) {
+      avatarImg.src = empresa.avatar.startsWith("data:image/")
+        ? empresa.avatar
+        : `data:image/jpeg;base64,${empresa.avatar}`;
+    } else {
+      avatarImg.src = "https://www.gravatar.com/avatar/placeholder?s=120";
+    }
+    if (empresa?.estado) {
+      await mostrarNomeEstadoPorId(empresa.estado);
+    } else {
+      document.getElementById("estado").textContent = "Não informado";
+    }
+    document.getElementById("cidade").textContent =
+      empresa?.cidade || "Não informado";
+    document.getElementById("contato_empresa").textContent =
+      empresa.contato || "Não informado";
+    document.getElementById("resumo_empresa").textContent =
+      empresa.resumo || "Sem descrição.";
 
     // 3. Buscar vagas abertas da empresa
-    const vagasRes = await fetch(`http://localhost:3000/api/vagas/abertas?empresa_id=${empresaProfileId}`);
+    const vagasRes = await fetch(
+      `http://localhost:3000/api/vagas/abertas?empresa_id=${empresaProfileId}`
+    );
     if (!vagasRes.ok) throw new Error("Erro ao carregar vagas da empresa.");
 
     const vagas = await vagasRes.json();
@@ -35,7 +56,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     // 4. Exibir as vagas
-    vagas.forEach(vaga => {
+    vagas.forEach((vaga) => {
       const card = document.createElement("div");
       card.className = "col-md-6 mb-4";
 
@@ -52,9 +73,23 @@ document.addEventListener("DOMContentLoaded", async () => {
       `;
       vagasContainer.appendChild(card);
     });
-
   } catch (error) {
     console.error("Erro ao carregar dados:", error);
     alert("Erro ao carregar o perfil ou vagas da empresa.");
   }
 });
+// mostrar nome do estado
+async function mostrarNomeEstadoPorId(id) {
+  try {
+    const response = await fetch("Estados.json");
+    const estados = await response.json();
+    const estadoEncontrado = estados.find(
+      (e) => e.ID === id || e.ID.toString() === id.toString()
+    );
+    document.getElementById("estado").textContent = estadoEncontrado
+      ? `${estadoEncontrado.Nome} (${estadoEncontrado.Sigla})`
+      : "Desconhecido";
+  } catch {
+    document.getElementById("estado").textContent = "-";
+  }
+}

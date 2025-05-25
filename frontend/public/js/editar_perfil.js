@@ -124,6 +124,16 @@ function inicializarEspecializacao(especializacaoSalva) {
     });
   }
 }
+//  função para ocultar o campo de sobrenome no html para empresas e retirar o required do sobrenome
+function ocultarCampoNomeCompletoParaEmpresa(userType) {
+  if (userType === 3) {
+    const campoSobrenome = document.getElementById("nome_completo");
+    if (campoSobrenome) {
+      campoSobrenome.removeAttribute("required");
+      campoSobrenome.closest(".form-group").style.display = "none";
+    }
+  }
+}
 
 // DOM principal
 
@@ -161,6 +171,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     const data = await res.json();
     const user = data.user;
+
+    // chamando a funcçao para ocultar o campo de sobrenome para empresas
+    ocultarCampoNomeCompletoParaEmpresa(user.type_user_id);
 
     // Parse das redes sociais
     let redes = {};
