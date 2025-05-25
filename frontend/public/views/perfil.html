@@ -17,9 +17,10 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       position: relative;
       overflow-x: hidden;
+      padding-top: 70px;
+      /* deixa espaço para a navbar fixa externa */
     }
 
-    /* Onda animada */
     .wave-container {
       position: absolute;
       top: 0;
@@ -28,137 +29,6 @@
       overflow: hidden;
       line-height: 0;
       z-index: 0;
-    }
-
-    @keyframes waveMove {
-      0% {
-        d: path("M0,160L48,144C96,128,192,96,288,117.3C384,139,480,213,576,240C672,267,768,245,864,240C960,235,1056,245,1152,234.7C1248,224,1344,192,1392,176L1440,160L1440,0L0,0Z");
-      }
-
-      100% {
-        d: path("M0,120L60,150C120,180,240,180,360,160C480,140,600,100,720,130C840,160,960,220,1080,210C1200,200,1320,120,1440,140L1440,0L0,0Z");
-      }
-    }
-
-    .navbar {
-      background-color: #1e1e1e !important;
-      padding-top: 0.4rem;
-      padding-bottom: 0.4rem;
-    }
-
-    .nav-logo {
-      font-weight: bold;
-      font-size: 1.5rem;
-      color: #ff6600;
-    }
-
-    .navbar-nav .nav-link {
-      color: white;
-      transition: 0.3s;
-      padding: 0.5rem 1rem;
-    }
-
-    .navbar-nav .nav-link:hover,
-    .navbar-nav .nav-link.active {
-      color: #ff6600;
-    }
-
-    .container,
-    .perfil-card {
-      position: relative;
-      z-index: 1;
-    }
-
-    .navbar {
-      background-color: #1e1e1e;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .nav-logo {
-      font-weight: bold;
-      font-size: 1.5rem;
-      color: #ff6600;
-    }
-
-    .navbar-nav.centered .nav-link {
-      color: white;
-      margin: 0 10px;
-      transition: color 0.3s ease;
-    }
-
-    .navbar-nav.centered .nav-link:hover,
-    .navbar-nav.centered .nav-link.active {
-      color: #ff6600;
-    }
-
-    .navbar-buttons .btn {
-      margin-left: 10px;
-      transition: all 0.3s ease-in-out;
-    }
-
-    .btn-outline-danger {
-      border-color: #ff6600;
-      color: #ff6600;
-    }
-
-    .btn-outline-danger:hover {
-      background-color: #ff6600;
-      color: white;
-    }
-
-    .btn-danger {
-      background-color: #ff6600;
-      border-color: #ff6600;
-    }
-
-    .btn-danger:hover {
-      background-color: #e65c00;
-    }
-
-    /* Fade-in e slide-up para o card */
-    .perfil-card {
-      background-color: #fff;
-      border-radius: 15px;
-      padding: 40px;
-      max-width: 700px;
-      margin: 0 auto;
-      color: #333;
-      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
-      animation: fadeSlideUp 1.2s ease forwards;
-      opacity: 0;
-    }
-
-    @keyframes fadeSlideUp {
-      0% {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Animação para o título */
-    .perfil-card h2 {
-      font-weight: 700;
-      color: #ff6600;
-      margin-bottom: 30px;
-      animation: slideInText 1s ease forwards;
-      opacity: 0;
-    }
-
-    @keyframes slideInText {
-      0% {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
 
     .perfil-card {
@@ -174,7 +44,6 @@
       animation: floatIn 2s ease-out, floatIdle 3s ease-in-out 2s 1;
       opacity: 0;
       animation-fill-mode: forwards;
-      transition: all 0.3s ease-in-out;
     }
 
     @keyframes floatIn {
@@ -211,46 +80,56 @@
       }
     }
 
-    /* Botão animado */
+    .perfil-card h2 {
+      font-weight: 700;
+      color: #ff6600;
+      margin-bottom: 30px;
+      animation: slideInText 1s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes slideInText {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     .btn-editar-perfil {
-      background-color: #000;
-      color: white;
-      border: 2px solid #ff6600;
-      padding: 0.6rem 1.2rem;
-      border-radius: 0.5rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.4s ease;
+      background-color: #000 !important;
+      color: white !important;
+      font-weight: bold !important;
+      border: 2px solid #ff6600 !important;
+      border-radius: 8px !important;
+      padding: 6px 16px !important;
+      transition: all 0.3s ease !important;
+      text-decoration: none !important;
+      display: inline-block !important;
     }
 
     .btn-editar-perfil:hover {
-      background-color: #ff6600;
-      color: #000;
-      transform: scale(1.05);
+      background-color: #000 !important;
+      color: #ffffff !important;
+      box-shadow: 0 0 2px #ff6600, 0 0 1px #ff6600 !important;
+      transform: scale(1.05) !important;
     }
 
     @media (max-width: 768px) {
       .perfil-card {
         padding: 20px;
       }
-
-      .nav-logo {
-        font-weight: bold;
-        font-size: 1.5rem;
-        color: #ff6600;
-      }
-
-      .navbar-buttons .btn {
-        margin: 5px 0;
-      }
-
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Navbar -->
+  <!-- Aqui a navbar será carregada externamente via JS -->
   <div id="navbar-container"></div>
 
   <!-- Onda decorativa -->
@@ -274,11 +153,11 @@
   </div>
 
   <!-- Conteúdo do Perfil -->
-  <div class="container mt-5">
+  <div class="container">
     <div class="perfil-card text-center">
       <h2>Perfil do Usuário</h2>
       <div id="perfilContainer">
-        <!-- Conteúdo do perfil via JS -->
+        <!-- Conteúdo gerado por JS -->
       </div>
       <div class="mt-4">
         <a href="editar_perfil.html" class="btn btn-editar-perfil">Editar Perfil</a>
@@ -289,6 +168,12 @@
   <script src="/perfil.js"></script>
   <script src="/nav.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- AOS.js -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800 });
+  </script>
+
 </body>
 
 </html>

@@ -43,10 +43,99 @@ async function carregarEstadosECidades(estadoAtual = "", cidadeAtual = "") {
   });
 }
 
+// Carregar cursos do sistema
+function carregarCursosDisponiveis() {
+  const cursos = window.CURSOS || {};
+  const select = document.getElementById("curso_concluido");
+  Object.entries(cursos).forEach(([id, curso]) => {
+    const option = document.createElement("option");
+    option.value = id;
+    option.textContent = curso.titulo;
+    select.appendChild(option);
+  });
+}
+
+// Manipular cursos adicionados
+function criarCursoConcluido(curso, link) {
+  const container = document.getElementById("lista-cursos-concluidos");
+  const div = document.createElement("div");
+  div.classList.add("mb-2", "curso-item");
+  div.innerHTML = `
+    <strong>${curso}</strong>: <a href="${link}" target="_blank">${link}</a>
+    <button type="button" class="btn btn-sm btn-danger ms-2">Remover</button>
+  `;
+  div.querySelector("button").addEventListener("click", () => div.remove());
+  container.appendChild(div);
+}
+
+let especializacoes = [];
+let tagsContainer;
+let inputHidden;
+
+function atualizarTags() {
+  tagsContainer.innerHTML = "";
+  especializacoes.forEach((esp) => {
+    const tag = document.createElement("span");
+    tag.className =
+      "badge bg-warning text-dark px-2 py-1 rounded d-flex align-items-center me-2";
+    tag.dataset.value = esp;
+    tag.innerHTML = `${esp} <span class="ms-2" style="cursor:pointer;">&times;</span>`;
+    tag.querySelector("span").addEventListener("click", () => {
+      especializacoes = especializacoes.filter((item) => item !== esp);
+      atualizarTags();
+    });
+    tagsContainer.appendChild(tag);
+  });
+  inputHidden.value = especializacoes.join(", ");
+}
+
+function getEspecializacoesAtuais() {
+  return especializacoes;
+}
+
+function prepararEspecializacaoParaEnvio() {
+  return especializacoes.join(", ");
+}
+
+function adicionarEspecializacao(esp) {
+  if (!especializacoes.includes(esp)) {
+    especializacoes.push(esp);
+    atualizarTags();
+  }
+}
+
+function inicializarEspecializacao(especializacaoSalva) {
+  tagsContainer = document.getElementById("especializacao-tags");
+  inputHidden = document.getElementById("especializacao");
+  especializacoes = especializacaoSalva
+    ? especializacaoSalva
+        .split(",")
+        .map((e) => e.trim())
+        .filter(Boolean)
+    : [];
+  atualizarTags();
+
+  const select = document.getElementById("especializacao-select");
+  if (select) {
+    select.addEventListener("change", (e) => {
+      const nova = e.target.value;
+      if (nova) adicionarEspecializacao(nova);
+      e.target.selectedIndex = 0; // resetar select
+    });
+  }
+}
+
+// DOM principal
+
 document.addEventListener("DOMContentLoaded", async function () {
   const token = localStorage.getItem("token");
   const avatarInput = document.getElementById("avatar");
   const avatarPreview = document.getElementById("avatarPreview");
+  const contatoInput = document.getElementById("contato");
+
+  IMask(contatoInput, {
+    mask: "+00 (00) 00000-0000",
+  });
 
   if (!token) {
     alert("Usuário não autenticado!");
@@ -73,6 +162,14 @@ document.addEventListener("DOMContentLoaded", async function () {
     const data = await res.json();
     const user = data.user;
 
+    // Parse das redes sociais
+    let redes = {};
+    try {
+      redes = JSON.parse(user.profile?.redes_sociais || "{}");
+    } catch (e) {
+      console.warn("Erro ao ler redes_sociais:", e);
+    }
+
     const nomeField = document.createElement("div");
     nomeField.className = "form-group mb-3";
     nomeField.innerHTML = `
@@ -86,8 +183,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     document.getElementById("contato").value = user.profile?.contato || "";
     document.getElementById("resumo").value = user.profile?.resumo || "";
-    document.getElementById("redes_sociais").value =
-      user.profile?.redes_sociais || "";
+    document.getElementById("instagram").value = redes.instagram || "";
     avatarPreview.src = user.profile?.avatar
       ? user.profile.avatar.startsWith("data:image/")
         ? user.profile.avatar
@@ -98,6 +194,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       user.profile?.estado || "",
       user.profile?.cidade || ""
     );
+    carregarCursosDisponiveis();
 
     if (user.type_user_id === 2) {
       document.getElementById("camposProfissional").classList.remove("d-none");
@@ -109,6 +206,34 @@ document.addEventListener("DOMContentLoaded", async function () {
         user.profile?.data_nascimento || "";
       document.getElementById("github_perfil").value =
         user.profile?.github_perfil || "";
+
+      inicializarEspecializacao(user.profile?.especializacao || "");
+
+      const btnAddCurso = document.getElementById("btnAddCurso");
+
+      btnAddCurso.addEventListener("click", () => {
+        const curso = document.getElementById("curso_concluido").value;
+        const link = document.getElementById("link_curso").value;
+        if (!curso || !link) {
+          alert("Selecione um curso e insira o link do projeto.");
+          return;
+        }
+        criarCursoConcluido(curso, link);
+        document.getElementById("curso_concluido").value = "";
+        document.getElementById("link_curso").value = "";
+      });
+
+      const selectEspecializacao = document.getElementById(
+        "especializacao-select"
+      );
+      if (window.ESPECIALIZACOES && selectEspecializacao) {
+        window.ESPECIALIZACOES.forEach((item) => {
+          const option = document.createElement("option");
+          option.value = item;
+          option.textContent = item;
+          selectEspecializacao.appendChild(option);
+        });
+      }
 
       const projetosLista = document.getElementById("projetos-lista");
       const btnAddProjeto = document.getElementById("btnAddProjeto");
@@ -134,20 +259,19 @@ document.addEventListener("DOMContentLoaded", async function () {
       } catch {}
 
       btnAddProjeto.addEventListener("click", () => criarProjetoInput());
-    } else {
-      const nomeCompletoInput = document.getElementById("nome_completo");
-      if (nomeCompletoInput) {
-        nomeCompletoInput.removeAttribute("required");
-        const wrapper = nomeCompletoInput.closest(".form-group");
-        if (wrapper) {
-          wrapper.classList.add("d-none");
-        } else {
-          nomeCompletoInput.style.setProperty("display", "none", "important");
-        }
-      }
+
+      try {
+        const cursosSalvos = JSON.parse(
+          user.profile?.cursos_concluidos || "[]"
+        );
+        cursosSalvos.forEach((c) =>
+          criarCursoConcluido(c.curso, c.repositorio)
+        );
+      } catch {}
     }
 
-    form.addEventListener("submit", async function (e) {
+    const formEl = document.getElementById("editarPerfilForm");
+    formEl.addEventListener("submit", async function (e) {
       e.preventDefault();
 
       let avatarBase64 = avatarPreview.src;
@@ -163,6 +287,14 @@ document.addEventListener("DOMContentLoaded", async function () {
         return { nome: nomeInput.value, link: linkInput.value };
       });
 
+      const cursosConcluidos = Array.from(
+        document.querySelectorAll(".curso-item")
+      ).map((div) => {
+        const nome = div.querySelector("strong").textContent;
+        const link = div.querySelector("a").getAttribute("href");
+        return { curso: nome, repositorio: link };
+      });
+
       const payload = {
         name: document.getElementById("nome_publico").value,
         nome_completo:
@@ -172,15 +304,21 @@ document.addEventListener("DOMContentLoaded", async function () {
         contato: document.getElementById("contato").value,
         resumo: document.getElementById("resumo").value,
         avatar: avatarBase64,
-        redes_sociais: document.getElementById("redes_sociais").value,
-        especializacao:
-          document.getElementById("especializacao")?.value || null,
+        redes_sociais: (() => {
+          const insta = document.getElementById("instagram").value.trim();
+          return insta ? { instagram: insta } : {};
+        })(),
+        especializacao: prepararEspecializacaoParaEnvio(),
         data_nascimento:
           document.getElementById("data_nascimento")?.value || null,
         github_perfil: document.getElementById("github_perfil").value || null,
         projetos,
         estado: document.getElementById("estado").value,
         cidade: document.getElementById("cidade").value,
+        cursos_concluidos:
+          cursosConcluidos && Array.isArray(cursosConcluidos)
+            ? cursosConcluidos
+            : [],
       };
 
       const update = await fetch("http://localhost:3000/api/usuarios/perfil", {

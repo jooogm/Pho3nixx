@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
   const termo = params.get("termo");
@@ -7,9 +6,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!termo || !token) return;
 
   try {
-    const response = await fetch(`http://localhost:3000/api/vagas?titulo=${encodeURIComponent(termo)}`, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
+    const response = await fetch(
+      `http://localhost:3000/api/vagas?titulo=${encodeURIComponent(termo)}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
 
     const vagas = await response.json();
 
@@ -21,7 +23,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    vagas.forEach(vaga => {
+    vagas.forEach((vaga) => {
       const card = document.createElement("div");
       card.className = "card mb-3";
       card.innerHTML = `
@@ -31,9 +33,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 </h5>
           <p class="card-text">${vaga.descricao || ""}</p>
           <p class="card-text"><strong>Empresa:</strong> 
-            <a href="perfil_empresa.html?id=${vaga.empresa_id}">${vaga.empresa_nome} </a>
+            <a href="perfil_empresa.html?id=${vaga.empresa_id}">${
+        vaga.empresa_nome
+      } </a>
           </p>
-          <p class="card-text"><strong>Localização:</strong> ${vaga.localizacao}</p>
+          <p class="card-text"><strong>Localização:</strong> ${
+            vaga.localizacao
+          }</p>
         </div>
       `;
       container.appendChild(card);

@@ -86,7 +86,12 @@ const UserProfissionalProfile = sequelize.define(
       allowNull: true,
     },
     cidade: Sequelize.STRING,
+    cursos_concluidos: {
+      type: Sequelize.JSON,
+      allowNull: true,
+    },
   },
+
   {
     tableName: "user_profissional_profile",
     timestamps: true,

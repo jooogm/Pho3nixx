@@ -175,9 +175,9 @@
       </svg>
     </div>
 
-    <div class="container mt-4">
-      <h2>Resultados da Busca</h2>
-      <div id="resultados-vagas" class="mt-3">
+    <div class="container d-flex flex-column align-items-center justify-content-center" style="min-height: 60vh;">
+      <h2 class="mb-4">Resultados da Busca</h2>
+      <div id="resultados-vagas" class="w-100" style="max-width: 800px;">
         <!-- Aqui você pode inserir os resultados da busca -->
       </div>
     </div>
@@ -235,6 +235,11 @@
     </script>
     <script src="/nav.js"></script>
     <script src="/busca.js"></script>
+    <!-- AOS -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+      AOS.init({ duration: 800 });
+    </script>
 
   </body>
 

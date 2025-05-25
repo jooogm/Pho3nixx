@@ -5,8 +5,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Phoenix</title>
+
+  <!-- Estilos externos -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
   <style>
     body {
       background: linear-gradient(135deg, #0d0d0d, #ff6600);
@@ -30,8 +34,6 @@
 
     .btn-sair {
       border-color: #ff6600;
-      color: #000000;
-      color: #ff6600;
       background-color: #000 !important;
       color: #fff !important;
     }
@@ -50,25 +52,6 @@
       color: #ff6600;
     }
 
-    .navbar-buttons .btn-outline-danger {
-      border-color: #ff6600;
-      color: #ff6600;
-    }
-
-    .navbar-buttons .btn-outline-danger:hover {
-      background-color: #ff6600;
-      color: white;
-    }
-
-    .navbar-buttons .btn-danger {
-      background-color: #ff6600;
-      border-color: #ff6600;
-    }
-
-    .navbar-buttons .btn-danger:hover {
-      background-color: #ff6600;
-    }
-
     .btn-meuperfil {
       color: white;
       border: 2px solid #ff6600;
@@ -76,28 +59,20 @@
 
     .hero-section {
       min-height: 100vh;
-      background: transparent;
     }
 
-    .hero-section h2 {
+    .hero-section h2,
+    .hero-section h1 {
       font-weight: bold;
     }
 
-    .btn-candidaturas {
-      color: white;
-      border: 2px solid #ff6600;
-    }
-
-    .btn-candidaturas:hover {
-      background-color: #ff6600;
-      border-color: #ff6600;
-    }
-
+    .btn-candidaturas,
     .btn-minhasvagas {
       color: white;
       border: 2px solid #ff6600;
     }
 
+    .btn-candidaturas:hover,
     .btn-minhasvagas:hover {
       background-color: #ff6600;
       border-color: #ff6600;
@@ -123,43 +98,8 @@
       border-color: #ff6600 !important;
     }
 
-    /* 🔥 NOVO: Botões após login */
-    .navbar-buttons .btn-nav {
-      background-color: transparent;
-      color: white;
-      border: 2px solid #ff6600;
-      border-radius: 8px;
-      padding: 0.4rem 1rem;
-      margin-left: 8px;
-      font-weight: 500;
-      transition: all 0.3s ease;
-    }
-
-    .navbar-buttons .btn-nav:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 0 5px #ff6600;
-    }
-
-    .btn-nav-fill {
-      background-color: #ff6600;
-      color: white;
-      font-weight: 500;
-      padding: 0.4rem 1rem;
-      border-radius: 8px;
-      border: 2px solid #ff6600;
-      margin-left: 8px;
-      transition: all 0.3s ease;
-    }
-
-    .btn-nav-fill:hover {
-      background-color: #e65c00;
-      color: white;
-      box-shadow: 0 0 5px #ff6600;
-    }
-
     .logo-footer {
       color: #ff6600;
-      /* cor que preferir */
     }
   </style>
 </head>
@@ -170,8 +110,8 @@
 
   <section class="hero-section d-flex align-items-center">
     <div class="container d-flex flex-column flex-lg-row align-items-center justify-content-between">
-      <div class="col-lg-6">
-        <h1 class="fw text-white">
+      <div class="col-lg-6" data-aos="fade-right">
+        <h1 class="text-white">
           Encontre os melhores talentos de <span style="color: #ff6600;">TECNOLOGIA</span> do Brasil ou conquiste uma
           oportunidade nas maiores empresas do país.
         </h1>
@@ -179,26 +119,26 @@
           Conectamos profissionais qualificados a empresas inovadoras, impulsionando carreiras e acelerando o
           crescimento do setor de TI.
         </p>
-        <a href="cadastro.html" class="btn btn-warning text-white mt-3">Cadastre-se</a>
+        <a href="cadastro.html" class="btn btn-warning text-white mt-3" data-aos="zoom-in">Cadastre-se</a>
       </div>
-      <div class="col-lg-5 mt-4 mt-lg-0">
-        <img src="./LogoPhoenix.PNG" alt="Phoenix">
+      <div class="col-lg-5 mt-4 mt-lg-0" data-aos="fade-left">
+        <img src="./LogoPhoenix.PNG" alt="Phoenix" class="img-fluid">
       </div>
     </div>
   </section>
 
   <!-- Rodapé -->
-  <footer class="text-white pt-5 pb-3" style="background-color: #1e1e1e;">
+  <footer class="text-white pt-5 pb-3" style="background-color: #1e1e1e;" data-aos="fade-up">
     <div class="container">
       <div class="row">
         <div class="col-md-3 mb-4">
-          <h5 class="logo-footer text fw-bold">Pho3nix</h5>
+          <h5 class="logo-footer fw-bold">Pho3nix</h5>
           <p>Conectando profissionais de tecnologia às maiores empresas do Brasil.</p>
         </div>
         <div class="col-md-3 mb-4">
           <h6 class="text-uppercase fw-bold">Institucional</h6>
           <ul class="list-unstyled">
-            <li><a href="#" class="text-white text-decoration-none">Sobre nós</a></li>
+            <li><a href="sobre_nos.html" class="text-white text-decoration-none">Sobre nós</a></li>
             <li><a href="#" class="text-white text-decoration-none">Carreiras</a></li>
           </ul>
         </div>
@@ -213,10 +153,12 @@
         <hr class="border-secondary" />
 
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-          <a href="#" class="text-white text-decoration-none mb-2 mb-md-0">Política de Privacidade</a>
+          <a href="políticas_de_privacidade.html" class="text-white text-decoration-none mb-2 mb-md-0">Política de
+            Privacidade</a>
           <p class="mb-0">© 2025 Phoenix. Todos os direitos reservados.</p>
         </div>
       </div>
+    </div>
   </footer>
 
   <!-- Botão voltar ao topo -->
@@ -224,11 +166,15 @@
     style="bottom: 20px; right: 20px; display: none; border-radius: 50%; width: 48px; height: 48px; z-index: 999;">
     <i class="bi bi-chevron-up"></i>
   </button>
+
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script src="/nav.js"></script>
   <script>
-    const btnTopo = document.getElementById("btnTopo");
+    AOS.init({ duration: 800 });
 
+    const btnTopo = document.getElementById("btnTopo");
     window.addEventListener("scroll", () => {
       btnTopo.style.display = window.scrollY > 200 ? "block" : "none";
     });

@@ -170,6 +170,7 @@ const getUserProfile = async (req, res) => {
             "redes_sociais",
             "github_perfil",
             "projetos",
+            "cursos_concluidos",
           ],
         },
         {
@@ -239,6 +240,7 @@ const editUserProfile = async (req, res) => {
     especializacao,
     github_perfil,
     projetos,
+    cursos_concluidos,
   } = req.body;
 
   try {
@@ -277,6 +279,10 @@ const editUserProfile = async (req, res) => {
           github_perfil: github_perfil || userProfissionalProfile.github_perfil, // Verifica se github_perfil foi enviada
           projetos:
             typeof projetos === "string" ? projetos : JSON.stringify(projetos),
+          cursos_concluidos:
+            typeof cursos_concluidos === "string"
+              ? cursos_concluidos
+              : JSON.stringify(cursos_concluidos),
         });
         return res
           .status(200)
