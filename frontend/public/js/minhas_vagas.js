@@ -8,6 +8,19 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  // ✅ Função auxiliar para pegar o nome do estado
+  async function obterNomeEstadoPorId(id) {
+    try {
+      const response = await fetch("Estados.json");
+      const estados = await response.json();
+      const estado = estados.find((e) => e.ID.toString() === id.toString());
+      return estado ? `${estado.Nome} (${estado.Sigla})` : "Desconhecido";
+    } catch (e) {
+      console.warn("Erro ao buscar estado:", e);
+      return "-";
+    }
+  }
+
   fetch("http://localhost:3000/api/vagas/minhas", {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -17,34 +30,54 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!res.ok) throw new Error("Erro ao buscar vagas");
       return res.json();
     })
-    .then((vagas) => {
-      if (vagas.length === 0) {
-        vagasContainer.innerHTML =
-          '<p style="color:white;">Nenhuma vaga cadastrada.</p>';
-        return;
-      }
-
-      vagas.forEach((vaga) => {
+    .then(async (vagas) => {
+      for (const vaga of vagas) {
         const vagaCard = document.createElement("div");
         vagaCard.className = "vaga-card";
         vagaCard.setAttribute("data-aos", "fade-up");
 
+        let nomeEstado = "";
+        if (vaga.modalidade === "Presencial" || vaga.modalidade === "Híbrido") {
+          nomeEstado = await obterNomeEstadoPorId(vaga.estado);
+        }
+
         vagaCard.innerHTML = `
           <h4>${vaga.titulo}</h4>
           <p><strong>Descrição:</strong> ${vaga.descricao}</p>
-          <p><strong>Localização:</strong> ${vaga.localizacao}</p>
+          <p><strong>Modalidade:</strong> ${
+            vaga.modalidade || "Não informado"
+          }</p>
+          ${
+            vaga.modalidade === "Presencial" || vaga.modalidade === "Híbrido"
+              ? `<p><strong>Estado:</strong> ${nomeEstado}</p>
+                 <p><strong>Cidade:</strong> ${
+                   vaga.cidade || "Não informado"
+                 }</p>`
+              : ""
+          }
+          ${
+            vaga.requisitos
+              ? `<p><strong>Requisitos:</strong> ${vaga.requisitos}</p>`
+              : ""
+          }
           <p><strong>Salário:</strong> R$ ${vaga.salario}</p>
           <p><strong>Tipo de contrato:</strong> ${vaga.tipo_contrato}</p>
           <p><strong>Status:</strong> ${vaga.status}</p>
           <div class="mt-3">
-            <a href="editar_vaga.html?id=${vaga.vaga_id}" class="btn btn-edit">Editar</a>
-            <button class="btn btn-delete" onclick="deletarVaga(${vaga.vaga_id})">Excluir</button>
-            <a href="candidatos.html?vaga_id=${vaga.vaga_id}" class="btn btn-orange-rect">Ver Candidatos</a>
+            <a href="editar_vaga.html?id=${
+              vaga.vaga_id
+            }" class="btn btn-edit">Editar</a>
+            <button class="btn btn-delete" onclick="deletarVaga(${
+              vaga.vaga_id
+            })">Excluir</button>
+            <a href="candidatos.html?vaga_id=${
+              vaga.vaga_id
+            }" class="btn btn-orange-rect">Ver Candidatos</a>
           </div>
         `;
 
         vagasContainer.appendChild(vagaCard);
-      });
+      }
 
       // ✅ Ativa o AOS após os cards serem inseridos
       AOS.refresh();
