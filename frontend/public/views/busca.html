@@ -12,8 +12,8 @@
       background: linear-gradient(180deg, #121212 0%, #ff6600 100%);
       color: white;
       min-height: 100vh;
-      position: relative;
-      overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
     /* Onda animada */
@@ -122,8 +122,7 @@
     }
 
     footer {
-      position: absolute;
-      bottom: 0;
+      position: relative;
       width: 100%;
       background-color: #1e1e1e;
       color: white;
@@ -183,7 +182,7 @@
     </div>
 
     <!-- Rodapé -->
-    <footer class="text-white pt-5 pb-3" style="background-color: #1e1e1e; position: absolute; bottom: 0; width: 100%;">
+    <footer class="text-white pt-5 pb-3">
       <div class="container">
         <div class="row">
           <div class="col-md-3 mb-4">

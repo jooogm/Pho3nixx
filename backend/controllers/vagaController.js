@@ -19,6 +19,7 @@ const criarVaga = async (req, res) => {
     beneficios,
     data_validade,
     modalidade,
+    cursos_indicados,
   } = req.body;
 
   try {
@@ -60,6 +61,7 @@ const criarVaga = async (req, res) => {
       nivel_experiencia,
       requisitos,
       modalidade,
+      cursos_indicados,
       beneficios,
       empresa_id: empresaProfile.id,
       empresa_nome: empresaProfile.nome_completo, // Nome da empresa

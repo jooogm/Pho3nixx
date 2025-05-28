@@ -27,6 +27,10 @@ const Vaga = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    cursos_indicados: {
+      type: DataTypes.JSON,
+      allowNull: true,
+    },
     salario: DataTypes.DECIMAL(10, 2),
     tipo_contrato: DataTypes.ENUM("CLT", "PJ", "Freelancer", "Estágio"),
     nivel_experiencia: DataTypes.ENUM("Júnior", "Pleno", "Sênior"),

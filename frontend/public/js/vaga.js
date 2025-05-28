@@ -49,6 +49,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       `;
     }
 
+    // Cursos formatados
+    let listaCursos = "<li>Não indicado</li>";
+    if (
+      Array.isArray(vaga.cursos_indicados) &&
+      vaga.cursos_indicados.length > 0
+    ) {
+      listaCursos = vaga.cursos_indicados
+        .map((curso) => `<li>${curso}</li>`)
+        .join("");
+    }
+
     document.getElementById("detalhes-vaga").innerHTML = `
       <h2>${vaga.titulo}</h2>
       <p><strong>Descrição:</strong> ${vaga.descricao}</p>
@@ -56,6 +67,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       ${estadoCidadeHTML}
       <p><strong>Requisitos:</strong></p>
       <ul>${listaRequisitos}</ul>
+       <p><strong>Cursos Recomendados:</strong></p>
+  <ul>${listaCursos}</ul>
       <p><strong>Salário:</strong> R$ ${vaga.salario}</p>
       <p><strong>Status:</strong> ${vaga.status}</p>
     `;

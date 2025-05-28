@@ -1,3 +1,15 @@
+async function obterNomeEstadoPorId(id) {
+  try {
+    const response = await fetch("Estados.json");
+    const estados = await response.json();
+    const estado = estados.find((e) => e.ID.toString() === id.toString());
+    return estado ? `${estado.Nome} (${estado.Sigla})` : "Desconhecido";
+  } catch (e) {
+    console.warn("Erro ao buscar estado:", e);
+    return "-";
+  }
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   const urlParams = new URLSearchParams(window.location.search);
   const empresaProfileId = urlParams.get("empresa") || urlParams.get("id"); // pega ?empresa=6 ou ?id=6
@@ -30,7 +42,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       avatarImg.src = "https://www.gravatar.com/avatar/placeholder?s=120";
     }
     if (empresa?.estado) {
-      await mostrarNomeEstadoPorId(empresa.estado);
+      await obterNomeEstadoPorId(empresa.estado);
     } else {
       document.getElementById("estado").textContent = "Não informado";
     }
@@ -56,21 +68,36 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     // 4. Exibir as vagas
-    vagas.forEach((vaga) => {
+    vagas.forEach(async (vaga) => {
       const card = document.createElement("div");
       card.className = "col-md-6 mb-4";
 
+      // Montar info dinâmica da vaga
+      let infoExtra = `<strong>Modalidade:</strong> ${
+        vaga.modalidade || "Não informada"
+      }`;
+      if (vaga.modalidade === "Presencial" || vaga.modalidade === "Híbrido") {
+        const estadoFormatado = await obterNomeEstadoPorId(vaga.estado);
+        infoExtra += ` &nbsp; • &nbsp; <strong>Estado:</strong> ${estadoFormatado}`;
+        infoExtra += ` &nbsp; • &nbsp; <strong>Cidade:</strong> ${
+          vaga.cidade || "Não informada"
+        }`;
+      }
+      if (vaga.salario) {
+        infoExtra += ` &nbsp; • &nbsp; <strong>Salário:</strong> R$ ${vaga.salario}`;
+      }
+
       card.innerHTML = `
         <div class="card h-100 shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title">
-            <a href="vaga.html?id=${vaga.vaga_id}">${vaga.titulo}</a>
-            </h5>
-            <p class="card-text"><strong>Local:</strong> ${vaga.localizacao}</p>
-            <p class="card-text">${vaga.descricao.slice(0, 100)}...</p>
-          </div>
-        </div>
-      `;
+    <div class="card-body">
+      <h5 class="card-title">
+        <a href="vaga.html?id=${vaga.vaga_id}">${vaga.titulo}</a>
+      </h5>
+      <p class="card-text small">${infoExtra}</p>
+      <p class="card-text">${vaga.descricao.slice(0, 100)}...</p>
+    </div>
+  </div>
+`;
       vagasContainer.appendChild(card);
     });
   } catch (error) {
@@ -78,18 +105,3 @@ document.addEventListener("DOMContentLoaded", async () => {
     alert("Erro ao carregar o perfil ou vagas da empresa.");
   }
 });
-// mostrar nome do estado
-async function mostrarNomeEstadoPorId(id) {
-  try {
-    const response = await fetch("Estados.json");
-    const estados = await response.json();
-    const estadoEncontrado = estados.find(
-      (e) => e.ID === id || e.ID.toString() === id.toString()
-    );
-    document.getElementById("estado").textContent = estadoEncontrado
-      ? `${estadoEncontrado.Nome} (${estadoEncontrado.Sigla})`
-      : "Desconhecido";
-  } catch {
-    document.getElementById("estado").textContent = "-";
-  }
-}

@@ -258,6 +258,24 @@
         <input type="hidden" id="requisitos" name="requisitos" />
       </div>
 
+      <!-- Checkbox para indicar cursos -->
+      <div class="form-check form-switch mt-3">
+        <input class="form-check-input" type="checkbox" id="indicar-cursos">
+        <label class="form-check-label text-light" for="indicar-cursos">
+          Deseja indicar cursos recomendados?
+        </label>
+      </div>
+
+      <div id="wrapper-cursos" class="mt-3" style="display: none;">
+        <label for="cursos-select" class="form-label">Cursos recomendados</label>
+        <select id="cursos-select" class="form-select">
+          <option value="">Selecione um curso</option>
+        </select>
+        <div id="cursos-tags" class="mt-2 d-flex flex-wrap gap-2"></div>
+        <input type="hidden" id="cursos_indicados" name="cursos_indicados" />
+      </div>
+
+
       <!-- Contrato -->
       <div class="mb-3">
         <label class="form-label">Tipo de contrato:</label>
@@ -291,6 +309,7 @@
 
   <!-- Scripts -->
   <script src="/especializacoes.js"></script>
+  <script src="/detalhes_cursos.js"></script>
   <script src="/criar_vaga.js"></script>
   <script src="/nav.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>

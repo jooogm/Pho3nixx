@@ -3,7 +3,7 @@ const CURSOS = {
     id: "Algoritmos",
     titulo: "Curso de Algoritmos",
     descricao:
-      "Ideal para iniciantes, este curso ensina lógica de programação desde os fundamentos. Aprenda como funcionam algoritmos, estruturas de decisão, repetições e fluxogramas com explicações simples, práticas e didáticas. Se você está começando no mundo da programação, esta trilha é o ponto de partida perfeito.",
+      "Ideal para iniciantes, este curso ensina lógica de programação desde os fundamentos. Aprenda como funcionam algoritmos, estruturas de decisão, repetições e fluxogramas com explicações simples, práticas e didáticas. Se você está começando no mundo da programação, esta trilha é o ponto de partida perfeito. Aula do Curso de Algoritmo criado pelo professor Gustavo Guanabara para o portal CursoemVideo.com.",
     competencias: [
       "Lógica de Programação",
       "Estruturas Condicionais",
@@ -20,7 +20,7 @@ const CURSOS = {
     id: "Mysql",
     titulo: "Curso de Banco de Dados com MySQL",
     descricao:
-      "Aprenda a dominar o MySQL, um dos bancos de dados mais utilizados no mundo. Este curso cobre desde os conceitos básicos de modelagem de dados até comandos SQL avançados, criação de tabelas, relacionamentos e consultas otimizadas. Uma trilha essencial para quem quer trabalhar com backend ou administração de dados.",
+      "Aprenda a dominar o MySQL, um dos bancos de dados mais utilizados no mundo. Este curso cobre desde os conceitos básicos de modelagem de dados até comandos SQL avançados, criação de tabelas, relacionamentos e consultas otimizadas. Uma trilha essencial para quem quer trabalhar com backend ou administração de dados. Aula do Curso de Banco de Dados com MySQL criado pelo professor Gustavo Guanabara para o portal CursoemVideo.com.",
     competencias: [
       "Modelagem de Dados",
       "Criação de Tabelas",
@@ -37,9 +37,9 @@ const CURSOS = {
   },
   Php: {
     id: "Php",
-    titulo: "Curso de PHP Moderno",
+    titulo: "Curso PHP Iniciante",
     descricao:
-      "Neste curso você aprenderá PHP do zero, com foco em desenvolvimento web moderno. O professor Guanabara ensina desde a sintaxe básica da linguagem até a criação de formulários, manipulação de dados e conexão com banco de dados. Ideal para quem quer criar sites dinâmicos e sistemas com backend próprio.",
+      "Neste curso você aprenderá PHP do zero, com foco em desenvolvimento web moderno. O professor Guanabara ensina desde a sintaxe básica da linguagem até a criação de formulários, manipulação de dados e conexão com banco de dados. Ideal para quem quer criar sites dinâmicos e sistemas com backend próprio. Aula do Curso de PHP para Iniciantes criado pelo professor Gustavo Guanabara para o portal CursoemVideo.com.",
     competencias: [
       "Sintaxe PHP",
       "Variáveis e Tipos de Dados",

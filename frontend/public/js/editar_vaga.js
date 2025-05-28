@@ -11,7 +11,7 @@ async function carregarEstadosECidades(estadoAtual = "", cidadeAtual = "") {
     const opt = document.createElement("option");
     opt.value = estado.ID;
     opt.textContent = `${estado.Nome} (${estado.Sigla})`;
-    if (estado.ID.toString() === estadoAtual.toString()) opt.selected = true;
+    if (estado.ID.toString() === estadoAtual?.toString()) opt.selected = true;
     estadoSelect.appendChild(opt);
   });
 
@@ -42,6 +42,8 @@ async function carregarEstadosECidades(estadoAtual = "", cidadeAtual = "") {
     }
   });
 }
+
+// ---------------------- REQUISITOS ----------------------
 
 let requisitosSelecionados = [];
 const tagsContainerRequisitos = document.getElementById("requisitos-tags");
@@ -96,7 +98,95 @@ function inicializarRequisitos(requisitosSalvos) {
   });
 }
 
+// ---------------------- CURSOS INDICADOS ----------------------
+
+let cursosSelecionados = [];
+const selectCursos = document.getElementById("cursos-select");
+const inputCursos = document.getElementById("cursos_indicados");
+const tagsContainerCursos = document.getElementById("cursos-tags");
+const checkIndicarCursos = document.getElementById("indicar-cursos");
+const wrapperCursos = document.getElementById("wrapper-cursos");
+
+function atualizarTagsCursos() {
+  tagsContainerCursos.innerHTML = "";
+  cursosSelecionados.forEach((curso) => {
+    const tag = document.createElement("span");
+    tag.className =
+      "badge bg-info text-dark px-2 py-1 rounded d-flex align-items-center me-2";
+    tag.dataset.value = curso;
+    tag.innerHTML = `${curso} <span class="ms-2" style="cursor:pointer;">&times;</span>`;
+    tag.querySelector("span").addEventListener("click", () => {
+      cursosSelecionados = cursosSelecionados.filter((c) => c !== curso);
+      atualizarTagsCursos();
+    });
+    tagsContainerCursos.appendChild(tag);
+  });
+  inputCursos.value = JSON.stringify(cursosSelecionados);
+}
+
+function inicializarCursos(cursosSalvos) {
+  if (!tagsContainerCursos || !inputCursos || !selectCursos) return;
+
+  if (window.CURSOS) {
+    Object.values(window.CURSOS).forEach((curso) => {
+      const opt = document.createElement("option");
+      opt.value = curso.titulo;
+      opt.textContent = curso.titulo;
+      selectCursos.appendChild(opt);
+    });
+  }
+
+  cursosSelecionados = Array.isArray(cursosSalvos) ? cursosSalvos : [];
+
+  if (cursosSelecionados.length > 0) {
+    checkIndicarCursos.checked = true;
+    wrapperCursos.style.display = "block";
+  }
+
+  atualizarTagsCursos();
+
+  selectCursos.addEventListener("change", (e) => {
+    const novo = e.target.value;
+    if (novo && !cursosSelecionados.includes(novo)) {
+      cursosSelecionados.push(novo);
+      atualizarTagsCursos();
+    }
+    e.target.selectedIndex = 0;
+  });
+}
+
+checkIndicarCursos.addEventListener("change", () => {
+  wrapperCursos.style.display = checkIndicarCursos.checked ? "block" : "none";
+});
+
+// ---------------------- DOM READY ----------------------
+
 document.addEventListener("DOMContentLoaded", async () => {
+  const modalidadeSelect = document.getElementById("modalidade");
+  const estadoWrapper = document.getElementById("wrapper-estado");
+  const cidadeWrapper = document.getElementById("wrapper-cidade");
+
+  function atualizarVisibilidadeLocalizacao() {
+    const valor = modalidadeSelect.value;
+    const mostrar = valor === "Presencial" || valor === "Híbrido";
+
+    estadoWrapper.style.display = mostrar ? "block" : "none";
+    cidadeWrapper.style.display = mostrar ? "block" : "none";
+
+    const estadoSelect = document.getElementById("estado");
+    const cidadeSelect = document.getElementById("cidade");
+
+    if (mostrar) {
+      estadoSelect.setAttribute("required", true);
+      cidadeSelect.setAttribute("required", true);
+    } else {
+      estadoSelect.removeAttribute("required");
+      cidadeSelect.removeAttribute("required");
+    }
+  }
+
+  modalidadeSelect.addEventListener("change", atualizarVisibilidadeLocalizacao);
+
   const urlParams = new URLSearchParams(window.location.search);
   const vagaId = urlParams.get("id");
 
@@ -117,9 +207,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     const response = await fetch(`http://localhost:3000/api/vagas/${vagaId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { Authorization: `Bearer ${token}` },
     });
 
     const vaga = await response.json();
@@ -129,8 +217,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    // CARREGAR E SELECIONAR OS VALORES DE ESTADO E CIDADE
     await carregarEstadosECidades(vaga.estado, vaga.cidade);
+    atualizarVisibilidadeLocalizacao();
 
     for (const key in vaga) {
       if (form.elements[key]) {
@@ -139,6 +227,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     inicializarRequisitos(vaga.requisitos);
+    inicializarCursos(vaga.cursos_indicados);
   } catch (err) {
     console.error(err);
     mensagem.textContent = "❌ Erro ao buscar vaga.";
@@ -152,6 +241,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     formData.forEach((value, key) => (data[key] = value));
 
     data.requisitos = requisitosSelecionados.join(", ");
+    data.cursos_indicados = JSON.parse(inputCursos.value || "[]");
 
     try {
       const updateResponse = await fetch(
