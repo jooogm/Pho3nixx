@@ -61,8 +61,9 @@ function criarCursoConcluido(curso, link) {
   const div = document.createElement("div");
   div.classList.add("mb-2", "curso-item");
   div.innerHTML = `
-    <strong>${curso}</strong>: <a href="${link}" target="_blank">${link}</a>
-    <button type="button" class="btn btn-sm btn-danger ms-2">Remover</button>
+    <strong class="text-orange">${curso}</strong>: 
+    <a href="${link}" target="_blank">${link}</a>
+    <button type="button" class="btn btn-sm btn-outline-danger-custom ms-2">Remover</button>
   `;
   div.querySelector("button").addEventListener("click", () => div.remove());
   container.appendChild(div);
@@ -130,7 +131,10 @@ function ocultarCampoNomeCompletoParaEmpresa(userType) {
     const campoSobrenome = document.getElementById("nome_completo");
     if (campoSobrenome) {
       campoSobrenome.removeAttribute("required");
-      campoSobrenome.closest(".form-group").style.display = "none";
+      const grupo = campoSobrenome.closest(".form-group");
+      if (grupo) {
+        grupo.style.display = "none";
+      }
     }
   }
 }
@@ -257,13 +261,13 @@ document.addEventListener("DOMContentLoaded", async function () {
         div.innerHTML = `
           <input type="text" class="form-control mb-1" placeholder="Nome do projeto" value="${nome}">
           <input type="url" class="form-control mb-1" placeholder="Link do projeto" value="${link}">
-          <button type="button" class="btn btn-sm btn-danger">Remover</button>
+          <button type="button" class="btn btn-sm btn-outline-danger-custom ms-2">Remover</button>
           <hr>
         `;
         div
           .querySelector("button")
           .addEventListener("click", () => div.remove());
-        projetosLista.appendChild(div);
+        document.getElementById("projetos-lista").appendChild(div);
       }
 
       try {
