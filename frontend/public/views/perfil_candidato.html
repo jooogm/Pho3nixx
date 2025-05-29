@@ -4,36 +4,221 @@
 <head>
     <meta charset="UTF-8">
     <title>Perfil do Candidato</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            color: white;
+            background-color: #1e1e1e;
+            /* Fundo sólido para evitar o degradê vazar */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex-grow: 1;
+            background: linear-gradient(135deg, #0d0d0d, #ff6600);
+            /* degradê aplicado aqui */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 2rem 1rem;
+            position: relative;
+        }
+
+        .wave-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        #perfil-candidato {
+            background-color: rgba(30, 30, 30, 0.85);
+            border: 2px solid rgba(255, 102, 0, 0.5);
+            border-radius: 16px;
+            padding: 2rem 2.5rem;
+            max-width: 700px;
+            width: 100%;
+            box-shadow: 0 0 20px rgba(255, 102, 0, 0.3);
+            animation: fadeIn 0.6s ease;
+            margin-bottom: 60px;
+            z-index: 1;
+        }
+
+        #perfil-candidato h2 {
+            color: #ff6600;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        #perfil-candidato img {
+            display: block;
+            margin: 0 auto 1rem;
+            border-radius: 50%;
+            border: 3px solid #ff6600;
+            box-shadow: 0 0 10px rgba(255, 102, 0, 0.4);
+        }
+
+        #perfil-candidato p,
+        #perfil-candidato label {
+            margin: 0.4rem 0;
+            color: #ccc;
+            font-size: 1rem;
+        }
+
+        #perfil-candidato strong {
+            color: #ffcc99;
+        }
+
+        #perfil-candidato a {
+            color: #66b3ff;
+            text-decoration: none;
+        }
+
+        #perfil-candidato a:hover {
+            text-decoration: underline;
+        }
+
+        #perfil-candidato ul {
+            padding-left: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        #perfil-candidato ul li {
+            margin-bottom: 0.4rem;
+        }
+
+        select#status {
+            background-color: #1e1e1e;
+            border: 1px solid #ff6600;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            margin-top: 0.5rem;
+        }
+
+        footer {
+            background-color: #1e1e1e;
+            padding-top: 2rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .logo-footer {
+            color: #ff6600;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- Navbar -->
     <div id="navbar-container"></div>
 
-    <div id="perfil-candidato">
-        <h2 id="nome"></h2>
-        <img id="avatar" width="120" class="rounded-circle" alt="Foto do candidato" />
-        <p><strong>Email:</strong> <span id="email"></span></p>
-        <p><strong>Estado:</strong> <span id="estado"></span></p>
-        <p><strong>Cidade:</strong> <span id="cidade"></span></p>
-        <p><strong>Contato:</strong> <span id="contato"></span></p>
-        <p><strong>Especialização:</strong> <span id="especializacao"></span></p>
-        <p><strong>Resumo:</strong> <span id="resumo"></span></p>
-        <p><strong>GitHub:</strong> <span id="github">Carregando...</span></p>
-        <p><strong>Instagram:</strong> <span id="instagram">Carregando...</span></p>
-        <p><strong>Projetos:</strong></p>
-        <ul id="projetos" style="list-style: none; padding-left: 0;"></ul>
-        <p><strong>Cursos Concluídos:</strong></p>
-        <ul id="cursos" style="list-style: none; padding-left: 0;"></ul>
-        <label for="status"><strong>Status da inscrição:</strong></label>
-        <select id="status">
-            <option value="em andamento">em andamento</option>
-            <option value="processo seletivo">processo seletivo</option>
-            <option value="aprovado">aprovado</option>
-            <option value="encerrado">encerrado</option>
-        </select>
+    <div class="wave-container wave-top">
+        <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+            <defs>
+                <linearGradient id="waveGradientTop" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#1e1e1e; stop-opacity:1" />
+                    <stop offset="50%" style="stop-color:#1e1e1e; stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#1e1e1e; stop-opacity:1" />
+                </linearGradient>
+            </defs>
+            <path fill="url(#waveGradientTop)">
+                <animate attributeName="d" dur="10s" repeatCount="indefinite" values="
+          M0,160 C360,280 1080,40 1440,160 L1440,0 L0,0 Z;
+          M0,160 C300,100 1140,280 1440,160 L1440,0 L0,0 Z;
+          M0,160 C360,280 1080,40 1440,160 L1440,0 L0,0 Z" />
+            </path>
+        </svg>
     </div>
+
+    <main>
+        <div class="container-perfil">
+            <div id="perfil-candidato">
+                <h2 id="nome"></h2>
+                <img id="avatar" width="120" class="rounded-circle" alt="Foto do candidato" />
+                <p><strong>Email:</strong> <span id="email"></span></p>
+                <p><strong>Estado:</strong> <span id="estado"></span></p>
+                <p><strong>Cidade:</strong> <span id="cidade"></span></p>
+                <p><strong>Contato:</strong> <span id="contato"></span></p>
+                <p><strong>Especialização:</strong> <span id="especializacao"></span></p>
+                <p><strong>Resumo:</strong> <span id="resumo"></span></p>
+                <p><strong>GitHub:</strong> <span id="github">Carregando...</span></p>
+                <p><strong>Instagram:</strong> <span id="instagram">Carregando...</span></p>
+                <p><strong>Projetos:</strong></p>
+                <ul id="projetos" style="list-style: none; padding-left: 0;"></ul>
+                <p><strong>Cursos Concluídos:</strong></p>
+                <ul id="cursos" style="list-style: none; padding-left: 0;"></ul>
+                <label for="status"><strong>Status da inscrição:</strong></label>
+                <select id="status">
+                    <option value="em andamento">em andamento</option>
+                    <option value="processo seletivo">processo seletivo</option>
+                    <option value="aprovado">aprovado</option>
+                    <option value="encerrado">encerrado</option>
+                </select>
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-white pt-5 pb-3" data-aos="fade-up">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <h5 class="logo-footer fw-bold">Pho3nix</h5>
+                    <p>Conectando profissionais de tecnologia às maiores empresas do Brasil.</p>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h6 class="text-uppercase fw-bold">Institucional</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="sobre_nos.html" class="text-white text-decoration-none">Sobre nós</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Carreiras</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h6 class="text-uppercase fw-bold">Serviços</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white text-decoration-none">Empresas</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Profissionais</a></li>
+                    </ul>
+                </div>
+
+                <hr class="border-secondary" />
+
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+                    <a href="políticas_de_privacidade.html"
+                        class="text-white text-decoration-none mb-2 mb-md-0">Política de Privacidade</a>
+                    <p class="mb-0">© 2025 Phoenix. Todos os direitos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button id="btnTopo" class="btn btn-warning position-fixed"
+        style="bottom: 20px; right: 20px; display: none; border-radius: 50%; width: 48px; height: 48px; z-index: 999;">
+        <i class="bi bi-chevron-up"></i>
+    </button>
 
     <script src="perfil_candidato.js"></script>
     <script src="/nav.js"></script>

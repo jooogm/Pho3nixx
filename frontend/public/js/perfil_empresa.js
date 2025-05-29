@@ -41,11 +41,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     } else {
       avatarImg.src = "https://www.gravatar.com/avatar/placeholder?s=120";
     }
-    if (empresa?.estado) {
-      await obterNomeEstadoPorId(empresa.estado);
-    } else {
-      document.getElementById("estado").textContent = "Não informado";
-    }
+    const nomeEstado = await obterNomeEstadoPorId(empresa.estado);
+    document.getElementById("estado").textContent = nomeEstado;
     document.getElementById("cidade").textContent =
       empresa?.cidade || "Não informado";
     document.getElementById("contato_empresa").textContent =

@@ -7,19 +7,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
   <style>
+    html,
     body {
-      background: linear-gradient(180deg, #121212 0%, #ff6600 100%);
-      color: white;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       min-height: 100vh;
-      overflow-x: hidden;
-      padding-top: 0 !important;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(135deg, #0d0d0d, #ff6600);
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
     }
 
-    .navbar-brand {
-      color: #ff6600 !important;
-      text-decoration: none !important;
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 2rem 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    footer {
+      background-color: #1e1e1e;
+      padding: 2rem 1rem 1rem;
+      color: white;
+      margin-top: auto;
     }
 
     .navbar {
@@ -27,32 +45,58 @@
       padding: 0.6rem 1rem;
       position: relative;
       z-index: 10;
-      border-bottom: none;
     }
 
+    .navbar-brand,
     .nav-logo {
       font-weight: bold;
       font-size: 1.5rem;
-      color: #ff6600;
+      color: #ff6600 !important;
     }
 
     .wave-container {
-      position: relative;
-      top: -1px;
+      position: absolute;
+      top: 0;
+      width: 100%;
       z-index: 0;
-      margin-bottom: -5px;
-      line-height: 0;
     }
 
-    .wave-container svg {
-      width: 100%;
-      height: 90px;
-      display: block;
+    h1 {
+      color: #ff6600 !important;
+      font-weight: bold !important;
+      text-align: center !important;
+      margin-top: 80px !important;
+      margin-bottom: 30px !important;
+    }
+
+    li {
+      color: #ffffff !important;
+    }
+
+    #detalhes-vaga {
+      background-color: rgba(30, 30, 30, 0.85);
+      border: 2px solid rgba(255, 102, 0, 0.5);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 0 15px rgba(255, 102, 0, 0.3);
+      max-width: 800px;
+      backdrop-filter: blur(10px);
+    }
+
+    #detalhes-vaga h2 {
+      color: #ff6600;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    #detalhes-vaga p {
+      color: #ddd;
+      margin-bottom: 10px;
     }
 
     #btn-inscrever {
       display: block;
-      margin: 0 auto 60px auto;
+      margin: 40px auto 60px;
       background-color: #1e1e1e;
       border: 2px solid #ff6600;
       color: #fff;
@@ -70,74 +114,8 @@
       box-shadow: 0 0 10px rgba(255, 102, 0, 0.6);
     }
 
-
-    h1 {
-      color: #ff6600 !important;
-      font-weight: bold !important;
-      margin-bottom: 30px !important;
-      text-align: center !important;
-      margin-top: 40px !important;
-    }
-
-
-    #detalhes-vaga {
-      background-color: rgba(30, 30, 30, 0.85) !important;
-      border: 2px solid rgba(255, 102, 0, 0.5) !important;
-      border-radius: 16px !important;
-      padding: 30px !important;
-      box-shadow: 0 0 15px rgba(255, 102, 0, 0.3) !important;
-      max-width: 800px !important;
-      margin: 0 auto 40px !important;
-      backdrop-filter: blur(10px) !important;
-    }
-
-    #detalhes-vaga h2 {
-      color: #ff6600 !important;
-      font-weight: bold !important;
-      margin-bottom: 15px !important;
-    }
-
-    #detalhes-vaga p {
-      color: #ddd;
-      margin-bottom: 10px;
-    }
-
-    .search-form {
-      max-width: 300px;
-    }
-
-    .search-input {
-      background-color: #fff;
-      color: #000;
-      border-radius: 4px 0 0 4px;
-      border: 1px solid #ccc;
-    }
-
-    .search-btn {
-      border: 1px solid #ccc;
-      border-radius: 0 4px 4px 0;
-      background-color: #000;
-      color: #fff;
-    }
-
-    .search-btn:hover {
-      background-color: #ff6600;
-      border-color: #ff6600;
-    }
-
-    .btn-inscrever-estilizado {
-      background-color: #000;
-      color: white;
-      border: 2px solid #ff6600;
-      border-radius: 12px;
-      padding: 10px 24px;
-      font-weight: bold;
-      transition: all 0.3s ease;
-    }
-
-    .btn-inscrever-estilizado:hover {
-      background-color: #000000;
-      color: rgb(255, 255, 255);
+    .logo-footer {
+      color: #ff6600;
     }
   </style>
 </head>
@@ -145,7 +123,6 @@
 <body>
   <div id="navbar-container"></div>
 
-  <!-- Onda logo após a navbar -->
   <div class="wave-container">
     <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
       <defs>
@@ -158,20 +135,52 @@
         <animate attributeName="d" dur="8s" repeatCount="indefinite" values="
         M0,160 C360,280 1080,40 1440,160 L1440,0 L0,0 Z;
         M0,160 C300,100 1140,280 1440,160 L1440,0 L0,0 Z;
-        M0,160 C360,280 1080,40 1440,160 L1440,0 L0,0 Z
-      " />
+        M0,160 C360,280 1080,40 1440,160 L1440,0 L0,0 Z" />
       </path>
     </svg>
   </div>
 
-  <!-- Conteúdo da Vaga -->
-  <div class="container">
+  <main>
     <h1>Detalhes da Vaga</h1>
-    <div id="detalhes-vaga">
-      <!-- Inserido via JS -->
-    </div>
+    <div id="detalhes-vaga"></div>
     <button id="btn-inscrever">Me Inscrever</button>
-  </div>
+  </main>
+
+  <footer class="text-white pt-5 pb-3" data-aos="fade-up">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 mb-4">
+          <h5 class="logo-footer fw-bold">Pho3nix</h5>
+          <p>Conectando profissionais de tecnologia às maiores empresas do Brasil.</p>
+        </div>
+        <div class="col-md-3 mb-4">
+          <h6 class="text-uppercase fw-bold">Institucional</h6>
+          <ul class="list-unstyled">
+            <li><a href="sobre_nos.html" class="text-white text-decoration-none">Sobre nós</a></li>
+            <li><a href="#" class="text-white text-decoration-none">Carreiras</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3 mb-4">
+          <h6 class="text-uppercase fw-bold">Serviços</h6>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-white text-decoration-none">Empresas</a></li>
+            <li><a href="#" class="text-white text-decoration-none">Profissionais</a></li>
+          </ul>
+        </div>
+        <hr class="border-secondary" />
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+          <a href="políticas_de_privacidade.html" class="text-white text-decoration-none mb-2 mb-md-0">Política de
+            Privacidade</a>
+          <p class="mb-0">© 2025 Phoenix. Todos os direitos reservados.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="btnTopo" class="btn btn-warning position-fixed"
+    style="bottom: 20px; right: 20px; display: none; border-radius: 50%; width: 48px; height: 48px; z-index: 999;">
+    <i class="bi bi-chevron-up"></i>
+  </button>
 
   <script src="vaga.js"></script>
   <script src="/nav.js"></script>

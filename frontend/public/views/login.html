@@ -6,6 +6,9 @@
   <title>Login - Phoenix</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+  <!-- ... tudo antes do <style> permanece igual ... -->
 
   <style>
     body {
@@ -69,10 +72,61 @@
       border-radius: 1rem;
       box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
       background-color: #1e1e1e;
+      animation: floatIn 1s ease-out, floatIdle 3s ease-in-out 1s infinite;
+      opacity: 0;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes floatIn {
+      0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes floatIdle {
+      0% {
+        transform: translateY(0);
+      }
+
+      25% {
+        transform: translateY(-3px);
+      }
+
+      50% {
+        transform: translateY(0);
+      }
+
+      75% {
+        transform: translateY(3px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
     }
 
     .login-card h2 {
       color: #ff6600;
+      animation: fadeInText 1s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeInText {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .form-label {
@@ -103,29 +157,35 @@
     .btn-danger {
       background-color: #ff6600;
       border: none;
+      transition: 0.3s ease;
     }
 
     .btn-danger:hover {
       background-color: #e65500;
+      transform: scale(1.03);
     }
 
     .btn-outline-danger {
       color: #ff6600;
       border-color: #ff6600;
+      transition: 0.3s ease;
     }
 
     .btn-outline-danger:hover {
       background-color: #ff6600;
       color: white;
+      transform: scale(1.03);
     }
 
     .btn-secondary {
       background-color: #444;
       border: none;
+      transition: 0.3s ease;
     }
 
     .btn-secondary:hover {
       background-color: #555;
+      transform: scale(1.03);
     }
 
     a.text-danger,
@@ -242,7 +302,12 @@
     });
   </script>
   <script>
-    AOS.init({ duration: 800 });
+    AOS.init({ duration: 800, once: true });
+
+    // Adiciona a classe de flutuação após a entrada AOS
+    setTimeout(() => {
+      document.getElementById("loginCard").classList.add("float-idle");
+    }, 1000);
   </script>
 
 </body>

@@ -48,7 +48,7 @@ const criarVaga = async (req, res) => {
         .json({ message: "Perfil de empresa não encontrado." });
     }
 
-    console.log("Perfil de empresa encontrado:", empresaProfile.nome_completo);
+    console.log("Perfil de empresa encontrado:", empresaProfile.name);
 
     // Criação da nova vaga com dados do perfil da empresa
     const novaVaga = await Vaga.create({
@@ -64,7 +64,7 @@ const criarVaga = async (req, res) => {
       cursos_indicados,
       beneficios,
       empresa_id: empresaProfile.id,
-      empresa_nome: empresaProfile.nome_completo, // Nome da empresa
+      empresa_nome: empresaProfile.name, // Nome da empresa
     });
 
     console.log("Vaga criada com sucesso:", novaVaga);

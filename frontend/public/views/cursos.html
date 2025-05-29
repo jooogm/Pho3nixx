@@ -7,8 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
     <style>
-        html {
+        html,
+        body {
+            height: 100% !important;
+            margin: 0;
+            display: flex !important;
+            flex-direction: column !important;
             overflow-x: hidden !important;
         }
 
@@ -16,9 +23,12 @@
             background: linear-gradient(180deg, #121212 0%, #ff6600 100%) !important;
             color: #f0f0f0 !important;
             font-family: 'Segoe UI', sans-serif !important;
-            min-height: 100vh !important;
-            padding-bottom: 60px !important;
-            overflow-x: hidden !important;
+        }
+
+        main {
+            flex: 1 !important;
+            display: flex;
+            flex-direction: column;
         }
 
         .wave-container {
@@ -81,7 +91,6 @@
             text-shadow: none !important;
         }
 
-
         .curso-card p {
             color: #ccc !important;
             font-size: 0.95rem !important;
@@ -106,6 +115,10 @@
             color: #000 !important;
             box-shadow: 0 0 8px #ff6600 !important;
         }
+
+        .logo-footer {
+            color: #ff6600;
+        }
     </style>
 </head>
 
@@ -127,17 +140,103 @@
                 <animate attributeName="d" dur="10s" repeatCount="indefinite" values="
           M0,160 C360,280 1080,40 1200,160 L1200,0 L0,0 Z;
           M0,160 C300,100 1140,280 1200,160 L1200,0 L0,0 Z;
-          M0,160 C360,280 1080,40 1200,160 L1200,0 L0,0 Z
-        " />
+          M0,160 C360,280 1080,40 1200,160 L1200,0 L0,0 Z" />
             </path>
         </svg>
     </div>
 
-    <!-- Título -->
-    <h2>Trilhas Recomendadas</h2>
+    <!-- Conteúdo principal -->
+    <main>
+        <h2 data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">Trilhas Recomendadas</h2>
 
-    <!-- Container dos cursos -->
-    <div id="cursos-container"></div>
+        <div class="container my-5" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+            <div class="row align-items-center g-5">
+
+                <!-- Texto -->
+                <div class="col-md-6" data-aos="fade-right" data-aos-delay="300" data-aos-duration="1200">
+                    <h4 class="text-warning fw-bold mb-3">Apoio do Professor Guanabara</h4>
+                    <p class="text-light">
+                        Temos o privilégio de contar com o apoio do renomado Professor <strong>Gustavo
+                            Guanabara</strong>,
+                        referência nacional no ensino de tecnologia. Ele gentilmente autorizou o uso dos seus vídeos
+                        educacionais
+                        em nossa plataforma <strong>Pho3nix</strong>, fortalecendo ainda mais a missão de capacitar
+                        novos talentos na área de TI.
+                    </p>
+                    <p class="text-light">
+                        Seus cursos gratuitos, didáticos e reconhecidos em todo o país, agora fazem parte das trilhas de
+                        aprendizado do nosso sistema. Essa colaboração reforça nosso compromisso em oferecer conteúdo de
+                        qualidade,
+                        acessível e alinhado com as exigências do mercado.
+                    </p>
+                    <p class="text-light">
+                        A seguir, um vídeo enviado por ele nos autorizando a utilizar os cursos, especialmente para uso
+                        educacional dentro da nossa plataforma.
+                    </p>
+                </div>
+
+                <!-- Vídeo -->
+                <div class="col-md-6 d-flex justify-content-center" data-aos="fade-left" data-aos-delay="400"
+                    data-aos-duration="1200">
+                    <div class="card bg-dark text-white border-warning shadow-lg"
+                        style="border-radius: 16px; max-width: 400px; width: 100%;">
+                        <div class="card-body p-2">
+                            <video controls style="width: 100%; border-radius: 12px;">
+                                <source src="video-guanabara.mp4" type="video/mp4">
+                                Seu navegador não suporta vídeos incorporados.
+                            </video>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Curso Cards -->
+        <div id="cursos-container" data-aos="zoom-in" data-aos-delay="500" data-aos-duration="1000"></div>
+    </main>
+
+
+    <!-- Rodapé -->
+    <footer class="text-white pt-5 pb-3" style="background-color: #1e1e1e;" data-aos="fade-up">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <h5 class="logo-footer fw-bold">Pho3nix</h5>
+                    <p>Conectando profissionais de tecnologia às maiores empresas do Brasil.</p>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h6 class="text-uppercase fw-bold">Institucional</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="sobre_nos.html" class="text-white text-decoration-none">Sobre nós</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Carreiras</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h6 class="text-uppercase fw-bold">Serviços</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white text-decoration-none">Empresas</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Profissionais</a></li>
+                    </ul>
+                </div>
+
+                <hr class="border-secondary" />
+
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+                    <a href="políticas_de_privacidade.html"
+                        class="text-white text-decoration-none mb-2 mb-md-0">Política de
+                        Privacidade</a>
+                    <p class="mb-0">© 2025 Phoenix. Todos os direitos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botão voltar ao topo -->
+    <button id="btnTopo" class="btn btn-warning position-fixed"
+        style="bottom: 20px; right: 20px; display: none; border-radius: 50%; width: 48px; height: 48px; z-index: 999;">
+        <i class="bi bi-chevron-up"></i>
+    </button>
 
     <script src="detalhes_cursos.js"></script>
     <script src="cursos.js"></script>
@@ -145,8 +244,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 800 });
+        document.addEventListener("DOMContentLoaded", function () {
+            AOS.init({
+                duration: 1000, // tempo da animação
+                once: true,     // anima só uma vez ao entrar na tela
+                easing: 'ease-in-out',
+            });
+        });
     </script>
+
 </body>
 
 </html>
