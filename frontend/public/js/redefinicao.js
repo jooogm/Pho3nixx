@@ -1,23 +1,29 @@
-document.getElementById('formEsqueciSenha').addEventListener('submit', async function (e) {
+document
+  .getElementById("formEsqueciSenha")
+  .addEventListener("submit", async function (e) {
     e.preventDefault();
-  
-    const email = document.getElementById('email').value;
-    const mensagem = document.getElementById('mensagem');
-  
+
+    const email = document.getElementById("email").value;
+    const mensagem = document.getElementById("mensagem");
+
     try {
-      const response = await fetch('http://localhost:3000/api/auth/forgot-password', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email })
-      });
-  
+      const response = await fetch(
+        `${window.API_URL}/api/auth/forgot-password`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        }
+      );
+
       const data = await response.json();
-  
+
       if (response.ok) {
         mensagem.textContent = "✅ E-mail de redefinição enviado com sucesso!";
         mensagem.style.color = "green";
       } else {
-        mensagem.textContent = "❌ " + (data.message || "Erro ao enviar e-mail.");
+        mensagem.textContent =
+          "❌ " + (data.message || "Erro ao enviar e-mail.");
         mensagem.style.color = "red";
       }
     } catch (error) {

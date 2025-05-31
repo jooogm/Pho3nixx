@@ -1,3 +1,13 @@
+async function getNomeEstadoPorId(id) {
+  if (!id) return "Estado não informado";
+
+  const response = await fetch("/Estados.json");
+  const estados = await response.json();
+
+  const estado = estados.find((e) => e.ID.toString() === id.toString());
+  return estado ? estado.Nome : "Estado desconhecido";
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
   const termo = params.get("termo");
@@ -7,13 +17,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     const response = await fetch(
-      `http://localhost:3000/api/vagas?titulo=${encodeURIComponent(termo)}`,
+      `${window.API_URL}/api/vagas?titulo=${encodeURIComponent(
+        termo
+      )}&status=Aberta`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
 
-    const vagas = await response.json();
+    const todasVagas = await response.json();
+    const vagas = todasVagas.filter((vaga) => vaga.status === "Aberta");
 
     const container = document.getElementById("resultados-vagas");
     container.innerHTML = "";
@@ -23,27 +36,36 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    vagas.forEach((vaga) => {
+    for (const vaga of vagas) {
+      const nomeEstado = await getNomeEstadoPorId(vaga.estado);
+
+      // Exibe localização apenas se não for remoto
+      const localizacaoHTML =
+        vaga.modalidade === "Remoto"
+          ? ""
+          : `<p><strong>Localização:</strong> ${
+              vaga.cidade || "Cidade não informada"
+            } - ${nomeEstado}</p>`;
+
       const card = document.createElement("div");
       card.className = "card mb-3";
       card.innerHTML = `
-        <div class="card-body">
-          <h5 class="card-title">
-  <a href="vaga.html?id=${vaga.vaga_id}">${vaga.titulo}</a>
-</h5>
-          <p class="card-text">${vaga.descricao || ""}</p>
-          <p class="card-text"><strong>Empresa:</strong> 
-            <a href="perfil_empresa.html?id=${vaga.empresa_id}">${
+  <div class="card-body">
+    <h5 class="card-title">
+      <a href="vaga.html?id=${vaga.vaga_id}">${vaga.titulo}</a>
+    </h5>
+    <p class="card-text">${vaga.descricao || ""}</p>
+    <p class="card-text"><strong>Empresa:</strong> 
+      <a href="perfil_empresa.html?id=${vaga.empresa_id}">${
         vaga.empresa_nome
-      } </a>
-          </p>
-          <p class="card-text"><strong>Localização:</strong> ${
-            vaga.localizacao
-          }</p>
-        </div>
-      `;
+      }</a>
+    </p>
+    <p><strong>Modalidade:</strong> ${vaga.modalidade}</p>
+    ${localizacaoHTML}
+  </div>
+`;
       container.appendChild(card);
-    });
+    }
   } catch (error) {
     console.error("Erro ao buscar vagas:", error);
   }

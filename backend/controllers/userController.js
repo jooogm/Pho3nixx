@@ -228,6 +228,7 @@ const getUserProfile = async (req, res) => {
 // Lógica para editar perfil do usuário
 const editUserProfile = async (req, res) => {
   const {
+    name,
     nome_completo,
     resumo,
     estado,
@@ -252,6 +253,8 @@ const editUserProfile = async (req, res) => {
       return res.status(404).json({ message: "Usuário não encontrado." });
     }
 
+    await user.update({ name });
+
     // Verificar qual perfil o usuário tem e atualizar
     if (typeUserId === 2) {
       // Profissional
@@ -261,6 +264,7 @@ const editUserProfile = async (req, res) => {
       if (userProfissionalProfile) {
         // Atualizar perfil profissional
         await userProfissionalProfile.update({
+          name,
           nome_completo,
           resumo,
           estado,
@@ -299,6 +303,7 @@ const editUserProfile = async (req, res) => {
       if (userEmpresaProfile) {
         // Atualizar perfil de empresa
         await userEmpresaProfile.update({
+          name,
           resumo,
           estado,
           cidade,

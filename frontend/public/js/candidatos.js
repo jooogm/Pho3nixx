@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     const res = await fetch(
-      `http://localhost:3000/api/inscricoes/candidatos/${vagaId}`,
+      `${window.API_URL}/api/inscricoes/candidatos/${vagaId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         try {
           const res = await fetch(
-            `http://localhost:3000/api/inscricoes/status/${inscricaoId}`,
+            `${window.API_URL}/api/inscricoes/status/${inscricaoId}`,
             {
               method: "PUT",
               headers: {

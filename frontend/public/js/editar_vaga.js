@@ -206,7 +206,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
-    const response = await fetch(`http://localhost:3000/api/vagas/${vagaId}`, {
+    const response = await fetch(`${window.API_URL}/api/vagas/${vagaId}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
@@ -245,7 +245,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     try {
       const updateResponse = await fetch(
-        `http://localhost:3000/api/vagas/${vagaId}`,
+        `${window.API_URL}/api/vagas/${vagaId}`,
         {
           method: "PUT",
           headers: {

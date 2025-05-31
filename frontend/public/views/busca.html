@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Busca de Vagas</title>
+  <link rel="icon" href="/favicon.ico?v=1" type="image/x-icon">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
@@ -12,10 +13,7 @@
   <style>
     html,
     body {
-      height: 100%;
       margin: 0;
-      display: flex;
-      flex-direction: column;
     }
 
     body {
@@ -213,17 +211,8 @@
             <h6 class="text-uppercase fw-bold">Institucional</h6>
             <ul class="list-unstyled">
               <li><a href="sobre_nos.html" class="text-white text-decoration-none">Sobre nós</a></li>
-              <li><a href="#" class="text-white text-decoration-none">Carreiras</a></li>
             </ul>
           </div>
-          <div class="col-md-3 mb-4">
-            <h6 class="text-uppercase fw-bold">Serviços</h6>
-            <ul class="list-unstyled">
-              <li><a href="#" class="text-white text-decoration-none">Empresas</a></li>
-              <li><a href="#" class="text-white text-decoration-none">Profissionais</a></li>
-            </ul>
-          </div>
-
           <hr class="border-secondary" />
 
           <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
@@ -247,7 +236,7 @@
       <i class="bi bi-chevron-up"></i>
     </button>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/buscar.js"></script>
+    <script src="/busca.js"></script>
     <script>
       const btnTopo = document.getElementById("btnTopo");
 
@@ -259,6 +248,7 @@
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
     </script>
+    <script src="/config.js"></script>
     <script src="/nav.js"></script>
     <script src="/busca.js"></script>
     <!-- AOS -->

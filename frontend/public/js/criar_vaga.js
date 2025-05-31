@@ -198,7 +198,7 @@ document
     );
 
     try {
-      const response = await fetch("http://localhost:3000/api/vagas/criar", {
+      const response = await fetch(`${window.API_URL}/api/vagas/criar`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -210,12 +210,19 @@ document
       const result = await response.json();
 
       if (response.ok) {
-        document.getElementById("mensagem").innerText =
-          "Vaga criada com sucesso!";
+        mensagem.innerText = "Vaga criada com sucesso!";
+        mensagem.classList.remove("erro");
+        mensagem.classList.add("sucesso");
         this.reset();
+
+        // Aguarda 2 segundos e redireciona para a página de vagas
+        setTimeout(() => {
+          window.location.href = "minhas_vagas.html";
+        }, 2000);
       } else {
-        document.getElementById("mensagem").innerText =
-          result.message || "Erro ao criar vaga.";
+        mensagem.innerText = result.message || "Erro ao criar vaga.";
+        mensagem.classList.remove("sucesso");
+        mensagem.classList.add("erro");
       }
     } catch (error) {
       console.error("Erro ao enviar vaga:", error);

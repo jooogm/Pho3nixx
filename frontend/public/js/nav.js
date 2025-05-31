@@ -17,6 +17,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (error) {
     console.error("Erro ao carregar navbar:", error);
   }
+
+  const path = window.location.pathname;
+  const links = document.querySelectorAll(".nav-link");
+
+  links.forEach((link) => {
+    const href = link.getAttribute("href");
+    if (href && path.includes(href)) {
+      link.classList.add("active-link");
+    }
+  });
 });
 
 // Botões de autenticação

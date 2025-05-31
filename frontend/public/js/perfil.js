@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       return;
     }
 
-    const response = await fetch("http://localhost:3000/api/usuarios/perfil", {
+    const response = await fetch(`${window.API_URL}/api/usuarios/perfil`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     let perfilHTML = `
   <div class="text-center">
-    <img src="${avatarSrc}" class="rounded-circle" width="150">
+    <img src="${avatarSrc}" class="rounded-circle avatar-perfil">
     <h3>${nomeExibido}</h3>
     <p><strong>Email:</strong> ${user.email}</p>
     <hr>

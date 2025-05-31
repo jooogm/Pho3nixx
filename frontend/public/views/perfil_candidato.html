@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Perfil do Candidato</title>
+    <link rel="icon" href="/favicon.ico?v=1" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
@@ -129,6 +130,22 @@
                 transform: translateY(0);
             }
         }
+
+        .avatar-perfil {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #ff6600;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .avatar-perfil {
+            width: 150px;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 50%;
+        }
     </style>
 </head>
 
@@ -158,7 +175,7 @@
         <div class="container-perfil">
             <div id="perfil-candidato">
                 <h2 id="nome"></h2>
-                <img id="avatar" width="120" class="rounded-circle" alt="Foto do candidato" />
+                <img id="avatar" width="120" class="rounded-circle avatar-perfil" alt="Foto do candidato" />
                 <p><strong>Email:</strong> <span id="email"></span></p>
                 <p><strong>Estado:</strong> <span id="estado"></span></p>
                 <p><strong>Cidade:</strong> <span id="cidade"></span></p>
@@ -193,14 +210,6 @@
                     <h6 class="text-uppercase fw-bold">Institucional</h6>
                     <ul class="list-unstyled">
                         <li><a href="sobre_nos.html" class="text-white text-decoration-none">Sobre nós</a></li>
-                        <li><a href="#" class="text-white text-decoration-none">Carreiras</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <h6 class="text-uppercase fw-bold">Serviços</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-white text-decoration-none">Empresas</a></li>
-                        <li><a href="#" class="text-white text-decoration-none">Profissionais</a></li>
                     </ul>
                 </div>
 
@@ -220,9 +229,10 @@
         <i class="bi bi-chevron-up"></i>
     </button>
 
-    <script src="perfil_candidato.js"></script>
-    <script src="/nav.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="/config.js"></script>
+    <script src="/nav.js"></script>
+    <script src="perfil_candidato.js"></script>
     <script>
         AOS.init({ duration: 800 });
     </script>

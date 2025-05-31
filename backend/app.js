@@ -23,9 +23,10 @@ app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 // Configuração do CORS
 app.use(
   cors({
-    origin: "http://localhost:3000", // Substitua pelo endereço do frontend
+    origin: ["http://localhost:3000", "https://pho3nix.com.br"], // Substitua pelo endereço do frontend
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Authorization", "Content-Type"],
+    credentials: true,
   })
 );
 

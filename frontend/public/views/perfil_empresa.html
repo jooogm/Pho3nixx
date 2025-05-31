@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Perfil da Empresa</title>
+    <link rel="icon" href="/favicon.ico?v=1" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
@@ -11,10 +12,9 @@
         body {
             background: linear-gradient(135deg, #0d0d0d, #ff6600);
             color: white;
-            min-height: 100vh !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         h2,
@@ -81,6 +81,22 @@
         .logo-footer {
             color: #ff6600;
         }
+
+        .avatar-perfil {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #ff6600;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .avatar-perfil {
+            width: 150px;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 50%;
+        }
     </style>
 </head>
 
@@ -89,24 +105,28 @@
     <!-- Navbar -->
     <div id="navbar-container"></div>
 
+    <main class="flex-grow-1">
+        <div class="container py-4">
+            <div class="container py-4">
+                <h2 class="mb-4">Perfil da Empresa</h2>
 
-    <div class="container py-4">
-        <h2 class="mb-4">Perfil da Empresa</h2>
+                <div id="empresa-info" class="card mb-4 p-3 shadow-sm">
+                    <div class="text-center mb-3">
+                        <img id="avatar_empresa" class="rounded-circle avatar-perfil" width="120"
+                            alt="Avatar da empresa" />
+                    </div>
+                    <h4 id="nome_empresa"></h4>
+                    <p><strong>Estado:</strong> <span id="estado"></span></p>
+                    <p><strong>Cidade:</strong> <span id="cidade"></span></p>
+                    <p><strong>Contato:</strong> <span id="contato_empresa"></span></p>
+                    <p><strong>Sobre:</strong> <span id="resumo_empresa"></span></p>
+                </div>
 
-        <div id="empresa-info" class="card mb-4 p-3 shadow-sm">
-            <div class="text-center mb-3">
-                <img id="avatar_empresa" class="rounded-circle" width="120" alt="Avatar da empresa" />
+                <h4 class="mb-3">Vagas da Empresa</h4>
+                <div id="vagas-lista" class="row"></div>
             </div>
-            <h4 id="nome_empresa"></h4>
-            <p><strong>Estado:</strong> <span id="estado"></span></p>
-            <p><strong>Cidade:</strong> <span id="cidade"></span></p>
-            <p><strong>Contato:</strong> <span id="contato_empresa"></span></p>
-            <p><strong>Sobre:</strong> <span id="resumo_empresa"></span></p>
         </div>
-
-        <h4 class="mb-3">Vagas da Empresa</h4>
-        <div id="vagas-lista" class="row"></div>
-    </div>
+    </main>
 
     <!-- Rodapé -->
     <footer class="text-white pt-5 pb-3" style="background-color: #1e1e1e;" data-aos="fade-up">
@@ -120,14 +140,6 @@
                     <h6 class="text-uppercase fw-bold">Institucional</h6>
                     <ul class="list-unstyled">
                         <li><a href="sobre_nos.html" class="text-white text-decoration-none">Sobre nós</a></li>
-                        <li><a href="#" class="text-white text-decoration-none">Carreiras</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <h6 class="text-uppercase fw-bold">Serviços</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-white text-decoration-none">Empresas</a></li>
-                        <li><a href="#" class="text-white text-decoration-none">Profissionais</a></li>
                     </ul>
                 </div>
 
@@ -149,9 +161,12 @@
         <i class="bi bi-chevron-up"></i>
     </button>
 
-    <script src="perfil_empresa.js"></script>
-    <script src="/nav.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="/config.js"></script>
+    <script src="/nav.js"></script>
+    <script src="perfil_empresa.js"></script>
+
+
     <script>
         AOS.init({ duration: 800 });
     </script>

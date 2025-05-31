@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  fetch("http://localhost:3000/api/vagas/minhas", {
+  fetch(`${window.API_URL}/api/vagas/minhas`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -93,7 +93,7 @@ function deletarVaga(id) {
   if (confirm("Tem certeza que deseja excluir esta vaga?")) {
     const token = localStorage.getItem("token");
 
-    fetch(`http://localhost:3000/api/vagas/${id}`, {
+    fetch(`${window.API_URL}/api/vagas/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,

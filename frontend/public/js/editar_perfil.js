@@ -56,12 +56,19 @@ function carregarCursosDisponiveis() {
 }
 
 // Manipular cursos adicionados
-function criarCursoConcluido(curso, link) {
+function criarCursoConcluido(cursoId, link) {
   const container = document.getElementById("lista-cursos-concluidos");
+
+  const cursoInfo = Object.entries(window.CURSOS).find(
+    ([id]) => id.toLowerCase() === cursoId.toLowerCase()
+  )?.[1];
+
+  const nomeCurso = cursoInfo ? cursoInfo.titulo : cursoId;
+
   const div = document.createElement("div");
   div.classList.add("mb-2", "curso-item");
   div.innerHTML = `
-    <strong class="text-orange">${curso}</strong>: 
+    <strong class="text-orange" data-id="${cursoId}">${nomeCurso}</strong>:
     <a href="${link}" target="_blank">${link}</a>
     <button type="button" class="btn btn-sm btn-outline-danger-custom ms-2">Remover</button>
   `;
@@ -169,7 +176,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   });
 
   try {
-    const res = await fetch("http://localhost:3000/api/usuarios/perfil", {
+    const res = await fetch(`${window.API_URL}/api/usuarios/perfil`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
@@ -229,13 +236,17 @@ document.addEventListener("DOMContentLoaded", async function () {
       const btnAddCurso = document.getElementById("btnAddCurso");
 
       btnAddCurso.addEventListener("click", () => {
-        const curso = document.getElementById("curso_concluido").value;
-        const link = document.getElementById("link_curso").value;
-        if (!curso || !link) {
+        const select = document.getElementById("curso_concluido");
+        const cursoId = select.value;
+        const cursoTitulo = select.options[select.selectedIndex].textContent;
+        const link = document.getElementById("link_curso").value.trim(); // 🔥 ESSA LINHA FALTAVA
+
+        if (!cursoId || !link) {
           alert("Selecione um curso e insira o link do projeto.");
           return;
         }
-        criarCursoConcluido(curso, link);
+
+        criarCursoConcluido(cursoId, link);
         document.getElementById("curso_concluido").value = "";
         document.getElementById("link_curso").value = "";
       });
@@ -275,15 +286,41 @@ document.addEventListener("DOMContentLoaded", async function () {
         projetosSalvos.forEach((p) => criarProjetoInput(p.nome, p.link));
       } catch {}
 
-      btnAddProjeto.addEventListener("click", () => criarProjetoInput());
+      btnAddProjeto.addEventListener("click", () => {
+        const projetos = document.querySelectorAll(".projeto-item");
+        const ultimoProjeto = projetos[projetos.length - 1];
+
+        if (ultimoProjeto) {
+          const [nomeInput, linkInput] =
+            ultimoProjeto.querySelectorAll("input");
+          const nome = nomeInput.value.trim();
+          const link = linkInput.value.trim();
+
+          if (!nome || !link) {
+            alert(
+              "Preencha o nome e o link do último projeto antes de adicionar outro."
+            );
+            return;
+          }
+        }
+
+        criarProjetoInput();
+      });
 
       try {
         const cursosSalvos = JSON.parse(
           user.profile?.cursos_concluidos || "[]"
         );
-        cursosSalvos.forEach((c) =>
-          criarCursoConcluido(c.curso, c.repositorio)
-        );
+
+        cursosSalvos.forEach((c) => {
+          const cursoId = c.curso;
+          const cursoInfo = Object.entries(window.CURSOS).find(
+            ([id]) => id.toLowerCase() === cursoId.toLowerCase()
+          )?.[1];
+
+          const nomeCurso = cursoInfo ? cursoInfo.titulo : cursoId;
+          criarCursoConcluido(cursoId, c.repositorio); // cursoId vai no data-id
+        });
       } catch {}
     }
 
@@ -338,7 +375,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             : [],
       };
 
-      const update = await fetch("http://localhost:3000/api/usuarios/perfil", {
+      const update = await fetch(`${window.API_URL}/api/usuarios/perfil`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,

@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       try {
-        const res = await fetch("http://localhost:3000/api/usuarios/perfil", {
+        const res = await fetch(`${window.API_URL}/api/usuarios/perfil`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -46,17 +46,14 @@ document.addEventListener("DOMContentLoaded", () => {
           : [];
         cursosAtuais.push({ curso: cursoId, repositorio: github });
 
-        const atualizar = await fetch(
-          "http://localhost:3000/api/usuarios/perfil",
-          {
-            method: "PUT",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ cursos_concluidos: cursosAtuais }),
-          }
-        );
+        const atualizar = await fetch(`${window.API_URL}/api/usuarios/perfil`, {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ cursos_concluidos: cursosAtuais }),
+        });
 
         if (atualizar.ok) {
           alert("Curso concluído salvo com sucesso!");

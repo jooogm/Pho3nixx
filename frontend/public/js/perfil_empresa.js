@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     // 1. Buscar perfil da empresa (rota pública)
     const perfilRes = await fetch(
-      `http://localhost:3000/api/usuarios/empresa/${empresaProfileId}`
+      `${window.API_URL}/api/usuarios/empresa/${empresaProfileId}`
     );
     if (!perfilRes.ok) throw new Error("Erro ao carregar perfil da empresa.");
 
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // 3. Buscar vagas abertas da empresa
     const vagasRes = await fetch(
-      `http://localhost:3000/api/vagas/abertas?empresa_id=${empresaProfileId}`
+      `${window.API_URL}/api/vagas/abertas?empresa_id=${empresaProfileId}`
     );
     if (!vagasRes.ok) throw new Error("Erro ao carregar vagas da empresa.");
 
