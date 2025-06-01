@@ -1,6 +1,6 @@
 # Pho3nix - Plataforma de Conexão entre Candidatos e Empresas de TI
 
-**Pho3nix** é uma plataforma desenvolvida como parte do **TCC** da **Faculdade USCS** – Universidade de São Caetano do Sul, no curso de **Análise e Desenvolvimento de Sistemas (ADS)**. O objetivo da plataforma é **conectar candidatos da área de TI** com empresas que buscam **profissionais especializados** em diversas tecnologias e ofecer trilhas de cursos recomendados que os ajudem a atender aos requisitos das vagas.
+**Pho3nix** é uma plataforma desenvolvida como parte do **TCC** da **Faculdade USCS** – Universidade de São Caetano do Sul, no curso de **Análise e Desenvolvimento de Sistemas (ADS)**. O objetivo da plataforma é **conectar candidatos da área de TI** com empresas que buscam **profissionais especializados** em diversas tecnologias e oferecer trilhas de cursos recomendados que os ajudem a atender aos requisitos das vagas.
 
 ## Funcionalidades da Plataforma
 

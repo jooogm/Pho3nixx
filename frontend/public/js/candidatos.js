@@ -24,8 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const candidatos = Array.isArray(dados) ? dados : dados.candidatos || [];
 
     if (!res.ok || candidatos.length === 0) {
-      container.innerHTML =
-        "<p>Nenhum candidato encontrado para esta vaga.</p>";
+      container.innerHTML = `<p style="color: white; text-align: center;">Nenhum candidato encontrado para esta vaga.</p>`;
       return;
     }
 

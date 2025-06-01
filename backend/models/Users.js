@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
 const sequelize = require("../config/database"); // Supondo que você tenha o Sequelize configurado corretamente aqui
+const Vaga = require("./Vagas");
 
 // Modelo do TypeUser
 const TypeUser = sequelize.define("TypeUser", {
@@ -131,6 +132,11 @@ const UserEmpresaProfile = sequelize.define(
     paranoid: true,
   }
 );
+
+User.hasMany(Vaga, {
+  foreignKey: "empresa_id",
+  as: "vagas",
+});
 
 // Exportando os modelos
 module.exports = {

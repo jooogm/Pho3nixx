@@ -166,13 +166,53 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   avatarInput.addEventListener("change", function () {
     const file = avatarInput.files[0];
+    const MAX_SIZE_MB = 2;
+    const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
+    const MAX_WIDTH = 1024;
+    const MAX_HEIGHT = 1024;
+
     if (file) {
+      if (file.size > MAX_SIZE_BYTES) {
+        alert(
+          `A imagem selecionada é muito grande (${(
+            file.size /
+            1024 /
+            1024
+          ).toFixed(2)}MB). O limite é ${MAX_SIZE_MB}MB.`
+        );
+        avatarInput.value = "";
+        avatarPreview.src =
+          "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250";
+        return;
+      }
+
       const reader = new FileReader();
       reader.onload = function (e) {
-        avatarPreview.src = e.target.result;
+        const img = new Image();
+        img.onload = function () {
+          if (img.width > MAX_WIDTH || img.height > MAX_HEIGHT) {
+            alert(
+              `A resolução da imagem é muito alta (${img.width}x${img.height}). O limite é ${MAX_WIDTH}x${MAX_HEIGHT}.`
+            );
+            avatarInput.value = "";
+            avatarPreview.src =
+              "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250";
+            return;
+          }
+
+          avatarPreview.src = e.target.result;
+        };
+        img.src = e.target.result;
       };
+
       reader.readAsDataURL(file);
     }
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      avatarPreview.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
   });
 
   try {
@@ -329,7 +369,21 @@ document.addEventListener("DOMContentLoaded", async function () {
       e.preventDefault();
 
       let avatarBase64 = avatarPreview.src;
+      const MAX_SIZE_MB = 2;
+      const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
+      const MAX_WIDTH = 1024;
+      const MAX_HEIGHT = 1024;
       const file = avatarInput.files[0];
+      if (file && file.size > MAX_SIZE_BYTES) {
+        alert(
+          `A imagem selecionada é muito grande (${(
+            file.size /
+            1024 /
+            1024
+          ).toFixed(2)}MB). O limite é ${MAX_SIZE_MB}MB.`
+        );
+        return;
+      }
       if (file) {
         avatarBase64 = await toBase64(file);
       }

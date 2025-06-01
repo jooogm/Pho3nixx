@@ -21,8 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (Array.isArray(data)) {
         if (data.length === 0) {
-          container.innerHTML =
-            "<p>Você ainda não se inscreveu em nenhuma vaga.</p>";
+          container.innerHTML = `<p style="color: white; text-align: center;">Você ainda não se inscreveu em nenhuma vaga.</p>`;
         } else {
           data.forEach((inscricao) => {
             const col = document.createElement("div");
@@ -52,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
           });
         }
       } else {
-        container.innerHTML = `<p>${data.message}</p>`;
+        container.innerHTML = `<p class="mensagem-vazia">${data.message}</p>`;
       }
     })
     .catch((err) => {

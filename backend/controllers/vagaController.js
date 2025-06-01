@@ -39,6 +39,11 @@ const criarVaga = async (req, res) => {
     // Busca o perfil da empresa do usuário
     const empresaProfile = await UserEmpresaProfile.findOne({
       where: { user_id: userId },
+      include: {
+        model: User,
+        as: "user",
+        attributes: ["name"], // só o campo que você quer
+      },
     });
 
     if (!empresaProfile) {
@@ -63,9 +68,16 @@ const criarVaga = async (req, res) => {
       modalidade,
       cursos_indicados,
       beneficios,
-      empresa_id: empresaProfile.id,
-      empresa_nome: empresaProfile.name, // Nome da empresa
+      empresa_id: userId,
+      empresa_nome: empresaProfile.user.name, // Nome da empresa
     });
+
+    if (!empresaProfile.user || !empresaProfile.user.name) {
+      console.log("Nome da empresa não encontrado.");
+      return res
+        .status(400)
+        .json({ message: "Nome da empresa não encontrado." });
+    }
 
     console.log("Vaga criada com sucesso:", novaVaga);
     res.status(201).json(novaVaga);
@@ -188,10 +200,7 @@ const listarMinhasVagas = async (req, res) => {
         .json({ message: "Perfil de empresa não encontrado." });
     }
 
-    const vagas = await Vaga.findAll({
-      where: { empresa_id: empresaProfile.id },
-      order: [["created_at", "DESC"]],
-    });
+    const vagas = await Vaga.findAll({ where });
 
     res.status(200).json(vagas);
   } catch (error) {
@@ -254,7 +263,16 @@ const listarVagasAbertas = async (req, res) => {
   }
 
   try {
-    const vagas = await Vaga.findAll({ where });
+    const vagas = await Vaga.findAll({
+      where,
+      include: [
+        {
+          model: User,
+          as: "empresa", // ⚠️ Alias deve estar igual ao definido no model
+          attributes: ["id", "name"],
+        },
+      ],
+    });
     res.status(200).json(vagas);
   } catch (error) {
     console.error(error);

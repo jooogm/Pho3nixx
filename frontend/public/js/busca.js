@@ -55,11 +55,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       <a href="vaga.html?id=${vaga.vaga_id}">${vaga.titulo}</a>
     </h5>
     <p class="card-text">${vaga.descricao || ""}</p>
-    <p class="card-text"><strong>Empresa:</strong> 
-      <a href="perfil_empresa.html?id=${vaga.empresa_id}">${
-        vaga.empresa_nome
-      }</a>
-    </p>
+    <p><strong>Empresa:</strong> 
+  <a href="perfil_empresa.html?id=${vaga.empresa_id}" class="text-secondary">
+  ${vaga.empresa_nome || "Empresa não disponível"}
+</a>
+</p>
     <p><strong>Modalidade:</strong> ${vaga.modalidade}</p>
     ${localizacaoHTML}
   </div>

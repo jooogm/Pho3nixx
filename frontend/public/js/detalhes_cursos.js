@@ -71,7 +71,8 @@ const CURSOS = {
       "Tratamento de erros com try/catch",
       "Compilação e execução de programas Java",
     ],
-    video: "https://youtu.be/sTX0UEplF54",
+    video:
+      "https://www.youtube.com/embed/videoseries?si=wvShne5MfE0Hf3G-&amp;list=PLHz_AreHm4dkI2ZdjTwZA4mPMxWTfNSpR",
     destaque: true,
   },
   GitGithub: {
