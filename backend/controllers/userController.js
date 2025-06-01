@@ -358,7 +358,7 @@ const getEmpresaPublica = async (req, res) => {
 
   try {
     const empresa = await UserEmpresaProfile.findOne({
-      where: { id: empresaProfileId },
+      where: { user_id: empresaProfileId },
       include: {
         model: User,
         as: "user",

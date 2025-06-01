@@ -200,7 +200,12 @@ const listarMinhasVagas = async (req, res) => {
         .json({ message: "Perfil de empresa não encontrado." });
     }
 
-    const vagas = await Vaga.findAll({ where });
+    const where = { empresa_id: userId };
+
+    const vagas = await Vaga.findAll({
+      where,
+      order: [["created_at", "DESC"]],
+    });
 
     res.status(200).json(vagas);
   } catch (error) {
@@ -263,16 +268,7 @@ const listarVagasAbertas = async (req, res) => {
   }
 
   try {
-    const vagas = await Vaga.findAll({
-      where,
-      include: [
-        {
-          model: User,
-          as: "empresa", // ⚠️ Alias deve estar igual ao definido no model
-          attributes: ["id", "name"],
-        },
-      ],
-    });
+    const vagas = await Vaga.findAll({ where });
     res.status(200).json(vagas);
   } catch (error) {
     console.error(error);
